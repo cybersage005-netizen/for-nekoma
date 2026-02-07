@@ -90,6 +90,11 @@ public class ItemRegistry {
     public static final Item TURTLE_LEGGINGS = register("turtle_leggings", new Item.Settings().armor(ArmorMaterials.TURTLE_SCUTE, EquipmentType.LEGGINGS));
     public static final Item TURTLE_BOOTS = register("turtle_boots", new Item.Settings().armor(ArmorMaterials.TURTLE_SCUTE, EquipmentType.BOOTS));
 
+    /*Added By CyberModder
+    1. Wild Fire Smithing Template added
+     */
+    public static final Item WILD_FIRE_SMITHING_TEMPLATE = register("wild_fire_smithing_template", new Item.Settings().maxCount(64));
+
     public static final Item TARGET_DUMMY = register("target_dummy", TargetDummyItem::new, new Item.Settings().maxCount(1));
 
     public static final Item ENDERMAN_HEAD = register(BlockRegistry.ENDERMAN_HEAD,
