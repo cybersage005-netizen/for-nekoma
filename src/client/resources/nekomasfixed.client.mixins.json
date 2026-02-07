@@ -1,0 +1,21 @@
+{
+  "required": true,
+  "package": "net.greenjab.nekomasfixed.mixin.client",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "BipedEntityModelMixin",
+    "BipedEntityRendererMixin",
+    "ClientPlayerInteractionManagerMixin",
+    "EntityModelsMixin",
+    "EquipmentRendererMixin",
+    "HeldItemRendererMixin",
+    "LabelCommandRendererCommandMixin",
+    "LabelCommandRendererMixin",
+    "ParticleManagerMixin",
+    "ParticleSpriteManagerMixin",
+    "TooltipComponentMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

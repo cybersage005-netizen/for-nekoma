@@ -1,0 +1,38 @@
+{
+  "required": true,
+  "package": "net.greenjab.nekomasfixed.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "BlockItemMixin",
+    "BlocksMixin",
+    "CarvedPumpkinBlockMixin",
+    "ContainerComponentMixin",
+    "DrownedEntityMixin",
+    "EnchantmentMixin",
+    "ExplosionImplMixin",
+    "FarmlandBlockMixin",
+    "ItemDispenserBehaviorMixin",
+    "ItemMixin",
+    "ItemsMixin",
+    "ItemStackMixin",
+    "LivingEntityMixin",
+    "NautilusStackMixin",
+    "NoteBlockMixin",
+    "PillagerEntityMixin",
+    "PlayerEntityMixin",
+    "TradeOffersMixin",
+    "WeightedPressurePlateBlockMixin",
+    "boat.AbstractBoatEntityMixin",
+    "boat.BodyControlMixin",
+    "boat.HopperBlockEntityMixin",
+    "boat.MinecraftServerMixin",
+    "boat.MobEntityMixin",
+    "boat.RaiderEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+	}
+}
