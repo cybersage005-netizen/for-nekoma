@@ -22,6 +22,8 @@ import net.minecraft.util.Rarity;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.waypoint.Waypoint;
+import net.minecraft.util.Identifier;
+
 
 import java.util.List;
 import java.util.function.BiFunction;
@@ -93,7 +95,7 @@ public class ItemRegistry {
     /*Added By CyberModder
     1. Wild Fire Smithing Template added
      */
-    public static final Item WILD_FIRE_SMITHING_TEMPLATE = register("wild_fire_smithing_template", new Item.Settings().maxCount(64));
+    public static final Item WILD_FIRE_SMITHING_TEMPLATE = registerTrim("wild_fire_smithing_template", "wild_fire");
 
     public static final Item TARGET_DUMMY = register("target_dummy", TargetDummyItem::new, new Item.Settings().maxCount(1));
 
@@ -150,6 +152,31 @@ public class ItemRegistry {
                 RegistryKey.of(RegistryKeys.ITEM, EntityType.getId(type).withSuffixedPath("_spawn_egg")), SpawnEggItem::new, new Item.Settings().spawnEgg(type)
         );
     }
+    private static Item registerTrim(String id, String nameOfTrim) {
+
+        return Registry.register(
+                Registries.ITEM,
+                Identifier.of("nekomasfixed", id),
+                new SmithingTemplateItem(
+                        Text.translatable("item.minecraft.smithing_template.armor_trim.applies_to"),
+                        Text.translatable("item.minecraft.smithing_template.armor_trim.ingredients"),
+                        Text.translatable("trim_pattern.nekomasfixed." + nameOfTrim),
+                        Text.translatable("trim_pattern.nekomasfixed." + nameOfTrim + ".description"),
+                        List.of(
+                                Identifier.of("minecraft", "item/empty_armor_slot_helmet"),
+                                Identifier.of("minecraft", "item/empty_armor_slot_chestplate"),
+                                Identifier.of("minecraft", "item/empty_armor_slot_leggings"),
+                                Identifier.of("minecraft", "item/empty_armor_slot_boots")
+                        ),
+                        List.of(
+                                Identifier.of("minecraft", "item/empty_slot_ingot")
+                        ),
+                        //No need for changing the armour list above because there is only helmet texture...
+                        new Item.Settings().maxCount(64)
+                )
+        );
+    }
+
 
     public static void registerItems() {
         System.out.println("register Items");

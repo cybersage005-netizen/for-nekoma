@@ -1,0 +1,7 @@
+{
+  "asset_id": "wild_fire",
+  "template_item": "nekomasfixed:wild_fire_smithing_template",
+  "description": {
+    "translate": "trim_pattern.nekomasfixed.wild_fire"
+  }
+}

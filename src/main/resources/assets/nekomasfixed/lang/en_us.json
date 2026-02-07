@@ -66,5 +66,6 @@
   "item.nekomasfixed.slingshot": "Slingshot",
   "item.nekomasfixed.wild_fire_spawn_egg": "Wild Fire Spawn Egg",
   "entity.nekomasfixed.wild_fire": "Wild Fire",
-  "trim_pattern.nekomasfixed.wild_fire_smithing_template": "Wild Fire Smithing Template"
+  "item.nekomasfixed.wild_fire_smithing_template": "Wild Fire Smithing Template",
+  "trim_pattern.nekomasfixed.wild_fire": "Wild Fire"
 }
