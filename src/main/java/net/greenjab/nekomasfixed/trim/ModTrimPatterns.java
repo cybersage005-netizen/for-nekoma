@@ -13,7 +13,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
-import org.jetbrains.annotations.UnknownNullability;
+
 
 
 public class ModTrimPatterns {
@@ -25,7 +25,7 @@ public class ModTrimPatterns {
 
     }
 
-    private static void register(Registerable<ArmorTrimPattern> registry, @UnknownNullability RegistryKey<ArmorTrimPattern> key) {
+    private static void register(Registerable<ArmorTrimPattern> registry,  RegistryKey<ArmorTrimPattern> key) {
         ArmorTrimPattern armorTrimPattern = new ArmorTrimPattern(getId((key)), Text.translatable(Util.createTranslationKey("trim_pattern", key.getValue())), false);
         registry.register(key, armorTrimPattern);
     }
