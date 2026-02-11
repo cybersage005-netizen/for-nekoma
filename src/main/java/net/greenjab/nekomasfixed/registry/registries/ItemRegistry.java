@@ -101,7 +101,7 @@ public class ItemRegistry {
                     Text.translatable("item.minecraft.smithing_template.armor_trim.applies_to"),
                     Text.translatable("item.minecraft.smithing_template.armor_trim.ingredients"),
                     Text.translatable("item.nekomasfixed.wild_fire_smithing_template"),
-                    Text.translatable("item.nekomasfixed.wild_fire_smithing_template.description"),
+                    Text.translatable("item.nekomasfixed.wild_fire_smithing_template"),
                     List.of(
                             Identifier.of("minecraft", "item/empty_armor_slot_helmet"),
                             Identifier.of("minecraft", "item/empty_armor_slot_chestplate"),
