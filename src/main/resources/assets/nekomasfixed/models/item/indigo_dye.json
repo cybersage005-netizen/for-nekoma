@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "nekommasfixed:item/indigo_dye"
+    "layer0": "nekomasfixed:item/indigo_dye"
   }
 }
