@@ -95,6 +95,9 @@ public class ItemRegistry {
     /*Added By CyberModder
     1. Wild Fire Smithing Template - Not Working
     2. Amber Dye
+    3. Aqua Dye
+    4. Indigo Dye
+    5. Crimson Dye
      */
 
     public static final Item WILD_FIRE_SMITHING_TEMPLATE = register(
@@ -122,6 +125,12 @@ public class ItemRegistry {
     public static final Item INDIGO_DYE = register("indigo_dye", new Item.Settings().maxCount(64));
     public static final Item CRIMSON_DYE = register("crimson_dye", new Item.Settings().maxCount(64));
     public static final Item AQUA_DYE = register("aqua_dye", new Item.Settings().maxCount(64));
+
+
+
+//    ------------------------------------------------------------------------------------------
+
+
 
     public static final Item TARGET_DUMMY = register("target_dummy", TargetDummyItem::new, new Item.Settings().maxCount(1));
 
