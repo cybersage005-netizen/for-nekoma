@@ -1,15 +1,13 @@
 {
-  "type": "minecraft:crafting_transmute",
-
+  "type": "minecraft:crafting_shapeless",
   "category": "misc",
+  "group": "amber_dye",
   "ingredients": [
-    [
-      "minecraft:white_dye",
-      "nekomasfixed:crimson_dye"
-    ]
+    "nekomasfixed:crimson_dye",
+    "minecraft:white_dye"
   ],
   "result": {
-    "id": "nekomasfixed:amber_dye",
-    "count": 2
+    "count": 2,
+    "id": "nekomasfixed:amber_dye"
   }
 }
