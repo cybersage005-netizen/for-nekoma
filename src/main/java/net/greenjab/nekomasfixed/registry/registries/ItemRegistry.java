@@ -119,6 +119,7 @@ public class ItemRegistry {
     );
 
     public static final Item AMBER_DYE = register("amber_dye", new Item.Settings().maxCount(64));
+    public static final Item INDIGO_DYE = register("indigo_dye", new Item.Settings().maxCount(64));
 
     public static final Item TARGET_DUMMY = register("target_dummy", TargetDummyItem::new, new Item.Settings().maxCount(1));
 
