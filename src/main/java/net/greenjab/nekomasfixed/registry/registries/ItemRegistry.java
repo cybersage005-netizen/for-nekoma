@@ -93,8 +93,10 @@ public class ItemRegistry {
     public static final Item TURTLE_BOOTS = register("turtle_boots", new Item.Settings().armor(ArmorMaterials.TURTLE_SCUTE, EquipmentType.BOOTS));
 
     /*Added By CyberModder
-    1. Wild Fire Smithing Template added
+    1. Wild Fire Smithing Template - Not Working
+    2. Amber Dye
      */
+
     public static final Item WILD_FIRE_SMITHING_TEMPLATE = register(
             "wild_fire_smithing_template",
             settings -> new SmithingTemplateItem(
@@ -116,7 +118,7 @@ public class ItemRegistry {
             new Item.Settings().rarity(Rarity.RARE)
     );
 
-
+    public static final Item AMBER_DYE = register("amber_dye", new Item.Settings().maxCount(64));
 
     public static final Item TARGET_DUMMY = register("target_dummy", TargetDummyItem::new, new Item.Settings().maxCount(1));
 
