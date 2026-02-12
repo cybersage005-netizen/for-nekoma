@@ -55,6 +55,7 @@ public class ItemGroupRegistry {
                         entries.add(ItemRegistry.WILD_FIRE_SMITHING_TEMPLATE);
                         entries.add(ItemRegistry.AMBER_DYE);
                         entries.add(ItemRegistry.INDIGO_DYE);
+                        entries.add(ItemRegistry.CRIMSON_DYE);
                     }).build();
 
 
