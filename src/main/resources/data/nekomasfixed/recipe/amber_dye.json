@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+
+  "category": "misc",
+  "ingredients": [
+    [
+      "minecraft:white_dye",
+      "nekomasfixed:crimson_dye"
+    ]
+  ],
+  "result": {
+    "id": "nekomasfixed:amber_dye",
+    "count": 2
+  }
+}
