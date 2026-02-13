@@ -98,6 +98,7 @@ public class ItemRegistry {
     3. Aqua Dye
     4. Indigo Dye
     5. Crimson Dye
+    6. Amber Terracotta
      */
 
     public static final Item WILD_FIRE_SMITHING_TEMPLATE = register(
