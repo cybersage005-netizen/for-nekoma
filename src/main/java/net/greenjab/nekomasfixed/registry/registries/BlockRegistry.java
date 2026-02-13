@@ -88,14 +88,10 @@ public class BlockRegistry {
      */
 
     public static final Block AMBER_TERRACOTTA = register("amber_terracotta", AbstractBlock.Settings.create().mapColor(MapColor.TERRACOTTA_YELLOW).instrument(NoteBlockInstrument.BASEDRUM)
-            .strength(0.90F).resistance(4.2F).requiresTool().lootTable(java.util.Optional.ofNullable(RegistryKey.of(
-                    RegistryKeys.LOOT_TABLE,
-                    Identifier.of("nekomasfixed", "blocks/amber_terracotta")
-            )))
-    );
+            .strength(0.70F).resistance(4.2F).requiresTool());
 
     public static final Block INDIGO_TERRACOTTA = register("indigo_terracotta", AbstractBlock.Settings.create().mapColor(MapColor.TERRACOTTA_BLUE).instrument(NoteBlockInstrument.BASEDRUM)
-            .strength(0.90F).resistance(4.2F).requiresTool());
+            .strength(0.70F).resistance(4.2F).requiresTool());
 
     private static Block register(String id, AbstractBlock.Settings settings) {
         return register(id, Block::new, settings);

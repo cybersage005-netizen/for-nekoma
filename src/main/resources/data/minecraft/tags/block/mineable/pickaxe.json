@@ -1,6 +1,8 @@
 {
     "replace": false,
     "values": [
-        "nekomasfixed:pearl_block"
+        "nekomasfixed:pearl_block",
+        "nekomasfixed:indigo_terracotta",
+        "nekomasfixed:amber_terracotta"
     ]
 }
