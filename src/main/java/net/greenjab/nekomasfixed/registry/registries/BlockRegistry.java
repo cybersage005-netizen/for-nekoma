@@ -103,8 +103,14 @@ public class BlockRegistry {
     public static final Block CRIMSON_TERRACOTTA = register("crimson_terracotta", AbstractBlock.Settings.create().mapColor(MapColor.TERRACOTTA_RED).instrument(NoteBlockInstrument.BASEDRUM)
             .strength(0.70F).resistance(4.2F).requiresTool());
 
-    public static final Block AQUA_GLAZED_TERRACOTTA = register("aqua_glazed_terracotta", AbstractBlock.Settings.create().mapColor(MapColor.TERRACOTTA_LIGHT_BLUE).instrument(NoteBlockInstrument.BASEDRUM)
-            .strength(0.70F).resistance(4.2F).requiresTool());
+    public static final Block AQUA_GLAZED_TERRACOTTA = register("aqua_glazed_terracotta",
+            GlazedTerracottaBlock::new,  // Required for creating a glazed terracotte block
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.TERRACOTTA_LIGHT_BLUE)
+                    .instrument(NoteBlockInstrument.BASEDRUM)
+                    .strength(1.4F)
+                    .resistance(4.2F)
+                    .requiresTool());
 
     private static Block register(String id, AbstractBlock.Settings settings) {
         return register(id, Block::new, settings);
