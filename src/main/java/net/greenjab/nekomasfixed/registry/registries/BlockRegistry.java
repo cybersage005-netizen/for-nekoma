@@ -7,6 +7,7 @@ import net.greenjab.nekomasfixed.registry.block.enums.NautilusBlockType;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
+import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -87,7 +88,7 @@ public class BlockRegistry {
      */
 
     public static Block AMBER_TERRACOTTA = register("amber_terracotta", AbstractBlock.Settings.create().mapColor(MapColor.TERRACOTTA_YELLOW).instrument(NoteBlockInstrument.BASEDRUM)
-            .strength(1.25F).resistance(4.2F));
+            .strength(1.25F).resistance(4.2F).requiresTool());
 
     private static Block register(String id, AbstractBlock.Settings settings) {
         return register(id, Block::new, settings);
