@@ -127,7 +127,7 @@ public class ItemRegistry {
     public static final Item CRIMSON_DYE = register("crimson_dye", new Item.Settings().maxCount(64));
     public static final Item AQUA_DYE = register("aqua_dye", new Item.Settings().maxCount(64));
     public static final Item AMBER_TERRACOTTA = register(BlockRegistry.AMBER_TERRACOTTA);
-
+    public static final Item INDIGO_TERRACOTTA = register(BlockRegistry.INDIGO_TERRACOTTA);
 
 //    ------------------------------------------------------------------------------------------
 
