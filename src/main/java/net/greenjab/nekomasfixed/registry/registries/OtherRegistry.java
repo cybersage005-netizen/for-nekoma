@@ -6,6 +6,7 @@ import net.greenjab.nekomasfixed.NekomasFixed;
 import net.greenjab.nekomasfixed.registry.other.AnimalComponent;
 import net.greenjab.nekomasfixed.registry.other.ClamFeature;
 import net.greenjab.nekomasfixed.registry.other.StoredTimeComponent;
+import net.minecraft.block.Block;
 import net.minecraft.component.ComponentType;
 import net.minecraft.item.Item;
 import net.minecraft.loot.LootTable;
@@ -46,7 +47,10 @@ public class OtherRegistry {
     //tag
     public static final TagKey<Item> CLAMTAG = TagKey.of(RegistryKeys.ITEM, NekomasFixed.id("clams"));
     public static final TagKey<Item> SLINGSHOT_PROJECTILES = TagKey.of(RegistryKeys.ITEM, NekomasFixed.id("slingshot_projectiles"));
-
+    public static final TagKey<Block> AMBER_BLOCK = TagKey.of(RegistryKeys.BLOCK, NekomasFixed.id("amber_block"));
+    public static final TagKey<Block> CRIMSON_BLOCK = TagKey.of(RegistryKeys.BLOCK, NekomasFixed.id("crimson_block"));
+    public static final TagKey<Block> INDIGO_BLOCK = TagKey.of(RegistryKeys.BLOCK, NekomasFixed.id("indigo_block"));
+    public static final TagKey<Block> AQUA_BLOCK = TagKey.of(RegistryKeys.BLOCK, NekomasFixed.id("aqua_block"));
 
     //loottable
     public static final RegistryKey<LootTable> CLAM_LOOT_TABLE = registerLoot_Table("gameplay/clam");

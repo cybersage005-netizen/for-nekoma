@@ -1,5 +1,6 @@
 {
     "replace": false,
+    "_notes": "The blocks in this tag can be broken by pickaxe and can be dropped if mentioned in loot_table files",
     "values": [
         "nekomasfixed:pearl_block",
         "nekomasfixed:indigo_terracotta",
