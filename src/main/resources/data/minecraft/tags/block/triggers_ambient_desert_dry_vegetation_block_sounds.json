@@ -1,6 +1,6 @@
 {
   "replace": false,
-  "_notes": "The blocks in this tag are replaced by air while terrain generation",
+  "_notes": "This Triggeres ambient sounds of desert and dry biomes",
   "values": [
 
     "nekomasfixed:indigo_terracotta",

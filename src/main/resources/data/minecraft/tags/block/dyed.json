@@ -1,6 +1,5 @@
 {
   "replace": false,
-  "_notes": "The blocks in this tag are replaced by air while terrain generation",
   "values": [
 
     "nekomasfixed:indigo_terracotta",
