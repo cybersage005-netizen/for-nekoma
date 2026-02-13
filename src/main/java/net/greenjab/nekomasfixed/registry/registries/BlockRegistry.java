@@ -88,6 +88,7 @@ public class BlockRegistry {
     2. Aqua Terracotta
     3. Indigo Terracotta
     4. Crimson Terracotta
+    5. Aqua Glazed Terracotta
      */
 
     public static final Block AMBER_TERRACOTTA = register("amber_terracotta", AbstractBlock.Settings.create().mapColor(MapColor.TERRACOTTA_YELLOW).instrument(NoteBlockInstrument.BASEDRUM)
@@ -100,6 +101,9 @@ public class BlockRegistry {
             .strength(0.70F).resistance(4.2F).requiresTool());
 
     public static final Block CRIMSON_TERRACOTTA = register("crimson_terracotta", AbstractBlock.Settings.create().mapColor(MapColor.TERRACOTTA_RED).instrument(NoteBlockInstrument.BASEDRUM)
+            .strength(0.70F).resistance(4.2F).requiresTool());
+
+    public static final Block AQUA_GLAZED_TERRACOTTA = register("aqua_glazed_terracotta", AbstractBlock.Settings.create().mapColor(MapColor.TERRACOTTA_LIGHT_BLUE).instrument(NoteBlockInstrument.BASEDRUM)
             .strength(0.70F).resistance(4.2F).requiresTool());
 
     private static Block register(String id, AbstractBlock.Settings settings) {

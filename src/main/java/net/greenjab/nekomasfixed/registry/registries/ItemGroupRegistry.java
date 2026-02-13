@@ -61,6 +61,7 @@ public class ItemGroupRegistry {
                         entries.add(ItemRegistry.INDIGO_TERRACOTTA);
                         entries.add(ItemRegistry.AQUA_TERRACOTTA);
                         entries.add(ItemRegistry.CRIMSON_TERRACOTTA);
+                        entries.add(ItemRegistry.AQUA_GLAZED_TERRACOTTA);
 
                     }).build();
 
