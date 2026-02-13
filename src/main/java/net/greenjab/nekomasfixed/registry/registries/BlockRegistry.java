@@ -112,6 +112,15 @@ public class BlockRegistry {
                     .resistance(4.2F)
                     .requiresTool());
 
+    public static final Block AMBER_GLAZED_TERRACOTTA = register("amber_glazed_terracotta",
+            GlazedTerracottaBlock::new,  // Required for creating a glazed terracotta block
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.TERRACOTTA_WHITE)
+                    .instrument(NoteBlockInstrument.BASEDRUM)
+                    .strength(1.4F)
+                    .resistance(4.2F)
+                    .requiresTool());
+
     private static Block register(String id, AbstractBlock.Settings settings) {
         return register(id, Block::new, settings);
     }
