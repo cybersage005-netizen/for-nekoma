@@ -93,6 +93,9 @@ public class BlockRegistry {
     public static final Block INDIGO_TERRACOTTA = register("indigo_terracotta", AbstractBlock.Settings.create().mapColor(MapColor.TERRACOTTA_BLUE).instrument(NoteBlockInstrument.BASEDRUM)
             .strength(0.70F).resistance(4.2F).requiresTool());
 
+    public static final Block AQUA_TERRACOTTA = register("aqua_terracotta", AbstractBlock.Settings.create().mapColor(MapColor.TERRACOTTA_LIGHT_BLUE).instrument(NoteBlockInstrument.BASEDRUM)
+            .strength(0.70F).resistance(4.2F).requiresTool());
+
     private static Block register(String id, AbstractBlock.Settings settings) {
         return register(id, Block::new, settings);
     }
