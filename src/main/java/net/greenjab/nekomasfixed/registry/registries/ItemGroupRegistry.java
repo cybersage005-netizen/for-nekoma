@@ -57,6 +57,7 @@ public class ItemGroupRegistry {
                         entries.add(ItemRegistry.INDIGO_DYE);
                         entries.add(ItemRegistry.CRIMSON_DYE);
                         entries.add(ItemRegistry.AQUA_DYE);
+                        entries.add(ItemRegistry.AMBER_TERRACOTTA);
 
                     }).build();
 
