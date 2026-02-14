@@ -2,6 +2,7 @@ package net.greenjab.nekomasfixed.mixin;
 
 import net.greenjab.nekomasfixed.registry.registries.ItemRegistry;
 import net.greenjab.nekomasfixed.util.ModColors.*;
+import net.minecraft.block.Block;
 import net.minecraft.block.entity.SignBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.DyeItem;
@@ -29,6 +30,15 @@ public class DyeIemMixin {
                 MutableText newTxt = txt.copyContentOnly();
                 newTxt.setStyle(txt.getStyle().withColor(dyeFromMod));
             }
+
+            signBlockEntity.markDirty();
+            signBlockEntity.getWorld().updateListeners(
+                    signBlockEntity.getPos(),
+                    signBlockEntity.getCachedState(),
+                    signBlockEntity.getCachedState(),
+                    Block.NOTIFY_ALL
+            );
+
         }
 
     }
