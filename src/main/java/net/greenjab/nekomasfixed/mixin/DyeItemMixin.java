@@ -8,6 +8,7 @@ import net.minecraft.item.DyeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -27,7 +28,7 @@ public class DyeItemMixin {
             for (int i = 0; i < 4; i++) {
                 Text line = signText.getMessage(i, false);
                 MutableText newLine = line.copyContentOnly();
-                newLine.setStyle(line.getStyle().withColor(dyeFromMod));
+                newLine.setStyle(line.getStyle().withColor(dyeFromMod).withFormatting(Formatting.BOLD));
 
                 signText = signText.withMessage(i, newLine, newLine);
             }
