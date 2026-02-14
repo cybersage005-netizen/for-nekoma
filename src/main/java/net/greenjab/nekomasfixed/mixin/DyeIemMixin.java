@@ -6,8 +6,8 @@ import net.minecraft.block.entity.SignBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.DyeItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
-import net.minecraft.text.TextColor;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -26,7 +26,8 @@ public class DyeIemMixin {
 
             for(int i = 0; i<4; i++){
                 Text txt = signBlockEntity.getText(true).getMessage(i, false);
-                System.out.println(txt.getStyle());
+                MutableText newTxt = txt.copyContentOnly();
+                newTxt.setStyle(txt.getStyle().withColor(dyeFromMod));
             }
         }
 
