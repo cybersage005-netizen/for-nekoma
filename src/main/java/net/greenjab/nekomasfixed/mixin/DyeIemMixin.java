@@ -38,6 +38,8 @@ public class DyeIemMixin {
                     signBlockEntity.getCachedState(),
                     Block.NOTIFY_ALL
             );
+            cir.setReturnValue(true); // Mixin cancellable
+
 
         }
 
