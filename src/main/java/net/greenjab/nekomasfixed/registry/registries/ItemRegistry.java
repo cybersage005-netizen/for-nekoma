@@ -148,13 +148,7 @@ public class ItemRegistry {
     public static Item register(String id, Item.Settings settings) {
         return register(keyOf(id), Item::new, settings);
     }
-    public static DyeItem registerDye(String id, DyeColor color) {
-        return (DyeItem) register(
-                keyOf(id),
-                settings -> new DyeItem(color, settings),
-                new Item.Settings()
-        );
-    }
+
 
 
     public static Item register(String id, Function<Item.Settings, Item> factory, Item.Settings settings) {
@@ -181,6 +175,13 @@ public class ItemRegistry {
     }
     public static Item register(Block block, BiFunction<Block, Item.Settings, Item> factory) {
         return register(block, factory, new Item.Settings());
+    }
+    public static DyeItem registerDye(String id, DyeColor color) {
+        return (DyeItem) register(
+                keyOf(id),
+                settings -> new DyeItem(color, settings),
+                new Item.Settings()
+        );
     }
     public static Item register(Block block, BiFunction<Block, Item.Settings, Item> factory, Item.Settings settings) {
         return register(
