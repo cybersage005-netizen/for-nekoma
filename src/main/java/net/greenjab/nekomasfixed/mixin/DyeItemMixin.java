@@ -27,7 +27,6 @@ public class DyeItemMixin {
         ItemStack stack = player.getStackInHand(player.getActiveHand());
 
         //Application of Amber dye on sign
-
         if (stack.isOf(ItemRegistry.AMBER_DYE)) {
             final int dyeFromMod = AMBER.getColor();
             var signText = signBlockEntity.getText(front);
@@ -40,15 +39,19 @@ public class DyeItemMixin {
             }
 
             //Chekcing for Glowing logic
-
             if(stack.isOf(Items.GLOW_INK_SAC)){
                 for(int i = 0; i< 4; i++){
                     Text line = signText.getMessage(i, false);
                     TextColor color = line.getStyle().getColor();
                     if (color != null && color.getRgb() == AMBER.getColor()) {
                         MutableText newLine = line.copyContentOnly();
-                        newLine.setStyle(line.getStyle().withColor(dyeFromMod).withFormatting(Formatting.BOLD));
-                        signText = signText.withMessage(i, newLine, newLine);
+                        // Fake glow by duplicating behind the main text
+                        MutableText glowLine = Text.empty()
+                                .append(Text.literal(" ") // slight offset
+                                        .append(newLine.copyContentOnly())
+                                        .setStyle(newLine.getStyle().withColor(dyeFromMod)))
+                                .append(newLine); // main text on top
+                        signText = signText.withMessage(i, glowLine, glowLine);
                     }
                 }
             }
