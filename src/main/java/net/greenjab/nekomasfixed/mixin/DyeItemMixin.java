@@ -1,13 +1,16 @@
 package net.greenjab.nekomasfixed.mixin;
 
 import net.greenjab.nekomasfixed.registry.registries.ItemRegistry;
+import net.greenjab.nekomasfixed.util.ModColors;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.SignBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.DyeItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
+import net.minecraft.text.TextColor;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -28,9 +31,21 @@ public class DyeItemMixin {
             for (int i = 0; i < 4; i++) {
                 Text line = signText.getMessage(i, false);
                 MutableText newLine = line.copyContentOnly();
-                newLine.setStyle(line.getStyle().withColor(dyeFromMod).withFormatting(Formatting.BOLD));
+                newLine.setStyle(line.getStyle().withColor(dyeFromMod));
 
                 signText = signText.withMessage(i, newLine, newLine);
+            }
+
+            if(stack.isOf(Items.GLOW_INK_SAC)){
+                for(int i = 0; i< 4; i++){
+                    Text line = signText.getMessage(i, false);
+                    TextColor color = line.getStyle().getColor();
+                    if (color != null && color.getRgb() == AMBER.getColor()) {
+                        MutableText newLine = line.copyContentOnly();
+                        newLine.setStyle(line.getStyle().withColor(dyeFromMod).withFormatting(Formatting.BOLD));
+                        signText = signText.withMessage(i, newLine, newLine);
+                    }
+                }
             }
 
             signBlockEntity.setText(signText, front);
