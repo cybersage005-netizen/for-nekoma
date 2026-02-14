@@ -25,6 +25,9 @@ public class DyeItemMixin {
     @Inject(method = "useOnSign", at = @At("HEAD"), cancellable = true)
     private void changeDye(World world, SignBlockEntity signBlockEntity, boolean front, PlayerEntity player, CallbackInfoReturnable<Boolean> cir) {
         ItemStack stack = player.getStackInHand(player.getActiveHand());
+
+        //Application of Amber dye on sign
+
         if (stack.isOf(ItemRegistry.AMBER_DYE)) {
             final int dyeFromMod = AMBER.getColor();
             var signText = signBlockEntity.getText(front);
@@ -35,6 +38,8 @@ public class DyeItemMixin {
 
                 signText = signText.withMessage(i, newLine, newLine);
             }
+
+            //Chekcing for Glowing logic
 
             if(stack.isOf(Items.GLOW_INK_SAC)){
                 for(int i = 0; i< 4; i++){
@@ -48,6 +53,7 @@ public class DyeItemMixin {
                 }
             }
 
+            //Updating the changes and applying it to the sign - important
             signBlockEntity.setText(signText, front);
 
             signBlockEntity.markDirty();
