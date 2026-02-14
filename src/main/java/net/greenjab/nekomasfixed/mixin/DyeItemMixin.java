@@ -19,6 +19,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import static net.greenjab.nekomasfixed.util.ModColors.AMBER;
+import static net.greenjab.nekomasfixed.util.ModColors.AQUA;
 
 @Mixin(DyeItem.class)
 public class DyeItemMixin {
@@ -26,7 +27,9 @@ public class DyeItemMixin {
     private void changeDye(World world, SignBlockEntity signBlockEntity, boolean front, PlayerEntity player, CallbackInfoReturnable<Boolean> cir) {
         ItemStack stack = player.getStackInHand(player.getActiveHand());
 
+        //------------------------------ AMBER DYE ------------------------------------
         //Application of Amber dye on sign
+
         if (stack.isOf(ItemRegistry.AMBER_DYE)) {
             final int dyeFromMod = AMBER.getColor();
             var signText = signBlockEntity.getText(front);
@@ -39,35 +42,58 @@ public class DyeItemMixin {
             }
 
             //Chekcing for Glowing logic
-            if(stack.isOf(Items.GLOW_INK_SAC)){
-                for(int i = 0; i< 4; i++){
+
+            if (stack.isOf(Items.GLOW_INK_SAC)) {
+                for (int i = 0; i < 4; i++) {
                     Text line = signText.getMessage(i, false);
                     TextColor color = line.getStyle().getColor();
                     if (color != null && color.getRgb() == AMBER.getColor()) {
                         MutableText newLine = line.copyContentOnly();
-                        // Fake glow by duplicating behind the main text
-                        MutableText glowLine = Text.empty()
-                                .append(Text.literal(" ") // slight offset
-                                        .append(newLine.copyContentOnly())
-                                        .setStyle(newLine.getStyle().withColor(dyeFromMod)))
-                                .append(newLine); // main text on top
-                        signText = signText.withMessage(i, glowLine, glowLine);
+                        newLine.setStyle(line.getStyle().withColor(dyeFromMod).withFormatting(Formatting.BOLD));
+                        signText = signText.withMessage(i, newLine, newLine);
                     }
                 }
             }
+            //-----------------------------------------------------------
+            //------------------ AQUA DYE -------------------------------
 
-            //Updating the changes and applying it to the sign - important
-            signBlockEntity.setText(signText, front);
+            if (stack.isOf(ItemRegistry.AQUA_DYE)) {
+                for (int i = 0; i < 4; i++) {
+                    Text line = signText.getMessage(i, false);
+                    MutableText newLine = line.copyContentOnly();
+                    newLine.setStyle(line.getStyle().withColor(AQUA.getColor()));
 
-            signBlockEntity.markDirty();
-            signBlockEntity.getWorld().updateListeners(
-                    signBlockEntity.getPos(),
-                    signBlockEntity.getCachedState(),
-                    signBlockEntity.getCachedState(),
-                    Block.NOTIFY_ALL
-            );
+                    signText = signText.withMessage(i, newLine, newLine);
+                }
 
-            cir.setReturnValue(true); // cancel vanilla dye logic
+                //Chekcing for Glowing logic
+
+                if (stack.isOf(Items.GLOW_INK_SAC)) {
+                    for (int i = 0; i < 4; i++) {
+                        Text line = signText.getMessage(i, false);
+                        TextColor color = line.getStyle().getColor();
+                        if (color != null && color.getRgb() == AQUA.getColor()) {
+                            MutableText newLine = line.copyContentOnly();
+                            newLine.setStyle(line.getStyle().withColor(AQUA.getColor()).withFormatting(Formatting.BOLD));
+                            signText = signText.withMessage(i, newLine, newLine);
+                        }
+                    }
+                }
+
+
+                //Updating the changes and applying it to the sign - important
+                signBlockEntity.setText(signText, front);
+
+                signBlockEntity.markDirty();
+                signBlockEntity.getWorld().updateListeners(
+                        signBlockEntity.getPos(),
+                        signBlockEntity.getCachedState(),
+                        signBlockEntity.getCachedState(),
+                        Block.NOTIFY_ALL
+                );
+
+                cir.setReturnValue(true); // cancel vanilla dye logic
+            }
         }
     }
 }

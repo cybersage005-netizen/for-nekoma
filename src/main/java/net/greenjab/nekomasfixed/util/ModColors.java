@@ -3,6 +3,7 @@ package net.greenjab.nekomasfixed.util;
 public class ModColors {
     // Creating new Mod colors, new colors can be added later...
     public static final ModColors AMBER = new ModColors("amber", 0xE0AF0B);
+    public static final ModColors AQUA = new ModColors("aqua", 0xA6CEC7);
 
     private final String name; // Instance field
     private final int color;   // Instance field
