@@ -8,7 +8,7 @@
     "CarvedPumpkinBlockMixin",
     "ContainerComponentMixin",
     "DrownedEntityMixin",
-    "DyeIemMixin",
+    "DyeItemMixin",
     "EnchantmentMixin",
     "ExplosionImplMixin",
     "FarmlandBlockMixin",
