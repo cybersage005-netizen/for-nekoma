@@ -17,12 +17,9 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Rarity;
-import net.minecraft.util.Util;
+import net.minecraft.util.*;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.waypoint.Waypoint;
-import net.minecraft.util.Identifier;
 
 
 import java.util.List;
@@ -122,10 +119,10 @@ public class ItemRegistry {
             new Item.Settings().rarity(Rarity.RARE)
     );
 
-    public static final Item AMBER_DYE = register("amber_dye", new Item.Settings().maxCount(64));
-    public static final Item INDIGO_DYE = register("indigo_dye", new Item.Settings().maxCount(64));
-    public static final Item CRIMSON_DYE = register("crimson_dye", new Item.Settings().maxCount(64));
-    public static final Item AQUA_DYE = register("aqua_dye", new Item.Settings().maxCount(64));
+    public static final Item AMBER_DYE = registerDye("amber_dye", DyeColor.YELLOW);
+    public static final Item INDIGO_DYE = registerDye("indigo_dye", DyeColor.PURPLE);
+    public static final Item CRIMSON_DYE = registerDye("crimson_dye", DyeColor.RED);
+    public static final Item AQUA_DYE = registerDye("aqua_dye", DyeColor.LIGHT_BLUE);
     public static final Item AMBER_TERRACOTTA = register(BlockRegistry.AMBER_TERRACOTTA);
     public static final Item INDIGO_TERRACOTTA = register(BlockRegistry.INDIGO_TERRACOTTA);
     public static final Item AQUA_TERRACOTTA = register(BlockRegistry.AQUA_TERRACOTTA);
@@ -151,6 +148,14 @@ public class ItemRegistry {
     public static Item register(String id, Item.Settings settings) {
         return register(keyOf(id), Item::new, settings);
     }
+    public static DyeItem registerDye(String id, DyeColor color) {
+        return (DyeItem) register(
+                keyOf(id),
+                settings -> new DyeItem(color, settings),
+                new Item.Settings()
+        );
+    }
+
 
     public static Item register(String id, Function<Item.Settings, Item> factory, Item.Settings settings) {
         return register(keyOf(id), factory, settings);
