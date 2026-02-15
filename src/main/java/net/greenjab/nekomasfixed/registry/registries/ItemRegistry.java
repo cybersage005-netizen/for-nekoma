@@ -123,7 +123,7 @@ public class ItemRegistry {
     public static final Item INDIGO_DYE = registerDye("indigo_dye", DyeColor.PURPLE);
     public static final Item CRIMSON_DYE = registerDye("crimson_dye", DyeColor.RED);
     public static final Item AQUA_DYE = registerDye("aqua_dye", DyeColor.LIGHT_BLUE);
-    public static final Item IRON_SICKLE = register("iron_sickle", new Item.Settings().sword(ToolMaterial.IRON, 3.0F, -2.4F));
+    public static final Item IRON_SICKLE = register("iron_sickle", new Item.Settings().sword(ToolMaterial.IRON, 1.0F, -0.4F));
     public static final Item AMBER_TERRACOTTA = register(BlockRegistry.AMBER_TERRACOTTA);
     public static final Item INDIGO_TERRACOTTA = register(BlockRegistry.INDIGO_TERRACOTTA);
     public static final Item AQUA_TERRACOTTA = register(BlockRegistry.AQUA_TERRACOTTA);
