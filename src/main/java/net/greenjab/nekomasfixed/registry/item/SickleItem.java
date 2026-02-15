@@ -1,14 +1,24 @@
 package net.greenjab.nekomasfixed.registry.item;
 
+import com.google.common.collect.Multimap;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.entity.player.PlayerEntity;
 
 public class SickleItem extends Item {
+
+    public static final float DAMAGE_IRON = 1f;
+    public static final float SPEED = 4.0f;
+
     public SickleItem(Settings settings) {
         super(settings);
     }
+
     int previousEntityId;
     private int attackCount = 1;
     @Override
@@ -25,10 +35,16 @@ public class SickleItem extends Item {
                 if(entityID == previousEntityId){
                     attackCount+=1;
                     previousEntityId = entityID;
+                    if(attackCount==4){
+                        System.out.println("Now dealing extra damage of " + ((3.0*DAMAGE_IRON)*(0.5)+DAMAGE_IRON));
+                    }else if(attackCount==5){
+                        System.out.println("Now dealing extra damage of " + (2.0*(3.0*DAMAGE_IRON)*(0.5)+DAMAGE_IRON));
+                    }
                 }else{
                     attackCount = 1;
                     previousEntityId = entityID;
                 }
+
                 System.out.println("Combo at lvl: " + attackCount);
             } else if (inMain) {
                 System.out.println("Main hand sickle");
