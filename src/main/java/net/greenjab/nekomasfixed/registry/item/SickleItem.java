@@ -26,7 +26,7 @@ public class SickleItem extends Item {
                     attackCount+=1;
                     previousEntityId = entityID;
                 }else{
-                    previousEntityId = entityID
+                    previousEntityId = entityID;
                 }
                 System.out.println("Combo at lvl: " + attackCount);
             } else if (inMain) {
