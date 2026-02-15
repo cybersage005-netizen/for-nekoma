@@ -9,6 +9,7 @@ public class SickleItem extends Item {
     public SickleItem(Settings settings) {
         super(settings);
     }
+    int previousEntityId;
     private int attackCount = 1;
     @Override
 
@@ -21,7 +22,12 @@ public class SickleItem extends Item {
             int entityID = target.getEntity().getId();
             if (inMain && inOff) {
                 System.out.println("Dual wield sickles combo! attacked on " + target.getEntity().getId());
-                attackCount+=1;
+                if(entityID == previousEntityId){
+                    attackCount+=1;
+                    previousEntityId = entityID;
+                }else{
+                    previousEntityId = entityID
+                }
                 System.out.println("Combo at lvl: " + attackCount);
             } else if (inMain) {
                 System.out.println("Main hand sickle");
