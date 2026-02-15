@@ -35,10 +35,11 @@ public class SickleItem extends Item {
                 if(entityID == previousEntityId){
                     attackCount+=1;
                     previousEntityId = entityID;
-                    if(attackCount==4){
-                        System.out.println("Now dealing extra damage of " + ((3.0*DAMAGE_IRON)*(0.5)+DAMAGE_IRON));
-                    }else if(attackCount==5){
-                        System.out.println("Now dealing extra damage of " + (2.0*(3.0*DAMAGE_IRON)*(0.5)+DAMAGE_IRON));
+                    if(attackCount==5){
+                        System.out.println("Now dealing extra damage of " + ((3.0*DAMAGE_IRON)+(3.0*DAMAGE_IRON*0.5)));
+                    }else if(attackCount==6){
+                        System.out.println("Now dealing extra damage of " + ((4.0*DAMAGE_IRON)+(4.0*DAMAGE_IRON)));
+                        attackCount=1;
                     }
                 }else{
                     attackCount = 1;
