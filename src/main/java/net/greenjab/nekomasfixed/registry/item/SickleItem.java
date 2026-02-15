@@ -9,6 +9,7 @@ public class SickleItem extends Item {
     public SickleItem(Settings settings) {
         super(settings);
     }
+    private int attackCount = 1;
     @Override
 
     public void postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
@@ -18,7 +19,7 @@ public class SickleItem extends Item {
             boolean inOff  = player.getOffHandStack().isOf(stack.getItem());
 
             if (inMain && inOff) {
-                System.out.println("Dual wield sickles combo!");
+                System.out.println("Dual wield sickles combo! attacked on" + target);
             } else if (inMain) {
                 System.out.println("Main hand sickle");
             }
