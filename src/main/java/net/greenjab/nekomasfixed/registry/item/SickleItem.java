@@ -9,6 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Hand;
 
 public class SickleItem extends Item {
 
@@ -56,8 +57,8 @@ public class SickleItem extends Item {
         int entityID = target.getId();
 
         if (inMain && inOff) {
-
-            if (now - lastHitAt > 40) {
+            player.swingHand(Hand.OFF_HAND);
+            if (now - lastHitAt > 30) {
                 attackCount = 1;
             }
 
