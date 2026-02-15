@@ -9,16 +9,25 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterial;
+import net.minecraft.item.tooltip.TooltipAppender;
 import net.minecraft.util.Identifier;
 
 public class ModItemSettings {
 
-    public static Item.Settings sickle(ToolMaterial material, float damage, float speed) {
+    public static Item.Settings sickle(ToolMaterial material, float speed) {
+        float realDamage = 0.0f;
+        if(material.equals(ToolMaterial.WOOD)){realDamage = 1f;}
+        else if(material.equals(ToolMaterial.STONE)){realDamage = 1.5f;}
+        else if(material.equals(ToolMaterial.COPPER)){realDamage = 1.15f;}
+        else if(material.equals(ToolMaterial.IRON)){realDamage = 2f;}
+        else if(material.equals(ToolMaterial.GOLD)){realDamage = 2f;}
+        else if(material.equals(ToolMaterial.DIAMOND)){realDamage = 3.5f;}
+        else if(material.equals(ToolMaterial.NETHERITE)){realDamage = 4f;}
         return new Item.Settings()
                 .maxDamage(material.durability())
                 .enchantable(15)
                 .repairable(Items.IRON_INGOT)
-                .component(DataComponentTypes.ATTRIBUTE_MODIFIERS, createAttributes(damage, speed))
+                .component(DataComponentTypes.ATTRIBUTE_MODIFIERS, createAttributes(realDamage, speed))
                 .component(DataComponentTypes.WEAPON, new WeaponComponent(1)); //NOTE: This tells that it is a weapon
     }
 
