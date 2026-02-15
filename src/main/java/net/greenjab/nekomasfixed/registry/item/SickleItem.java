@@ -16,7 +16,7 @@ public class SickleItem extends Item {
                 if(player.getOffHandStack() == stack){
                     System.out.println("Ready for combo");
                 }else{
-                    System.out.println("not ready for combo");
+                    System.out.println(player.getOffHandStack());
                 }
             }
         }
