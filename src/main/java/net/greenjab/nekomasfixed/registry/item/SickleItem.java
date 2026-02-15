@@ -11,10 +11,10 @@ public class SickleItem extends Item {
     }
     @Override
     public void postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        if (attacker instanceof PlayerEntity player) {
+        if (attacker instanceof PlayerEntity player) { //Important
             if (player.getMainHandStack() == stack) {
                 System.out.println("Used in MAIN hand");
-            } else if (player.getOffHandStack() == stack) {
+            } else if (player.getOffHandStack() == stack && player.getMainHandStack() == stack) {
                 System.out.println("Used in OFF hand");
             }
         }
