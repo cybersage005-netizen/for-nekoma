@@ -1,19 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
-
+  "show_notification": true,
+  "category": "equipment",
   "key": {
-    "#": "minecraft:iron_ingot",
-    "D": "minecraft:stick"
+    "#": "minecraft:stick",
+    "X": "#minecraft:iron_tool_materials"
   },
   "pattern": [
-    " ##",
-    "# #",
-    "S  "
+    "X",
+    "X",
+    "#"
   ],
   "result": {
     "count": 1,
     "id": "nekomasfixed:iron_sickle"
   }
-
-
 }
