@@ -19,7 +19,7 @@ public class SickleItem extends Item {
             boolean inOff  = player.getOffHandStack().isOf(stack.getItem());
 
             if (inMain && inOff) {
-                System.out.println("Dual wield sickles combo! attacked on" + target.getEntity().getName());
+                System.out.println("Dual wield sickles combo! attacked on" + target.getEntity().getName().getString());
             } else if (inMain) {
                 System.out.println("Main hand sickle");
             }
