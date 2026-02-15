@@ -10,17 +10,20 @@ public class SickleItem extends Item {
         super(settings);
     }
     @Override
+
     public void postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        if (attacker instanceof PlayerEntity player) { //Important
-            if (player.getMainHandStack() == stack) {
-                if(player.getOffHandStack() == stack){
-                    System.out.println("Ready for combo");
-                }else{
-                    System.out.println(player.getOffHandStack());
-                }
+        if (attacker instanceof PlayerEntity player) {
+
+            boolean inMain = player.getMainHandStack().isOf(stack.getItem());
+            boolean inOff  = player.getOffHandStack().isOf(stack.getItem());
+
+            if (inMain && inOff) {
+                System.out.println("Dual wield sickles combo!");
+            } else if (inMain) {
+                System.out.println("Main hand sickle");
             }
         }
-
     }
+
 
 }
