@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "building",
+  "category": "combat",
   "key": {
     "#": "minecraft:iron_ingot",
     "D": "minecraft:stick"
@@ -11,7 +11,7 @@
     "S  "
   ],
   "result": {
-    "count": 8,
+    "count": 1,
     "id": "nekomasfixed:iron_sickle"
   }
 
