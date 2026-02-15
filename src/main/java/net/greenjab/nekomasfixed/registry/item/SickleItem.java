@@ -13,9 +13,11 @@ public class SickleItem extends Item {
     public void postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (attacker instanceof PlayerEntity player) { //Important
             if (player.getMainHandStack() == stack) {
-                System.out.println("Used in MAIN hand");
-            } else if (player.getOffHandStack() == stack && player.getMainHandStack() == stack) {
-                System.out.println("Used in OFF hand");
+                if(player.getOffHandStack() == stack){
+                    System.out.println("Ready for combo");
+                }else{
+                    System.out.println("not ready for combo");
+                }
             }
         }
 
