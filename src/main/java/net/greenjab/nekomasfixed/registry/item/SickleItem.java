@@ -58,7 +58,9 @@ public class SickleItem extends Item {
 
         if (inMain && inOff) {
             if (attackCount % 2 == 0) {
-                player.swingHand(Hand.OFF_HAND);
+                player.getEntityWorld().getServer().execute(() -> {
+                    player.swingHand(Hand.OFF_HAND, true);
+                });
             }
 
             if (now - lastHitAt > 30) {
