@@ -1,9 +1,11 @@
 package net.greenjab.nekomasfixed.registry.registries;
 
 import net.greenjab.nekomasfixed.NekomasFixed;
+import net.greenjab.nekomasfixed.registry.item.SickleItem;
 import net.greenjab.nekomasfixed.registry.item.SlingshotItem;
 import net.greenjab.nekomasfixed.registry.item.TargetDummyItem;
 import net.greenjab.nekomasfixed.registry.other.AnimalComponent;
+import net.greenjab.nekomasfixed.util.ModItemSettings;
 import net.minecraft.block.Block;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.*;
@@ -119,11 +121,14 @@ public class ItemRegistry {
             new Item.Settings().rarity(Rarity.RARE)
     );
 
+
+
+
     public static final Item AMBER_DYE = registerDye("amber_dye", DyeColor.YELLOW);
     public static final Item INDIGO_DYE = registerDye("indigo_dye", DyeColor.PURPLE);
     public static final Item CRIMSON_DYE = registerDye("crimson_dye", DyeColor.RED);
     public static final Item AQUA_DYE = registerDye("aqua_dye", DyeColor.LIGHT_BLUE);
-    public static final Item IRON_SICKLE = register("iron_sickle", new Item.Settings().sword(ToolMaterial.IRON, 1.0F, -0.4F));
+    public static final Item IRON_SICKLE = register("iron_sickle", SickleItem::new, ModItemSettings.sickle(ToolMaterial.IRON, 1F, -0.5F));
     public static final Item AMBER_TERRACOTTA = register(BlockRegistry.AMBER_TERRACOTTA);
     public static final Item INDIGO_TERRACOTTA = register(BlockRegistry.INDIGO_TERRACOTTA);
     public static final Item AQUA_TERRACOTTA = register(BlockRegistry.AQUA_TERRACOTTA);
@@ -165,6 +170,7 @@ public class ItemRegistry {
         }
         return Registry.register(Registries.ITEM, key, item);
     }
+
     public static Item register(Block block) {
         return register(block, BlockItem::new, new Item.Settings());
     }
