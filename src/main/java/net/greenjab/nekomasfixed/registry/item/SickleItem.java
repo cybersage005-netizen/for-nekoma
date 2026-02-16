@@ -51,7 +51,7 @@ public class SickleItem extends Item {
         int entityID = target.getId();
 
         if (inMain && inOff) {
-            player.swingHand(Hand.OFF_HAND);
+
 
             if (now - lastHitAt > 30) {
                 attackCount = 1;
