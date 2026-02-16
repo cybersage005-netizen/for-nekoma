@@ -21,7 +21,7 @@
     "NoteBlockMixin",
     "PillagerEntityMixin",
     "PlayerEntityMixin",
-    "MinecraftClientMixin",
+
     "TradeOffersMixin",
     "WeightedPressurePlateBlockMixin",
     "boat.AbstractBoatEntityMixin",

@@ -1,4 +1,4 @@
-package net.greenjab.nekomasfixed.mixin;
+package net.greenjab.nekomasfixed.mixin.client;
 
 import net.greenjab.nekomasfixed.registry.registries.OtherRegistry;
 import net.minecraft.client.MinecraftClient;

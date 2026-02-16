@@ -12,6 +12,7 @@
     "LabelCommandRendererCommandMixin",
     "LabelCommandRendererMixin",
     "ParticleManagerMixin",
+    "MinecraftClientMixin",
     "ParticleSpriteManagerMixin",
     "TooltipComponentMixin"
   ],
