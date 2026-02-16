@@ -4,7 +4,7 @@
   "category": "equipment",
   "key": {
     "#": "minecraft:stick",
-    "X": "#minecraft:diamond_tool_material"
+    "X": "minecraft:diamond"
   },
   "pattern": [
     " XX",

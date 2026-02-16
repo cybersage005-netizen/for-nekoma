@@ -4,7 +4,7 @@
   "category": "equipment",
   "key": {
     "#": "minecraft:stick",
-    "X": "#minecraft:copper_tool_material"
+    "X": "minecraft:copper_ingot"
   },
   "pattern": [
     " XX",
