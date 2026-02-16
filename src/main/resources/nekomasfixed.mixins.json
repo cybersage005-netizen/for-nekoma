@@ -21,7 +21,7 @@
     "NoteBlockMixin",
     "PillagerEntityMixin",
     "PlayerEntityMixin",
-
+    "SickleItemMixin",
     "TradeOffersMixin",
     "WeightedPressurePlateBlockMixin",
     "boat.AbstractBoatEntityMixin",
