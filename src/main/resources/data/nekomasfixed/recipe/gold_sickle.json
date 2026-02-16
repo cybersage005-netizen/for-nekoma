@@ -5,7 +5,7 @@
   "category": "equipment",
   "key": {
     "#": "minecraft:stick",
-    "X": "minecraft:gold_ingot"
+    "X": "#minecraft:gold_tool_materials"
   },
   "pattern": [
     " XX",
