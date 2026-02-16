@@ -45,19 +45,18 @@ public class SickleItem extends Item {
     private int attackCount = 1;
 
     private void playOffhandSwing(PlayerEntity player) {
-        // ALWAYS swing locally (fixes 50% issue)
-        player.swingHand(Hand.OFF_HAND);
-
-        // Also sync to others
+        // Only send animation packet from server
         if (player.getEntityWorld() instanceof ServerWorld serverWorld) {
             var packet = new net.minecraft.network.packet.s2c.play.EntityAnimationS2CPacket(
                     player,
                     net.minecraft.network.packet.s2c.play.EntityAnimationS2CPacket.SWING_OFF_HAND
             );
 
-            serverWorld.getChunkManager().sendToOtherNearbyPlayers(player, packet);
+            // Send to EVERYONE including self
+            serverWorld.getChunkManager().sendToNearbyPlayers(player, packet);
         }
     }
+
 
 
     @Override
