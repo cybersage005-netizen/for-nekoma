@@ -44,6 +44,24 @@ public class SickleItem extends Item {
     int previousEntityId;
     private int attackCount = 1;
 
+    private void playOffhandSwing(PlayerEntity player) {
+        // Client side swing (instant visual)
+        if (player.getEntityWorld().isClient()) {
+            player.swingHand(Hand.OFF_HAND);
+            return;
+        }
+
+        // Server side packet (sync to other players)
+        if (player.getEntityWorld() instanceof ServerWorld serverWorld) {
+            var packet = new net.minecraft.network.packet.s2c.play.EntityAnimationS2CPacket(
+                    player,
+                    net.minecraft.network.packet.s2c.play.EntityAnimationS2CPacket.SWING_OFF_HAND
+            );
+
+            serverWorld.getChunkManager().sendToNearbyPlayers(player, packet);
+        }
+    }
+
     @Override
     public void postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (!(attacker instanceof PlayerEntity player)) return;
@@ -57,11 +75,10 @@ public class SickleItem extends Item {
         int entityID = target.getId();
 
         if (inMain && inOff) {
-            if (attackCount % 2 == 0) {
-                player.getEntityWorld().getServer().execute(() -> {
-                    player.swingHand(Hand.OFF_HAND, true);
-                });
-            }
+
+                playOffhandSwing(player);
+
+
 
             if (now - lastHitAt > 30) {
                 attackCount = 1;
@@ -92,5 +109,8 @@ public class SickleItem extends Item {
                 attackCount = 1;
             }
         }
+
+
+
     }
 }
