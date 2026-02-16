@@ -129,6 +129,12 @@ public class ItemRegistry {
     public static final Item CRIMSON_DYE = registerDye("crimson_dye", DyeColor.RED);
     public static final Item AQUA_DYE = registerDye("aqua_dye", DyeColor.LIGHT_BLUE);
     public static final Item IRON_SICKLE = register("iron_sickle", SickleItem::new, ModItemSettings.sickle(ToolMaterial.IRON, SickleItem.SPEED));
+    public static final Item WOODEN_SICKLE = register("wooden_sickle", SickleItem::new, ModItemSettings.sickle(ToolMaterial.WOOD, SickleItem.SPEED));
+    public static final Item GOLD_SICKLE = register("gold_sickle", SickleItem::new, ModItemSettings.sickle(ToolMaterial.GOLD, SickleItem.SPEED));
+    public static final Item COPPER_SICKLE = register("copper_sickle", SickleItem::new, ModItemSettings.sickle(ToolMaterial.COPPER, SickleItem.SPEED));
+    public static final Item DIAMOND_SICKLE = register("diamond_sickle", SickleItem::new, ModItemSettings.sickle(ToolMaterial.DIAMOND, SickleItem.SPEED));
+    public static final Item STONE_SICKLE = register("stone_sickle", SickleItem::new, ModItemSettings.sickle(ToolMaterial.STONE, SickleItem.SPEED));
+    public static final Item NETHERITE_SICKLE = register("netherite_sickle", SickleItem::new, ModItemSettings.sickle(ToolMaterial.NETHERITE, SickleItem.SPEED));
     public static final Item AMBER_TERRACOTTA = register(BlockRegistry.AMBER_TERRACOTTA);
     public static final Item INDIGO_TERRACOTTA = register(BlockRegistry.INDIGO_TERRACOTTA);
     public static final Item AQUA_TERRACOTTA = register(BlockRegistry.AQUA_TERRACOTTA);

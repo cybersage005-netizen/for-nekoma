@@ -27,7 +27,7 @@ public class MinecraftClientMixin {
                 && player.getOffHandStack().isIn(OtherRegistry.SICKLES)) {
 
             player.swingHand(Hand.MAIN_HAND);
-            offHandSwingDelay = 2;
+            offHandSwingDelay = 4;
             return;
         }
 

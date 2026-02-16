@@ -76,7 +76,13 @@
   "block.nekomasfixed.crimson_terracotta": "Crimson Terracotta",
   "block.nekomasfixed.aqua_glazed_terracotta": "Aqua Glazed Terracotta",
   "block.nekomasfixed.amber_glazed_terracotta": "Amber Glazed Terracotta",
-  "item.nekomasfixed.iron_sickle": "Iron Sickle"
+  "item.nekomasfixed.iron_sickle": "Iron Sickle",
+  "item.nekomasfixed.wooden_sickle": "Wooden Sickle",
+  "item.nekomasfixed.stone_sickle": "Stone Sickle",
+  "item.nekomasfixed.gold_sickle": "Gold Sickle",
+  "item.nekomasfixed.copper_sickle": "Copper Sickle",
+  "item.nekomasfixed.diamond_sickle": "Diamond Sickle",
+  "item.nekomasfixed.netherite_sickle": "Netherite Sickle",
 
 
 }
