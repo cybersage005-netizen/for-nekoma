@@ -21,6 +21,8 @@ public class MinecraftClientMixin {
     private void redirectSwing(ClientPlayerEntity player, Hand hand) {
         if (player.getMainHandStack().isIn(OtherRegistry.SICKLES)
                 && player.getOffHandStack().isIn(OtherRegistry.SICKLES)) {
+            player.swingHand(Hand.MAIN_HAND);
+            player.swingHand(Hand.OFF_HAND);
             return;
         }
         player.swingHand(hand);
