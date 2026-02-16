@@ -46,7 +46,7 @@ public class SickleItem extends Item {
 
     private void dualSwing(PlayerEntity player) {
         if (!(player.getEntityWorld() instanceof ServerWorld serverWorld)) return;
-
+        System.out.println("Animation Played");
         var main = new net.minecraft.network.packet.s2c.play.EntityAnimationS2CPacket(
                 player,
                 net.minecraft.network.packet.s2c.play.EntityAnimationS2CPacket.SWING_MAIN_HAND
@@ -58,8 +58,6 @@ public class SickleItem extends Item {
         );
 
         var cm = serverWorld.getChunkManager();
-
-        // Send both in same tick
         cm.sendToNearbyPlayers(player, main);
         cm.sendToNearbyPlayers(player, off);
     }
