@@ -22,7 +22,7 @@ public class MinecraftClientMixin {
         if (player.getMainHandStack().isIn(OtherRegistry.SICKLES)
                 && player.getOffHandStack().isIn(OtherRegistry.SICKLES)) {
             player.swingHand(Hand.MAIN_HAND);
-            player.swingHand(Hand.OFF_HAND);
+            MinecraftClient.getInstance().execute(() -> player.swingHand(Hand.OFF_HAND));
             return;
         }
         player.swingHand(hand);
