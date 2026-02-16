@@ -8,6 +8,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Hand;
 
 public class SickleItem extends Item {
 
@@ -37,22 +38,7 @@ public class SickleItem extends Item {
     int previousEntityId;
     private int attackCount = 1;
 
-    private void dualSwing(PlayerEntity player) {
-        if (!(player.getEntityWorld() instanceof ServerWorld serverWorld)) return;System.out.println("Animation Played");
-        var main = new net.minecraft.network.packet.s2c.play.EntityAnimationS2CPacket(
-                player,
-                net.minecraft.network.packet.s2c.play.EntityAnimationS2CPacket.SWING_MAIN_HAND
-        );
 
-        var off = new net.minecraft.network.packet.s2c.play.EntityAnimationS2CPacket(
-                player,
-                net.minecraft.network.packet.s2c.play.EntityAnimationS2CPacket.SWING_OFF_HAND
-        );
-
-        var cm = serverWorld.getChunkManager();
-        cm.sendToNearbyPlayers(player, main);
-        cm.sendToNearbyPlayers(player, off);
-    }
 
     @Override
     public void postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
@@ -65,7 +51,7 @@ public class SickleItem extends Item {
         int entityID = target.getId();
 
         if (inMain && inOff) {
-            dualSwing(player);
+            player.swingHand(Hand.OFF_HAND);
 
             if (now - lastHitAt > 30) {
                 attackCount = 1;

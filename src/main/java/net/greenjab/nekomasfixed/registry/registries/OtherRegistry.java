@@ -46,6 +46,7 @@ public class OtherRegistry {
 
     //tag
     public static final TagKey<Item> CLAMTAG = TagKey.of(RegistryKeys.ITEM, NekomasFixed.id("clams"));
+    public static final TagKey<Item> SICKLES = TagKey.of(RegistryKeys.ITEM, NekomasFixed.id("sickles"));
     public static final TagKey<Item> SLINGSHOT_PROJECTILES = TagKey.of(RegistryKeys.ITEM, NekomasFixed.id("slingshot_projectiles"));
     public static final TagKey<Block> AMBER_BLOCK = TagKey.of(RegistryKeys.BLOCK, NekomasFixed.id("amber_block"));
     public static final TagKey<Block> CRIMSON_BLOCK = TagKey.of(RegistryKeys.BLOCK, NekomasFixed.id("crimson_block"));
