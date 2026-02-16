@@ -44,18 +44,26 @@ public class SickleItem extends Item {
     int previousEntityId;
     private int attackCount = 1;
 
-    private void playOffhandSwing(PlayerEntity player) {
-        // Only send animation packet from server
-        if (player.getEntityWorld() instanceof ServerWorld serverWorld) {
-            var packet = new net.minecraft.network.packet.s2c.play.EntityAnimationS2CPacket(
-                    player,
-                    net.minecraft.network.packet.s2c.play.EntityAnimationS2CPacket.SWING_OFF_HAND
-            );
+    private void dualSwing(PlayerEntity player) {
+        if (!(player.getEntityWorld() instanceof ServerWorld serverWorld)) return;
 
-            // Send to EVERYONE including self
-            serverWorld.getChunkManager().sendToNearbyPlayers(player, packet);
-        }
+        var main = new net.minecraft.network.packet.s2c.play.EntityAnimationS2CPacket(
+                player,
+                net.minecraft.network.packet.s2c.play.EntityAnimationS2CPacket.SWING_MAIN_HAND
+        );
+
+        var off = new net.minecraft.network.packet.s2c.play.EntityAnimationS2CPacket(
+                player,
+                net.minecraft.network.packet.s2c.play.EntityAnimationS2CPacket.SWING_OFF_HAND
+        );
+
+        var cm = serverWorld.getChunkManager();
+
+        // Send both in same tick
+        cm.sendToNearbyPlayers(player, main);
+        cm.sendToNearbyPlayers(player, off);
     }
+
 
 
 
@@ -74,7 +82,7 @@ public class SickleItem extends Item {
         if (inMain && inOff) {
 
 
-            playOffhandSwing(player);
+            dualSwing(player);
 
 
             if (now - lastHitAt > 30) {
