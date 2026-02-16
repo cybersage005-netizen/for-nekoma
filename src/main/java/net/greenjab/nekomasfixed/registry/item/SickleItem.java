@@ -45,22 +45,20 @@ public class SickleItem extends Item {
     private int attackCount = 1;
 
     private void playOffhandSwing(PlayerEntity player) {
-        // Client side swing (instant visual)
-        if (player.getEntityWorld().isClient()) {
-            player.swingHand(Hand.OFF_HAND);
-            return;
-        }
+        // ALWAYS swing locally (fixes 50% issue)
+        player.swingHand(Hand.OFF_HAND);
 
-        // Server side packet (sync to other players)
+        // Also sync to others
         if (player.getEntityWorld() instanceof ServerWorld serverWorld) {
             var packet = new net.minecraft.network.packet.s2c.play.EntityAnimationS2CPacket(
                     player,
                     net.minecraft.network.packet.s2c.play.EntityAnimationS2CPacket.SWING_OFF_HAND
             );
 
-            serverWorld.getChunkManager().sendToNearbyPlayers(player, packet);
+            serverWorld.getChunkManager().sendToOtherNearbyPlayers(player, packet);
         }
     }
+
 
     @Override
     public void postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
@@ -76,8 +74,8 @@ public class SickleItem extends Item {
 
         if (inMain && inOff) {
 
-                playOffhandSwing(player);
 
+            playOffhandSwing(player);
 
 
             if (now - lastHitAt > 30) {
