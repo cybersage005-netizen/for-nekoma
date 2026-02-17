@@ -54,6 +54,7 @@ public class LivingEntityMixin {
         return amount;
     }
 
+
     @Inject(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;getActiveItem()Lnet/minecraft/item/ItemStack;"), cancellable = true)
     private void cancel0Damage(ServerWorld world, DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         if (amount<=0)cir.setReturnValue(true);

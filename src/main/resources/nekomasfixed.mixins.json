@@ -20,8 +20,8 @@
     "NautilusStackMixin",
     "NoteBlockMixin",
     "PillagerEntityMixin",
+    "PlayerEntityInterfaceMixin",
     "PlayerEntityMixin",
-
     "TradeOffersMixin",
     "WeightedPressurePlateBlockMixin",
     "boat.AbstractBoatEntityMixin",

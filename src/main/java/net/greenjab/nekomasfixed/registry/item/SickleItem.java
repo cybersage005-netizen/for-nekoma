@@ -1,5 +1,6 @@
 package net.greenjab.nekomasfixed.registry.item;
 
+import net.greenjab.nekomasfixed.util.DamageHelper;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.entity.LivingEntity;
@@ -61,7 +62,8 @@ public class SickleItem extends Item {
             }
 
             float damageDealt = getAttackDamage(stack);
-
+            DamageHelper.onPlayerAttack(player, target, damageDealt);
+            System.out.println("Damage dealt is " + damageDealt );
             lastHitAt = now;
             if (entityID == previousEntityId) {
                 attackCount++;
