@@ -71,12 +71,13 @@ public class LivingEntityMixin implements LivingEntityDamageAccess{
         return nekomasfixed$lastDealtDamage;
     }
 
-    @Inject(method = "applyDamage", at = @At("TAIL"))
-    private void captureDamage(ServerWorld world, DamageSource source, float amount, CallbackInfo ci) {
+    @Inject(method = "damage", at = @At("HEAD"))
+    private void captureDamage(ServerWorld world, DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         if (source.getAttacker() instanceof LivingEntity attacker) {
             ((LivingEntityDamageAccess) attacker).nekomasfixed$setLastDealtDamage(amount);
         }
     }
+
 
 
 
