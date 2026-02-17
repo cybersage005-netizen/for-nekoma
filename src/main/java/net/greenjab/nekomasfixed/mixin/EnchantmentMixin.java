@@ -41,9 +41,7 @@ public class EnchantmentMixin {
     private void modifyEnchantability(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
         if (stack.getItem() instanceof SickleItem) {
             cir.setReturnValue(
-                    (Object)this == Enchantments.UNBREAKING ||
-                            (Object)this == Enchantments.SHARPNESS ||
-                            (Object)this == Enchantments.MENDING
+                    (Object)this == Enchantments.UNBREAKING || (Object)this == Enchantments.SHARPNESS || (Object)this == Enchantments.MENDING
             );
         }
     }
