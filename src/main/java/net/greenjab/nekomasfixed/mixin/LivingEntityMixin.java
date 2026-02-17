@@ -15,10 +15,13 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import net.greenjab.nekomasfixed.access.LivingEntityDamageAccess;
+
 
 @Mixin(LivingEntity.class)
-public class LivingEntityMixin {
+public class LivingEntityMixin implements LivingEntityDamageAccess{
 
     @ModifyVariable(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;isSleeping()Z"), ordinal = 0, argsOnly = true)
     private float turtleChestplateBlock(float amount, @Local(argsOnly = true) ServerWorld world, @Local(argsOnly = true) DamageSource source) {
@@ -54,6 +57,18 @@ public class LivingEntityMixin {
     @Inject(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;getActiveItem()Lnet/minecraft/item/ItemStack;"), cancellable = true)
     private void cancel0Damage(ServerWorld world, DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         if (amount<=0)cir.setReturnValue(true);
+    }
+
+    @Unique
+    private float nekomasfixed$lastDamage;
+
+    @Inject(method = "applyDamage", at = @At("HEAD"))
+    private void captureDamage(ServerWorld world, DamageSource source, float amount, CallbackInfo ci) {
+        this.nekomasfixed$lastDamage = amount;
+    }
+
+    public float nekomasfixed$getLastDamage() {
+        return nekomasfixed$lastDamage;
     }
 
 

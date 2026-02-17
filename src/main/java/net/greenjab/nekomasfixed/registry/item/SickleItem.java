@@ -1,6 +1,6 @@
 package net.greenjab.nekomasfixed.registry.item;
 
-import net.greenjab.nekomasfixed.registry.registries.OtherRegistry;
+import net.greenjab.nekomasfixed.access.LivingEntityDamageAccess;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.entity.LivingEntity;
@@ -8,13 +8,11 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Hand;
 
 public class SickleItem extends Item {
 
-    public static final float DAMAGE = 2f;
     public static final float SPEED = 1.0f;
 
     public SickleItem(Item.Settings settings) {
@@ -42,9 +40,6 @@ public class SickleItem extends Item {
 
 
 
-
-
-
     @Override
     public void postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (!(attacker instanceof PlayerEntity player)) return;
@@ -65,7 +60,7 @@ public class SickleItem extends Item {
                 }
             }
 
-
+            float damageDealt = ((LivingEntityDamageAccess) player).nekomasfixed$getLastDamage();
             lastHitAt = now;
 
             if (entityID == previousEntityId) {
@@ -76,11 +71,11 @@ public class SickleItem extends Item {
             }
 
             if (attackCount == 5) {
-                float dmg = (float)((3.0 * getAttackDamage(stack)) * 1.5);
+                float dmg = (float)((3.0 * damageDealt) * 1.5);
                 target.damage((ServerWorld) target.getEntityWorld(), player.getDamageSources().playerAttack(player), dmg);
             }
             else if (attackCount == 6) {
-                float dmg = 2f * 4f * getAttackDamage(stack);
+                float dmg = 2f * 4f * damageDealt;
                 target.damage((ServerWorld) target.getEntityWorld(), player.getDamageSources().playerAttack(player), dmg);
                 attackCount = 1;
             }
