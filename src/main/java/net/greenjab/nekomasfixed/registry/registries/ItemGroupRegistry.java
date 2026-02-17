@@ -70,6 +70,7 @@ public class ItemGroupRegistry {
                         entries.add(ItemRegistry.COPPER_SICKLE);
                         entries.add(ItemRegistry.DIAMOND_SICKLE);
                         entries.add(ItemRegistry.NETHERITE_SICKLE);
+                        entries.add(ItemRegistry.CLEAR_ITEM_FRAME);
 
                     }).build();
 

@@ -12,6 +12,7 @@ import net.minecraft.component.type.*;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
+import net.minecraft.item.Items;
 import net.minecraft.item.equipment.ArmorMaterials;
 import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.registry.Registries;
@@ -128,6 +129,9 @@ public class ItemRegistry {
     public static final Item INDIGO_DYE = registerDye("indigo_dye", DyeColor.PURPLE);
     public static final Item CRIMSON_DYE = registerDye("crimson_dye", DyeColor.RED);
     public static final Item AQUA_DYE = registerDye("aqua_dye", DyeColor.LIGHT_BLUE);
+
+    public static final Item CLEAR_ITEM_FRAME = registerItemFrame("clear_item_frame");
+
     public static final Item IRON_SICKLE = register("iron_sickle", SickleItem::new, ModItemSettings.sickle(ToolMaterial.IRON, SickleItem.SPEED));
     public static final Item WOODEN_SICKLE = register("wooden_sickle", SickleItem::new, ModItemSettings.sickle(ToolMaterial.WOOD, SickleItem.SPEED));
     public static final Item GOLD_SICKLE = register("gold_sickle", SickleItem::new, ModItemSettings.sickle(ToolMaterial.GOLD, SickleItem.SPEED));
@@ -135,10 +139,12 @@ public class ItemRegistry {
     public static final Item DIAMOND_SICKLE = register("diamond_sickle", SickleItem::new, ModItemSettings.sickle(ToolMaterial.DIAMOND, SickleItem.SPEED));
     public static final Item STONE_SICKLE = register("stone_sickle", SickleItem::new, ModItemSettings.sickle(ToolMaterial.STONE, SickleItem.SPEED));
     public static final Item NETHERITE_SICKLE = register("netherite_sickle", SickleItem::new, ModItemSettings.sickle(ToolMaterial.NETHERITE, SickleItem.SPEED));
+
     public static final Item AMBER_TERRACOTTA = register(BlockRegistry.AMBER_TERRACOTTA);
     public static final Item INDIGO_TERRACOTTA = register(BlockRegistry.INDIGO_TERRACOTTA);
     public static final Item AQUA_TERRACOTTA = register(BlockRegistry.AQUA_TERRACOTTA);
     public static final Item CRIMSON_TERRACOTTA = register(BlockRegistry.CRIMSON_TERRACOTTA);
+
     public static final Item AQUA_GLAZED_TERRACOTTA = register(BlockRegistry.AQUA_GLAZED_TERRACOTTA);
     public static final Item AMBER_GLAZED_TERRACOTTA = register(BlockRegistry.AMBER_GLAZED_TERRACOTTA);
 
@@ -160,8 +166,6 @@ public class ItemRegistry {
     public static Item register(String id, Item.Settings settings) {
         return register(keyOf(id), Item::new, settings);
     }
-
-
 
     public static Item register(String id, Function<Item.Settings, Item> factory, Item.Settings settings) {
         return register(keyOf(id), factory, settings);
@@ -194,6 +198,13 @@ public class ItemRegistry {
                 keyOf(id),
                 settings -> new DyeItem(color, settings),
                 new Item.Settings()
+        );
+    }
+    public static Item registerItemFrame(String id) {
+        return register(
+                keyOf(id),
+                settings -> new ItemFrameItem(EntityType.ITEM_FRAME, settings),
+                new Item.Settings().maxCount(16)
         );
     }
     public static Item register(Block block, BiFunction<Block, Item.Settings, Item> factory, Item.Settings settings) {
