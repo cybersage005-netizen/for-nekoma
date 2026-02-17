@@ -13,7 +13,7 @@ import net.minecraft.util.Hand;
 public class SickleItem extends Item {
 
     public static final float DAMAGE = 2f;
-    public static final float SPEED = 1.6f;
+    public static final float SPEED = 1.0f;
 
     public SickleItem(Item.Settings settings) {
         super(settings);
