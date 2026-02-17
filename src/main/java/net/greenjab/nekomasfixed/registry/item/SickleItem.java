@@ -40,15 +40,7 @@ public class SickleItem extends Item {
     int previousEntityId;
     private int attackCount = 1;
 
-    @Override
-    public boolean isEnchantable(ItemStack stack) {
-        return true;
-    }
 
-    @Override
-    public boolean canBeEnchantedWith(ItemStack stack, RegistryEntry<Item> enchantment) {
-        return enchantment.isIn(OtherRegistry.SICKLE_ALLOWED);
-    }
 
 
 
