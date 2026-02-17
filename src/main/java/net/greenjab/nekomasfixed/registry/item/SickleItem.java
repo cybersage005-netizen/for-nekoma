@@ -62,8 +62,6 @@ public class SickleItem extends Item {
 
             float damageDealt = getAttackDamage(stack);
 
-            System.out.println("damage dealt: " + damageDealt);
-
             lastHitAt = now;
             if (entityID == previousEntityId) {
                 attackCount++;
@@ -73,7 +71,7 @@ public class SickleItem extends Item {
             }
 
             if (attackCount == 5) {
-                float dmg = (float)((3.0 * damageDealt) * 0.5f);
+                float dmg = (float)((3.0 * damageDealt) * 1.5f);
                 target.damage((ServerWorld) target.getEntityWorld(),
                         player.getDamageSources().playerAttack(player), dmg);
             }
