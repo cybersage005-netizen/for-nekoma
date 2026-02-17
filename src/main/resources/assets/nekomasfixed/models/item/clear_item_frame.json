@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "hnekomasfixed:item/clear_item_frame"
+    "layer0": "nekomasfixed:item/clear_item_frame"
   }
 }
