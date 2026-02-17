@@ -1,6 +1,5 @@
 package net.greenjab.nekomasfixed.registry.item;
 
-import net.greenjab.nekomasfixed.access.LivingEntityDamageAccess;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.entity.LivingEntity;
@@ -8,7 +7,6 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Hand;
 
@@ -62,7 +60,7 @@ public class SickleItem extends Item {
                 }
             }
 
-            float damageDealt = ((LivingEntityDamageAccess) player).nekomasfixed$getLastDealtDamage();
+            float damageDealt = getAttackDamage(stack);
 
             System.out.println("damage dealt: " + damageDealt);
 
