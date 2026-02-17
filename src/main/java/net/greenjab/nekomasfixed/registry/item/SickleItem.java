@@ -8,6 +8,7 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Hand;
 
@@ -40,6 +41,7 @@ public class SickleItem extends Item {
 
 
 
+
     @Override
     public void postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (!(attacker instanceof PlayerEntity player)) return;
@@ -60,9 +62,10 @@ public class SickleItem extends Item {
                 }
             }
 
-            float damageDealt = ((LivingEntityDamageAccess) player).nekomasfixed$getLastDamage();
-            lastHitAt = now;
+            float damageDealt = ((LivingEntityDamageAccess) target).nekomasfixed$getLastDamage();
             System.out.println("damage dealt: " + damageDealt);
+
+            lastHitAt = now;
             if (entityID == previousEntityId) {
                 attackCount++;
             } else {
@@ -71,17 +74,17 @@ public class SickleItem extends Item {
             }
 
             if (attackCount == 5) {
-                float dmg = (float)((3.0 * damageDealt) * 1.5);
-                target.damage((ServerWorld) target.getEntityWorld(), player.getDamageSources().playerAttack(player), dmg);
+                float dmg = (float)((3.0 * damageDealt) * 0.5f);
+                target.damage((ServerWorld) target.getEntityWorld(),
+                        player.getDamageSources().playerAttack(player), dmg);
             }
             else if (attackCount == 6) {
-                float dmg = 2f * 4f * damageDealt;
-                target.damage((ServerWorld) target.getEntityWorld(), player.getDamageSources().playerAttack(player), dmg);
+                float dmg = 2.0f * 4.0f * damageDealt;
+                target.damage((ServerWorld) target.getEntityWorld(),
+                        player.getDamageSources().playerAttack(player), dmg);
                 attackCount = 1;
             }
         }
-
-
-
     }
+
 }
