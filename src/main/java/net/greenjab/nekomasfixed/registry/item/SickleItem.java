@@ -61,9 +61,8 @@ public class SickleItem extends Item {
                 }
             }
 
-            float damageDealt = getAttackDamage(stack);
-            DamageHelper.onPlayerAttack(player, target, damageDealt);
-            System.out.println("Damage dealt is " + damageDealt );
+            float damageDealt = DamageHelper.onPlayerAttack(player, target, getAttackDamage(stack));
+
             lastHitAt = now;
             if (entityID == previousEntityId) {
                 attackCount++;

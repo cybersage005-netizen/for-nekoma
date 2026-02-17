@@ -42,15 +42,12 @@ public class DamageHelper {
         return new DamageCalculation(baseDamage, finalDamage, target, damageSource);
     }
 
-    public static void onPlayerAttack(PlayerEntity player, Entity target, float baseDamage) {
+    public static float onPlayerAttack(PlayerEntity player, Entity target, float baseDamage) {
         DamageSource damageSource = player.getDamageSources().playerAttack(player);
         DamageCalculation calc = calculateDamage(player, target, baseDamage, damageSource);
-        System.out.println(calc.toString());
         float finalDamage = calc.getFinalDamage();
         float reduction = calc.getDamageReduction();
-        if (reduction > 5.0f) {
-            System.out.println("Target has high damage reduction!");
-        }
+        return finalDamage;
     }
 
 }
