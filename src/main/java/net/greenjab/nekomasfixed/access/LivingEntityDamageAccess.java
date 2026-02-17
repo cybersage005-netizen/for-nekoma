@@ -1,5 +1,6 @@
 package net.greenjab.nekomasfixed.access;
 
 public interface LivingEntityDamageAccess {
-    float nekomasfixed$getLastDamage();
+    void nekomasfixed$setLastDealtDamage(float dmg);
+    float nekomasfixed$getLastDealtDamage();
 }
