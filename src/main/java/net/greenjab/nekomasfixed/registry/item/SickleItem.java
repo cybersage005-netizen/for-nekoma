@@ -55,7 +55,7 @@ public class SickleItem extends Item {
         if (inMain && inOff) {
 
             if(player.getOffHandStack().getDamage()>0){
-                player.getOffHandStack().setDamage(player.getOffHandStack().getDamage()-1);
+                player.getOffHandStack().setDamage(player.getOffHandStack().getDamage()+1);
             }
             if (now - lastHitAt > 30) {
                 attackCount = 1;
