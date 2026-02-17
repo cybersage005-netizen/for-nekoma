@@ -1,5 +1,6 @@
 package net.greenjab.nekomasfixed.registry.item;
 
+import net.greenjab.nekomasfixed.registry.registries.OtherRegistry;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.entity.LivingEntity;
@@ -7,10 +8,9 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Hand;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
 
 public class SickleItem extends Item {
 
@@ -39,6 +39,17 @@ public class SickleItem extends Item {
     long lastHitAt = 0;
     int previousEntityId;
     private int attackCount = 1;
+
+    @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public boolean canBeEnchantedWith(ItemStack stack, RegistryEntry<Item> enchantment) {
+        return enchantment.isIn(OtherRegistry.SICKLE_ALLOWED);
+    }
+
 
 
 
