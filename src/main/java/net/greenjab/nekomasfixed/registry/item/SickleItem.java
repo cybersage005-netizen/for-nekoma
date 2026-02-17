@@ -62,7 +62,7 @@ public class SickleItem extends Item {
 
             float damageDealt = ((LivingEntityDamageAccess) player).nekomasfixed$getLastDamage();
             lastHitAt = now;
-
+            System.out.println("damage dealt: " + damageDealt);
             if (entityID == previousEntityId) {
                 attackCount++;
             } else {
