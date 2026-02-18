@@ -23,7 +23,7 @@ public class NekomasFixed implements ModInitializer {
 		OtherRegistry.registerOther();
 		RecipeRegistry.registerRecipes();
 		EntityTypeRegistry.init(); // FIRST
-		ItemRegistry.init();
+
 		SyncHandler.init();
 	}
 
