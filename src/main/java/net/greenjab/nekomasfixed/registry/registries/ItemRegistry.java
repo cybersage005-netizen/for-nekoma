@@ -229,7 +229,7 @@ public class ItemRegistry {
     }
 
 
-
+    public static void init() {}
     public static void registerItems() {
         System.out.println("register Items");
     }

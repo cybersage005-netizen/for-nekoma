@@ -111,4 +111,10 @@ public class EntityTypeRegistry {
         FabricDefaultAttributeRegistry.register(TARGET_DUMMY, TargetDummyEntity.createTargetDummyAttributes().build());
         FabricDefaultAttributeRegistry.register(WILD_FIRE, WildFireEntity.createWildFireAttributes().build());
     }
+
+
+
+    public static void init() {}
+
+
 }
