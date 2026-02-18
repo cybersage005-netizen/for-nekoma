@@ -6,13 +6,13 @@ import net.minecraft.world.World;
 
 public class ClearItemFrameEntity extends ItemFrameEntity {
 
-    public ClearItemFrameEntity(EntityType<? extends ItemFrameEntity> type, World world) {
+    public ClearItemFrameEntity(EntityType<? extends ClearItemFrameEntity> type, World world) {
         super(type, world);
     }
 
+    // Invisible ONLY when item inside
     @Override
     public boolean isInvisible() {
-        // invisible ONLY when item exists inside
         return !this.getHeldItemStack().isEmpty();
     }
 }
