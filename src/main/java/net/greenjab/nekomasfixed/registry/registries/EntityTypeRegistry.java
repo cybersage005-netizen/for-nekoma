@@ -2,7 +2,7 @@ package net.greenjab.nekomasfixed.registry.registries;
 
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.greenjab.nekomasfixed.NekomasFixed;
-import net.greenjab.nekomasfixed.registry.block.entity.ClearItemFrameEntity;
+import net.greenjab.nekomasfixed.registry.entity.ClearItemFrameEntity;
 import net.greenjab.nekomasfixed.registry.entity.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.vehicle.AbstractBoatEntity;
@@ -11,7 +11,6 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
-import net.minecraft.util.Identifier;
 
 import java.util.List;
 import java.util.function.Supplier;

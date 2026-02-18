@@ -8,6 +8,9 @@ import net.greenjab.nekomasfixed.render.block.entity.EndermanHeadBlockEntityRend
 import net.greenjab.nekomasfixed.render.entity.*;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.render.entity.EntityRendererFactories;
+import net.minecraft.client.render.entity.ItemFrameEntityRenderer;
+
+
 
 public class EntityRendererRegistry {
 
@@ -39,6 +42,12 @@ public class EntityRendererRegistry {
         EntityRendererFactories.register(EntityTypeRegistry.HUGE_OAK_BOAT, context -> new HugeBoatEntityRenderer(context, EntityModelLayerRegistry.HUGE_OAK_BOAT));
         EntityRendererFactories.register(EntityTypeRegistry.HUGE_PALE_OAK_BOAT, context -> new HugeBoatEntityRenderer(context, EntityModelLayerRegistry.HUGE_PALE_OAK_BOAT));
         EntityRendererFactories.register(EntityTypeRegistry.HUGE_SPRUCE_BOAT, context -> new HugeBoatEntityRenderer(context, EntityModelLayerRegistry.HUGE_SPRUCE_BOAT));
+        EntityRendererFactories.register(
+                EntityTypeRegistry.CLEAR_ITEM_FRAME,
+                ItemFrameEntityRenderer::new
+        );
+
+
 
         EntityRendererFactories.register(EntityTypeRegistry.TARGET_DUMMY, TargetDummyEntityRenderer::new);
 
