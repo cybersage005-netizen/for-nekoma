@@ -16,13 +16,13 @@ public class ModItemSettings {
 
     public static Item.Settings sickle(ToolMaterial material, float speed) {
         float realDamage = 0.0f;
-        if(material.equals(ToolMaterial.WOOD)){realDamage = 1f;}
-        else if(material.equals(ToolMaterial.STONE)){realDamage = 1.5f;}
-        else if(material.equals(ToolMaterial.COPPER)){realDamage = 1.15f;}
-        else if(material.equals(ToolMaterial.IRON)){realDamage = 2f;}
-        else if(material.equals(ToolMaterial.GOLD)){realDamage = 1f;}
-        else if(material.equals(ToolMaterial.DIAMOND)){realDamage = 2.5f;}
-        else if(material.equals(ToolMaterial.NETHERITE)){realDamage = 3f;} // the damage is one less because one is added somewhere idk where
+        if(material.equals(ToolMaterial.WOOD)){realDamage = 2f;}
+        else if(material.equals(ToolMaterial.STONE)){realDamage = 2.5f;}
+        else if(material.equals(ToolMaterial.COPPER)){realDamage = 2.15f;}
+        else if(material.equals(ToolMaterial.IRON)){realDamage = 3f;}
+        else if(material.equals(ToolMaterial.GOLD)){realDamage = 2f;}
+        else if(material.equals(ToolMaterial.DIAMOND)){realDamage = 3.5f;}
+        else if(material.equals(ToolMaterial.NETHERITE)){realDamage = 4f;} // the damage is one less because one is added somewhere idk where
         return new Item.Settings()
                 .maxDamage(material.durability())
                 .enchantable(15)
