@@ -8,10 +8,7 @@ import net.greenjab.nekomasfixed.registries.TextureRegistry;
 import net.minecraft.client.render.entity.ItemFrameEntityRenderer;
 import net.minecraft.client.render.entity.equipment.EquipmentModel;
 import net.minecraft.util.Identifier;
-import net.greenjab.nekomasfixed.registries.EntityTypeRegistry;
-
-
-
+import net.greenjab.nekomasfixed.registry.registries.EntityTypeRegistry;
 
 public class NekomasFixedClient implements ClientModInitializer {
 	public static EquipmentModel turtleArmorModel = createHumanoidOnlyModel("turtle_scute");
