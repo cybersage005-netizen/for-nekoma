@@ -130,11 +130,11 @@ public class ItemRegistry {
     public static final Item CRIMSON_DYE = registerDye("crimson_dye", DyeColor.RED);
     public static final Item AQUA_DYE = registerDye("aqua_dye", DyeColor.LIGHT_BLUE);
 
-    public static final Item CLEAR_ITEM_FRAME = Registry.register(
-            Registries.ITEM,
-            NekomasFixed.id("clear_item_frame"),
-            new ItemFrameItem(EntityTypeRegistry.CLEAR_ITEM_FRAME, new Item.Settings())
-    );
+//    public static final Item CLEAR_ITEM_FRAME = Registry.register(
+//            Registries.ITEM,
+//            NekomasFixed.id("clear_item_frame"),
+//            new ItemFrameItem(EntityTypeRegistry.CLEAR_ITEM_FRAME, new Item.Settings())
+//    );
 
 
     public static final Item IRON_SICKLE = register("iron_sickle", SickleItem::new, ModItemSettings.sickle(ToolMaterial.IRON, SickleItem.SPEED));
@@ -229,7 +229,13 @@ public class ItemRegistry {
     }
 
 
-    public static void init() {}
+    public static void init() {
+        final Item CLEAR_ITEM_FRAME = Registry.register(
+                Registries.ITEM,
+                NekomasFixed.id("clear_item_frame"),
+                new ItemFrameItem(EntityTypeRegistry.CLEAR_ITEM_FRAME, new Item.Settings())
+        );
+    }
     public static void registerItems() {
         System.out.println("register Items");
     }
