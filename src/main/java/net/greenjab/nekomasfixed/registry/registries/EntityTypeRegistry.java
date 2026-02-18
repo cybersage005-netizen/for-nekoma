@@ -3,7 +3,6 @@ package net.greenjab.nekomasfixed.registry.registries;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.greenjab.nekomasfixed.NekomasFixed;
-import net.greenjab.nekomasfixed.registry.entity.ClearItemFrameEntity;
 import net.greenjab.nekomasfixed.registry.entity.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.decoration.ItemFrameEntity;

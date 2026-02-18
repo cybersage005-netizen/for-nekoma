@@ -152,11 +152,7 @@ public class ItemRegistry {
 
     public static final Item AQUA_GLAZED_TERRACOTTA = register(BlockRegistry.AQUA_GLAZED_TERRACOTTA);
     public static final Item AMBER_GLAZED_TERRACOTTA = register(BlockRegistry.AMBER_GLAZED_TERRACOTTA);
-    public static final Item CLEAR_ITEM_FRAME = Registry.register(
-            Registries.ITEM,
-            NekomasFixed.id("clear_item_frame"),
-            new ItemFrameItem(EntityTypeRegistry.CLEAR_ITEM_FRAME, new Item.Settings().maxCount(16))
-    );
+
 //    ------------------------------------------------------------------------------------------
 
 

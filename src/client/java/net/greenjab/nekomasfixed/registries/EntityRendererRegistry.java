@@ -42,10 +42,7 @@ public class EntityRendererRegistry {
         EntityRendererFactories.register(EntityTypeRegistry.HUGE_OAK_BOAT, context -> new HugeBoatEntityRenderer(context, EntityModelLayerRegistry.HUGE_OAK_BOAT));
         EntityRendererFactories.register(EntityTypeRegistry.HUGE_PALE_OAK_BOAT, context -> new HugeBoatEntityRenderer(context, EntityModelLayerRegistry.HUGE_PALE_OAK_BOAT));
         EntityRendererFactories.register(EntityTypeRegistry.HUGE_SPRUCE_BOAT, context -> new HugeBoatEntityRenderer(context, EntityModelLayerRegistry.HUGE_SPRUCE_BOAT));
-        EntityRendererFactories.register(
-                EntityTypeRegistry.CLEAR_ITEM_FRAME,
-                ItemFrameEntityRenderer::new
-        );
+
 
 
 
