@@ -10,6 +10,12 @@ public class ClearItemFrameEntity extends ItemFrameEntity {
         super(type, world);
     }
 
+    @Override
+    public boolean canStayAttached() {
+        return true;
+    }
+
+
     // Invisible ONLY when item inside
     @Override
     public boolean isInvisible() {
