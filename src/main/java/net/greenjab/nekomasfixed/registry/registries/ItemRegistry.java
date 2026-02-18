@@ -149,7 +149,11 @@ public class ItemRegistry {
     public static final Item INDIGO_TERRACOTTA = register(BlockRegistry.INDIGO_TERRACOTTA);
     public static final Item AQUA_TERRACOTTA = register(BlockRegistry.AQUA_TERRACOTTA);
     public static final Item CRIMSON_TERRACOTTA = register(BlockRegistry.CRIMSON_TERRACOTTA);
-
+    public static final Item CLEAR_ITEM_FRAME = Registry.register(
+            Registries.ITEM,
+            NekomasFixed.id("clear_item_frame"),
+            new ItemFrameItem(EntityTypeRegistry.CLEAR_ITEM_FRAME, new Item.Settings())
+    );
     public static final Item AQUA_GLAZED_TERRACOTTA = register(BlockRegistry.AQUA_GLAZED_TERRACOTTA);
     public static final Item AMBER_GLAZED_TERRACOTTA = register(BlockRegistry.AMBER_GLAZED_TERRACOTTA);
 
@@ -230,11 +234,7 @@ public class ItemRegistry {
 
 
     public static void init() {
-        final Item CLEAR_ITEM_FRAME = Registry.register(
-                Registries.ITEM,
-                NekomasFixed.id("clear_item_frame"),
-                new ItemFrameItem(EntityTypeRegistry.CLEAR_ITEM_FRAME, new Item.Settings())
-        );
+
     }
     public static void registerItems() {
         System.out.println("register Items");
