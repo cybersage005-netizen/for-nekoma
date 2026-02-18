@@ -232,10 +232,18 @@ public class ItemRegistry {
     public static Item CLEAR_ITEM_FRAME;
 
     public static void init() {
+        RegistryKey<Item> key = RegistryKey.of(
+                RegistryKeys.ITEM,
+                NekomasFixed.id("clear_item_frame")
+        );
+
         CLEAR_ITEM_FRAME = Registry.register(
                 Registries.ITEM,
-                NekomasFixed.id("clear_item_frame"),
-                new ItemFrameItem(EntityTypeRegistry.CLEAR_ITEM_FRAME, new Item.Settings())
+                key,
+                new ItemFrameItem(
+                        EntityTypeRegistry.CLEAR_ITEM_FRAME,
+                        new Item.Settings().registryKey(key)
+                )
         );
     }
     public static void registerItems() {
