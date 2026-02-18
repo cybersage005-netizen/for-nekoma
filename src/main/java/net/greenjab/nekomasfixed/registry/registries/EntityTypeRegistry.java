@@ -66,19 +66,25 @@ public class EntityTypeRegistry {
         return (type, world) -> new HugeBoatEntity(type, world, itemSupplier);
     }
 
-    public static final EntityType<ItemFrameEntity> CLEAR_ITEM_FRAME =
-            Registry.register(
-                    Registries.ENTITY_TYPE,
-                    NekomasFixed.id("clear_item_frame"),
-                    FabricEntityTypeBuilder.<ItemFrameEntity>create(SpawnGroup.MISC, ItemFrameEntity::new)
-                            .dimensions(EntityDimensions.fixed(0.5f, 0.5f))
-                            .trackRangeBlocks(10)
-                            .trackedUpdateRate(10)
-                            .build(RegistryKey.of(
-                                    RegistryKeys.ENTITY_TYPE,
-                                    NekomasFixed.id("clear_item_frame")
-                            ))
-            );
+    public static final EntityType<ItemFrameEntity> CLEAR_ITEM_FRAME;
+
+    static {
+        RegistryKey<EntityType<?>> key = RegistryKey.of(
+                RegistryKeys.ENTITY_TYPE,
+                NekomasFixed.id("clear_item_frame")
+        );
+
+        CLEAR_ITEM_FRAME = Registry.register(
+                Registries.ENTITY_TYPE,
+                key,
+                FabricEntityTypeBuilder.<ItemFrameEntity>create(SpawnGroup.MISC, ItemFrameEntity::new)
+                        .dimensions(EntityDimensions.fixed(0.5f, 0.5f))
+                        .trackRangeBlocks(10)
+                        .trackedUpdateRate(10)
+                        .build(key) // ✅ THIS IS THE FIX
+        );
+    }
+
 
 
 
