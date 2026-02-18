@@ -1,10 +1,12 @@
 package net.greenjab.nekomasfixed.registry.registries;
 
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.greenjab.nekomasfixed.NekomasFixed;
 import net.greenjab.nekomasfixed.registry.entity.ClearItemFrameEntity;
 import net.greenjab.nekomasfixed.registry.entity.*;
 import net.minecraft.entity.*;
+import net.minecraft.entity.decoration.ItemFrameEntity;
 import net.minecraft.entity.vehicle.AbstractBoatEntity;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -64,20 +66,20 @@ public class EntityTypeRegistry {
         return (type, world) -> new HugeBoatEntity(type, world, itemSupplier);
     }
 
-    public static final EntityType<ClearItemFrameEntity> CLEAR_ITEM_FRAME =
+    public static final EntityType<ItemFrameEntity> CLEAR_ITEM_FRAME =
             Registry.register(
                     Registries.ENTITY_TYPE,
                     NekomasFixed.id("clear_item_frame"),
-                    EntityType.Builder
-                            .<ClearItemFrameEntity>create(ClearItemFrameEntity::new, SpawnGroup.MISC)
-                            .dimensions(0.5f, 0.5f)
-                            .build(
-                                    RegistryKey.of(
-                                            RegistryKeys.ENTITY_TYPE,
-                                            NekomasFixed.id("clear_item_frame")
-                                    )
-                            )
+                    FabricEntityTypeBuilder.<ItemFrameEntity>create(SpawnGroup.MISC, ItemFrameEntity::new)
+                            .dimensions(EntityDimensions.fixed(0.5f, 0.5f))
+                            .trackRangeBlocks(10)
+                            .trackedUpdateRate(10)
+                            .build(RegistryKey.of(
+                                    RegistryKeys.ENTITY_TYPE,
+                                    NekomasFixed.id("clear_item_frame")
+                            ))
             );
+
 
 
 
