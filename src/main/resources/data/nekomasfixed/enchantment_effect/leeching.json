@@ -1,7 +1,3 @@
 {
-  "effects": [
-    {
-      "type": "nekomasfixed:leeching"
-    }
-  ]
+  "type": "nekomasfixed:leeching"
 }

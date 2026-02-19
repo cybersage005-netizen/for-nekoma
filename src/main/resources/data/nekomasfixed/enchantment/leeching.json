@@ -2,8 +2,8 @@
   "description": {
     "translate": "enchantment.nekomasfixed.leeching"
   },
-  "supported_items": "#minecraft:enchantable/sword",
-  "primary_items": "#minecraft:enchantable/sword",
+  "supported_items": "minecraft:sword_enchantable",
+  "primary_items": "minecraft:sword_enchantable",
   "weight": 5,
   "max_level": 3,
   "min_cost": {
@@ -18,9 +18,9 @@
   "slots": [
     "mainhand"
   ],
-  "effects": {
-    "entity_effects": [
-      "nekomasfixed:leeching"
-    ]
-  }
+  "effects": [
+    {
+      "type": "nekomasfixed:leeching"
+    }
+  ]
 }
