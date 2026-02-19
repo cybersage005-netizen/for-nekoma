@@ -15,9 +15,18 @@ public record LeechingEnchantmentEffect() implements EnchantmentEntityEffect {
     public void apply(ServerWorld world, int level, EnchantmentEffectContext context, Entity target, Vec3d pos) {
         LivingEntity attacker = context.owner();
         if (target instanceof LivingEntity victim) {
-            if (victim.hurtTime > 0) {
-                attacker.heal(level);
+            float health = ((LivingEntity) target).getHealth();
+            float playerHeal = 0.0f;
+            if(level == 1){
+                playerHeal = (float) (0.05 * health);
             }
+            if(level == 2){
+                playerHeal = (float) (0.08 * health);
+            }
+            if(level == 3){
+                playerHeal = (float) (0.1 * health);
+            }
+            attacker.setHealth(attacker.getHealth() + playerHeal);
         }
     }
 
