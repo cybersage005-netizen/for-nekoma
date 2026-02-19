@@ -13,11 +13,10 @@ public record LeechingEnchantmentEffect() implements EnchantmentEntityEffect {
 
     @Override
     public void apply(ServerWorld world, int level, EnchantmentEffectContext context, Entity target, Vec3d pos) {
-        if (context.owner() instanceof LivingEntity attacker) {
-            if (target instanceof LivingEntity victim) {
-                if (victim.hurtTime > 0) {
-                    attacker.heal(level);
-                }
+        LivingEntity attacker = context.owner();
+        if (target instanceof LivingEntity victim) {
+            if (victim.hurtTime > 0) {
+                attacker.heal(level);
             }
         }
     }
