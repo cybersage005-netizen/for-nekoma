@@ -20,11 +20,11 @@ public class EnchantmentRegistry {
                 Enchantment.builder(
                         Enchantment.definition(
                                 items.getOrThrow(ItemTags.WEAPON_ENCHANTABLE),
-                                5, // max level
-                                1, // min cost
-                                Enchantment.leveledCost(1, 10), // min cost per level
-                                Enchantment.leveledCost(1, 15), // max cost per level
-                                1, // anvil cost
+                                5,
+                                1,
+                                Enchantment.leveledCost(1, 10),
+                                Enchantment.leveledCost(1, 15),
+                                1,
                                 AttributeModifierSlot.MAINHAND
                         )
                 ).build(LEECHING.getValue())
