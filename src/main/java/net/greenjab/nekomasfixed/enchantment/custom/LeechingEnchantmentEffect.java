@@ -29,9 +29,7 @@ public record LeechingEnchantmentEffect() implements EnchantmentEntityEffect {
         }
 
         @Override
-        public void apply(ServerWorld world, int level, EnchantmentEffectContext context, Entity user, Vec3d pos) {
-
-        }
+        public void apply(ServerWorld world, int level, EnchantmentEffectContext context, Entity user, Vec3d pos) {}
 
         @Override
         public MapCodec<? extends EnchantmentEntityEffect> getCodec() {

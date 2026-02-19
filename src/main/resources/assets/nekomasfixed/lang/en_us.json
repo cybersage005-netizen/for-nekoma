@@ -79,11 +79,10 @@
   "item.nekomasfixed.iron_sickle": "Iron Sickle",
   "item.nekomasfixed.wooden_sickle": "Wooden Sickle",
   "item.nekomasfixed.stone_sickle": "Stone Sickle",
-  "item.nekomasfixed.gold_sickle": "Gold Sickle",
+  "item.nekomasfixed.golden_sickle": "Golden Sickle",
   "item.nekomasfixed.copper_sickle": "Copper Sickle",
   "item.nekomasfixed.diamond_sickle": "Diamond Sickle",
-  "item.nekomasfixed.netherite_sickle": "Netherite Sickle",
-  "item.nekomasfixed.clear_item_frame": "Clear Item Frame"
+  "item.nekomasfixed.netherite_sickle": "Netherite Sickle"
 
 
 }
