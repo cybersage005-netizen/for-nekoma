@@ -3,16 +3,12 @@ package net.greenjab.nekomasfixed.registry.block;
 import com.mojang.serialization.MapCodec;
 import net.greenjab.nekomasfixed.registry.block.entity.KilnBlockEntity;
 import net.greenjab.nekomasfixed.registry.registries.BlockEntityTypeRegistry;
-import net.greenjab.nekomasfixed.registry.registries.StatRegistry;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AbstractFurnaceBlock;
-import net.minecraft.block.BlastFurnaceBlock;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlastFurnaceBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.datafixer.fix.StatsRenameFix;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.screen.NamedScreenHandlerFactory;
@@ -53,7 +49,7 @@ public class KilnBlock extends AbstractFurnaceBlock {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof KilnBlockEntity) {
             player.openHandledScreen((NamedScreenHandlerFactory)blockEntity);
-            player.incrementStat(StatRegistry.INTERACT_WITH_KILN);
+            player.incrementStat(Stats.INTERACT_WITH_BLAST_FURNACE);
         }
     }
 
