@@ -3,6 +3,7 @@ package net.greenjab.nekomasfixed;
 import net.fabricmc.api.ModInitializer;
 
 
+import net.greenjab.nekomasfixed.enchantment.ModEnchantmentEffects;
 import net.greenjab.nekomasfixed.network.SyncHandler;
 import net.greenjab.nekomasfixed.registry.registries.*;
 import net.minecraft.util.Identifier;
@@ -23,9 +24,11 @@ public class NekomasFixed implements ModInitializer {
 		EntityTypeRegistry.registerEntityType();
 		OtherRegistry.registerOther();
 		RecipeRegistry.registerRecipes();
-		EntityTypeRegistry.init(); // FIRST
+		ModEnchantmentEffects.register();
+		EntityTypeRegistry.init();
 		SyncHandler.init();
 	}
+
 
 	public static Identifier id(String path) {
 		return Identifier.of(NAMESPACE, path);
