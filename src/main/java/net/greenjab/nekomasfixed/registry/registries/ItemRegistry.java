@@ -217,6 +217,17 @@ public class ItemRegistry {
                 new Item.Settings().maxCount(16)
         );
     }
+    public static void registerItems() {
+        NekomasFixed.LOGGER.info("Registering items...");
+
+        // Force static initialization
+        try {
+            Class.forName(ItemRegistry.class.getName());
+            NekomasFixed.LOGGER.info("Items registered successfully");
+        } catch (ClassNotFoundException e) {
+            NekomasFixed.LOGGER.error("Failed to register items", e);
+        }
+    }
     public static Item register(Block block, BiFunction<Block, Item.Settings, Item> factory, Item.Settings settings) {
         return register(
                 keyOf(block.getRegistryEntry().registryKey()),
@@ -237,7 +248,5 @@ public class ItemRegistry {
 
 
 
-    public static void registerItems() {
-        System.out.println("register Items");
-    }
+
 }
