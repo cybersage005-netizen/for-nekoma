@@ -6,6 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.greenjab.nekomasfixed.registry.recipe.CoralNautilusRecipe;
 import net.greenjab.nekomasfixed.registry.recipe.KilnRecipe;
 import net.greenjab.nekomasfixed.registry.recipe.ZombieNautilusRecipe;
+import net.greenjab.nekomasfixed.registry.recipe.book.KilnRecipeBookCategory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
@@ -14,6 +15,7 @@ import net.minecraft.recipe.RawShapedRecipe;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.book.CraftingRecipeCategory;
+import net.minecraft.recipe.book.RecipeBookCategory;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -142,6 +144,14 @@ public class RecipeRegistry {
             }
     );
 
+    public static final RecipeBookCategory KILN_RECIPE_BOOK_CATEGORY =
+            Registry.register(
+                    Registries.RECIPE_BOOK_CATEGORY,
+                    Identifier.of("nekomasfixed", "kiln"),
+                    KilnRecipeBookCategory.KILN
+            );
+
+    public static void registerRecipeBookGroups() {}
     public static void registerRecipes() {
         System.out.println("Registering Mod Recipes");
     }
