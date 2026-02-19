@@ -35,7 +35,7 @@ public class BlockRegistry {
     public static final Block PEARL_BLOCK = register("pearl_block", AbstractBlock.Settings.create().mapColor(MapColor.WHITE).instrument(NoteBlockInstrument.BASEDRUM)
             .sounds(BlockSoundGroup.CALCITE).requiresTool().strength(0.75F));
 
-    public static final Block KILN = register("kiln", AbstractBlock.Settings.create().mapColor(MapColor.LIGHT_GRAY).instrument(NoteBlockInstrument.BASEDRUM)
+    public static final Block KILN = register("kiln", KilnBlock::new,AbstractBlock.Settings.create().mapColor(MapColor.LIGHT_GRAY).instrument(NoteBlockInstrument.BASEDRUM)
             .sounds(BlockSoundGroup.GILDED_BLACKSTONE).requiresTool().strength(3.5f));
 
     public static final Block GLOW_TORCH = register(
