@@ -1,6 +1,7 @@
 package net.greenjab.nekomasfixed.enchantment.effect;
 
 import com.mojang.serialization.MapCodec;
+import net.greenjab.nekomasfixed.registry.entity.TargetDummyEntity;
 import net.minecraft.enchantment.EnchantmentEffectContext;
 import net.minecraft.enchantment.effect.EnchantmentEntityEffect;
 import net.minecraft.entity.Entity;
@@ -25,6 +26,9 @@ public record LeechingEnchantmentEffect() implements EnchantmentEntityEffect {
             }
             if(level == 3){
                 playerHeal = (float) (0.1 * health);
+            }
+            if(target instanceof TargetDummyEntity){
+                playerHeal = 0.0f;
             }
             attacker.setHealth(attacker.getHealth() + playerHeal);
         }
