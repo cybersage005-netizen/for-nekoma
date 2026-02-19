@@ -3,6 +3,7 @@
     "minecraft:unbreaking",
     "minecraft:mending",
     "minecraft:sharpness",
-    "nekomasfixed:leeching"
+    "nekomasfixed:leeching",
+    "minecraft:fire_aspect"
   ]
 }
