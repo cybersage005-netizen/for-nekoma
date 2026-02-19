@@ -2,6 +2,7 @@
   "values": [
     "minecraft:unbreaking",
     "minecraft:mending",
-    "minecraft:sharpness"
+    "minecraft:sharpness",
+    "nekomasfixed:leeching"
   ]
 }
