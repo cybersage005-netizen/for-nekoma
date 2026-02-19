@@ -18,6 +18,7 @@ public class NekomasFixed implements ModInitializer {
 	public void onInitialize() {
 		BlockEntityTypeRegistry.registerBlockEntityType();
 		BlockRegistry.registerBlocks();
+		EnchantmentEffectRegistry.register();
 		ItemRegistry.registerItems();
 		ItemGroupRegistry.registerItemGroup();
 		EntityTypeRegistry.registerEntityType();
