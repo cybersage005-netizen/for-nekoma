@@ -2,7 +2,7 @@ package net.greenjab.nekomasfixed;
 
 import net.fabricmc.api.ModInitializer;
 
-import net.greenjab.nekomasfixed.enchantment.ModEnchantmentEffects;
+
 import net.greenjab.nekomasfixed.network.SyncHandler;
 import net.greenjab.nekomasfixed.registry.registries.*;
 import net.minecraft.util.Identifier;
