@@ -83,9 +83,9 @@
   "item.nekomasfixed.copper_sickle": "Copper Sickle",
   "item.nekomasfixed.diamond_sickle": "Diamond Sickle",
   "item.nekomasfixed.netherite_sickle": "Netherite Sickle",
-
   "enchantment.nekomasfixed.leeching": "Leeching",
-  "block.nekomasfixed.kiln": "Kiln"
+  "block.nekomasfixed.kiln": "Kiln",
+  "container.nekomasfixed.kiln": "Kiln"
 
 
 

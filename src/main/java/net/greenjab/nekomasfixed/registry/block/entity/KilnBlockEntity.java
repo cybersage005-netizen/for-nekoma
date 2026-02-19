@@ -14,7 +14,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 
 public class KilnBlockEntity extends AbstractFurnaceBlockEntity {
-    private static final Text CONTAINER_NAME_TEXT = Text.translatable("container.blast_furnace");
+    private static final Text CONTAINER_NAME_TEXT = Text.translatable("container.nekomasfixed.kiln");
 
     public KilnBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityTypeRegistry.KILN_BLOCK_ENTITY, pos, state, RecipeType.BLASTING);
