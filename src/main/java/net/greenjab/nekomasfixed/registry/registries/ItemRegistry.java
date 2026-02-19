@@ -9,6 +9,7 @@ import net.greenjab.nekomasfixed.util.ModItemSettings;
 import net.minecraft.block.Block;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.*;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
@@ -28,6 +29,8 @@ import net.minecraft.world.waypoint.Waypoint;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+
+import static net.greenjab.nekomasfixed.NekomasFixed.id;
 
 public class ItemRegistry {
 
@@ -70,15 +73,15 @@ public class ItemRegistry {
     public static final Item BOAT_UPGRADE_TEMPLATE = register(
             "boat_upgrade_template", settings -> new SmithingTemplateItem(
                     Text.translatable(
-                            Util.createTranslationKey("item", NekomasFixed.id("boat"))
+                            Util.createTranslationKey("item", id("boat"))
                             ).formatted(Formatting.BLUE),
                     Text.translatable(
-                            Util.createTranslationKey("item", NekomasFixed.id("planks"))
+                            Util.createTranslationKey("item", id("planks"))
                     ).formatted(Formatting.BLUE),
                     Text.of(""),
                     Text.of(""),
-                    List.of(NekomasFixed.id("container/slot/boat")),
-                    List.of(NekomasFixed.id("container/slot/planks")),
+                    List.of(id("container/slot/boat")),
+                    List.of(id("container/slot/planks")),
                     settings),new Item.Settings().rarity(Rarity.UNCOMMON)
     );
 
@@ -144,6 +147,8 @@ public class ItemRegistry {
     public static final Item DIAMOND_SICKLE = register("diamond_sickle", SickleItem::new, ModItemSettings.sickle(ToolMaterial.DIAMOND, SickleItem.SPEED));
     public static final Item STONE_SICKLE = register("stone_sickle", SickleItem::new, ModItemSettings.sickle(ToolMaterial.STONE, SickleItem.SPEED));
     public static final Item NETHERITE_SICKLE = register("netherite_sickle", SickleItem::new, ModItemSettings.sickle(ToolMaterial.NETHERITE, SickleItem.SPEED));
+    public static final RegistryKey<Enchantment> LEECHING =
+            RegistryKey.of(RegistryKeys.ENCHANTMENT, id("leeching"));
 
     public static final Item AMBER_TERRACOTTA = register(BlockRegistry.AMBER_TERRACOTTA);
     public static final Item INDIGO_TERRACOTTA = register(BlockRegistry.INDIGO_TERRACOTTA);
@@ -176,7 +181,7 @@ public class ItemRegistry {
         return register(keyOf(id), factory, settings);
     }
     private static RegistryKey<Item> keyOf(String id) {
-        return RegistryKey.of(RegistryKeys.ITEM, NekomasFixed.id(id));
+        return RegistryKey.of(RegistryKeys.ITEM, id(id));
     }
     public static Item register(RegistryKey<Item> key, Function<Item.Settings, Item> factory, Item.Settings settings) {
         Item item = factory.apply(settings.registryKey(key));

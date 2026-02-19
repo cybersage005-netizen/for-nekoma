@@ -82,7 +82,11 @@
   "item.nekomasfixed.golden_sickle": "Golden Sickle",
   "item.nekomasfixed.copper_sickle": "Copper Sickle",
   "item.nekomasfixed.diamond_sickle": "Diamond Sickle",
-  "item.nekomasfixed.netherite_sickle": "Netherite Sickle"
+  "item.nekomasfixed.netherite_sickle": "Netherite Sickle",
+
+  "enchantment.nekomasfixed.leeching": "Leeching"
+
+
 
 
 }
