@@ -3,7 +3,7 @@
   "package": "net.greenjab.nekomasfixed.mixin.client",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "AbstractFurnaceScreenHandlerMixin",
+    "AbstractFurnaceScreenMixin",
     "BipedEntityModelMixin",
     "BipedEntityRendererMixin",
     "ClientPlayerInteractionManagerMixin",
