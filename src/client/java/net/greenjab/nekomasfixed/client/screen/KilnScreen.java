@@ -2,10 +2,13 @@ package net.greenjab.nekomasfixed.client.screen;
 
 import net.greenjab.nekomasfixed.NekomasFixed;
 import net.greenjab.nekomasfixed.screen.KilnScreenHandler;
-import net.minecraft.client.gui.Click;import net.minecraft.client.gui.screen.ingame.AbstractFurnaceScreen;
-import net.minecraft.client.input.KeyInput;import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.client.gui.ScreenPos;import net.minecraft.client.gui.screen.ingame.AbstractFurnaceScreen;
+import net.minecraft.client.gui.screen.recipebook.FurnaceRecipeBookWidget;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+
+import java.util.List;
 
 public class KilnScreen extends AbstractFurnaceScreen<KilnScreenHandler> {
     private static final Identifier TEXTURE = Identifier.of(NekomasFixed.MOD_ID, "textures/gui/container/kiln.png");
@@ -21,19 +24,20 @@ public class KilnScreen extends AbstractFurnaceScreen<KilnScreenHandler> {
                 TEXTURE,
                 LIT_PROGRESS_TEXTURE,
                 BURN_PROGRESS_TEXTURE,
-                null
+                List.of()  // Empty list = no tabs = no recipe book functionality
         );
     }
 
     @Override
-    public boolean mouseClicked(Click click, boolean doubled) {
-        // Prevent recipe book from opening
-        return super.mouseClicked(click, doubled);
+    public void init() {
+        super.init();
+        // The recipe book won't initialize properly because we passed null and empty list
+        // The button position is handled by the parent class
     }
 
     @Override
-    public boolean keyPressed(KeyInput input) {
-        // Prevent recipe book hotkey
-        return super.keyPressed(input);
+    protected ScreenPos getRecipeBookButtonPos() {
+        // Return position off-screen
+        return new ScreenPos(-1000, -1000);
     }
 }
