@@ -19,11 +19,11 @@ public class KilnScreen extends AbstractFurnaceScreen<KilnScreenHandler> {
                 handler,
                 inventory,
                 title,
-                Text.empty(), // No toggle button
+                null,           // No toggle button text = no button
                 TEXTURE,
                 LIT_PROGRESS_TEXTURE,
                 BURN_PROGRESS_TEXTURE,
-                List.of() // No recipe book tabs
+                null            // No recipe book tabs
         );
     }
 }
