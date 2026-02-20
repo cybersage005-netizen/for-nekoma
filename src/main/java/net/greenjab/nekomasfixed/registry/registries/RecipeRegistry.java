@@ -39,7 +39,7 @@ public class RecipeRegistry {
                     }
             );
 
-    // Recipe Book Category (for screen handler)
+    // Recipe Book Category - for screen handler
     public static final RecipeBookCategory KILN_RECIPE_BOOK_CATEGORY =
             Registry.register(
                     Registries.RECIPE_BOOK_CATEGORY,
@@ -47,10 +47,7 @@ public class RecipeRegistry {
                     KilnRecipeBookCategory.KILN
             );
 
-    // Recipe Book Type (for the recipe book itself)
-    public static final RecipeBookType KILN_RECIPE_BOOK_TYPE = KilnRecipeBookTypes.KILN;
-
-    // Recipe Serializer
+    // Recipe Serializer - defined ONCE with inline implementation
     public static final RecipeSerializer<KilnRecipe> KILN_RECIPE_SERIALIZER =
             Registry.register(
                     Registries.RECIPE_SERIALIZER,
@@ -60,24 +57,24 @@ public class RecipeRegistry {
                         @Override
                         public MapCodec<KilnRecipe> codec() {
                             return RecordCodecBuilder.mapCodec(instance -> instance.group(
-                                    Codec.STRING.optionalFieldOf("group", "").forGetter(recipe -> recipe.getGroup()),
-                                    CookingRecipeCategory.CODEC.fieldOf("category").orElse(CookingRecipeCategory.MISC).forGetter(recipe -> recipe.getCategory()),
-                                    Ingredient.CODEC.fieldOf("ingredient").forGetter(recipe -> recipe.ingredient()),
-                                    ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.getResult()),
-                                    Codec.FLOAT.optionalFieldOf("experience", 0.0F).forGetter(recipe -> recipe.getExperience()),
-                                    Codec.INT.optionalFieldOf("cookingtime", 200).forGetter(recipe -> recipe.getCookingTime())
+                                    Codec.STRING.optionalFieldOf("group", "").forGetter(KilnRecipe::getGroup),
+                                    CookingRecipeCategory.CODEC.fieldOf("category").orElse(CookingRecipeCategory.MISC).forGetter(KilnRecipe::getCategory),
+                                    Ingredient.CODEC.fieldOf("ingredient").forGetter(KilnRecipe::getIngredient),
+                                    ItemStack.CODEC.fieldOf("result").forGetter(KilnRecipe::getResult),
+                                    Codec.FLOAT.optionalFieldOf("experience", 0.0F).forGetter(KilnRecipe::getExperience),
+                                    Codec.INT.optionalFieldOf("cookingtime", 200).forGetter(KilnRecipe::getCookingTime)
                             ).apply(instance, KilnRecipe::new));
                         }
 
                         @Override
                         public PacketCodec<RegistryByteBuf, KilnRecipe> packetCodec() {
                             return PacketCodec.tuple(
-                                    PacketCodecs.STRING, recipe -> recipe.getGroup(),
-                                    CookingRecipeCategory.PACKET_CODEC, recipe -> recipe.getCategory(),
-                                    Ingredient.PACKET_CODEC, recipe -> recipe.ingredient(),
-                                    ItemStack.PACKET_CODEC, recipe -> recipe.getResult(),
-                                    PacketCodecs.FLOAT, recipe -> recipe.getExperience(),
-                                    PacketCodecs.INTEGER, recipe -> recipe.getCookingTime(),
+                                    PacketCodecs.STRING, KilnRecipe::getGroup,
+                                    CookingRecipeCategory.PACKET_CODEC, KilnRecipe::getCategory,
+                                    Ingredient.PACKET_CODEC, KilnRecipe::getIngredient,
+                                    ItemStack.PACKET_CODEC, KilnRecipe::getResult,
+                                    PacketCodecs.FLOAT, KilnRecipe::getExperience,
+                                    PacketCodecs.INTEGER, KilnRecipe::getCookingTime,
                                     KilnRecipe::new
                             );
                         }

@@ -1,8 +1,8 @@
-package net.greenjab.nekomasfixed.screen;
+package net.greenjab.nekomasfixed.client.screen;
 
 import net.greenjab.nekomasfixed.NekomasFixed;
+import net.greenjab.nekomasfixed.screen.KilnScreenHandler;
 import net.minecraft.client.gui.screen.ingame.AbstractFurnaceScreen;
-import net.minecraft.client.gui.screen.recipebook.RecipeBookWidget;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -19,11 +19,11 @@ public class KilnScreen extends AbstractFurnaceScreen<KilnScreenHandler> {
                 handler,
                 inventory,
                 title,
-                Text.empty(), // Empty text for toggle button (no button)
+                Text.empty(), // No toggle button
                 TEXTURE,
                 LIT_PROGRESS_TEXTURE,
                 BURN_PROGRESS_TEXTURE,
-                List.of() // Empty list = no recipe book tabs
+                List.of() // No recipe book tabs
         );
     }
 }

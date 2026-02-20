@@ -60,4 +60,7 @@ public class KilnRecipe extends AbstractCookingRecipe {
     }
 
 
+    public Ingredient getIngredient() {
+        return this.ingredient();
+    }
 }

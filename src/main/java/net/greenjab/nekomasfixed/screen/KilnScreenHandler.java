@@ -7,7 +7,6 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.book.RecipeBookType;
 import net.minecraft.screen.AbstractFurnaceScreenHandler;
 import net.minecraft.screen.ArrayPropertyDelegate;
@@ -25,8 +24,8 @@ public class KilnScreenHandler extends AbstractFurnaceScreenHandler {
         super(
                 ScreenHandlerRegistry.KILN_SCREEN_HANDLER,
                 RecipeRegistry.KILN_RECIPE_TYPE,
-                null,
-                RecipeRegistry.KILN_RECIPE_BOOK_TYPE,
+                null,  // RecipePropertySet key (not needed)
+                RecipeBookType.FURNACE,  // Use vanilla RecipeBookType
                 syncId,
                 playerInventory,
                 inventory,
