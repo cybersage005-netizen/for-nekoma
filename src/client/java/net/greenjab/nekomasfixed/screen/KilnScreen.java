@@ -1,4 +1,4 @@
-package net.greenjab.nekomasfixed.client.screen;
+package net.greenjab.nekomasfixed.screen;
 
 import net.greenjab.nekomasfixed.NekomasFixed;
 import net.greenjab.nekomasfixed.screen.KilnScreenHandler;
