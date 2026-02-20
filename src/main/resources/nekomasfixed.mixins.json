@@ -37,5 +37,8 @@
   },
   "overwrites": {
     "requireAnnotations": true
-	}
+  },
+  "client": [
+    "AbstractFurnaceScreenMixin"
+  ]
 }
