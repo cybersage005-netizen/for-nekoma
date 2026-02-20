@@ -3,6 +3,7 @@ package net.greenjab.nekomasfixed.registry.registries;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.greenjab.nekomasfixed.NekomasFixed;
 import net.greenjab.nekomasfixed.registry.recipe.CoralNautilusRecipe;
 import net.greenjab.nekomasfixed.registry.recipe.KilnRecipe;
 import net.greenjab.nekomasfixed.registry.recipe.ZombieNautilusRecipe;
@@ -11,9 +12,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
+import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RawShapedRecipe;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
+import net.minecraft.recipe.book.CookingRecipeCategory;
 import net.minecraft.recipe.book.CraftingRecipeCategory;
 import net.minecraft.recipe.book.RecipeBookCategory;
 import net.minecraft.registry.Registries;
@@ -25,7 +28,7 @@ public class RecipeRegistry {
     public static final RecipeType<KilnRecipe> KILN_RECIPE_TYPE =
             Registry.register(
                     Registries.RECIPE_TYPE,
-                    Identifier.of("nekomasfixed", "kiln"),
+                    Identifier.of(NekomasFixed.MOD_ID, "kiln"),
                     new RecipeType<KilnRecipe>() {
                         @Override
                         public String toString() {
@@ -34,40 +37,51 @@ public class RecipeRegistry {
                     }
             );
 
+    // Recipe Book Category
+    public static final RecipeBookCategory KILN_RECIPE_BOOK_CATEGORY =
+            Registry.register(
+                    Registries.RECIPE_BOOK_CATEGORY,
+                    Identifier.of(NekomasFixed.MOD_ID, "kiln"),
+                    new RecipeBookCategory() {}
+            );
+
+    // Recipe Serializer
     public static final RecipeSerializer<KilnRecipe> KILN_RECIPE_SERIALIZER =
             Registry.register(
                     Registries.RECIPE_SERIALIZER,
-                    Identifier.of("nekomasfixed", "kiln"),
+                    Identifier.of(NekomasFixed.MOD_ID, "kiln"),
                     new RecipeSerializer<KilnRecipe>() {
-
-                        private final MapCodec<KilnRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-                                Codec.STRING.optionalFieldOf("group", "").forGetter(KilnRecipe::getGroup),
-                                net.minecraft.recipe.Ingredient.CODEC.fieldOf("ingredient").forGetter(KilnRecipe::getIngredient),
-                                ItemStack.CODEC.fieldOf("result").forGetter(KilnRecipe::getResult),
-                                Codec.FLOAT.optionalFieldOf("experience", 0.0F).forGetter(KilnRecipe::getExperience),
-                                Codec.INT.optionalFieldOf("cookingtime", 200).forGetter(KilnRecipe::getCookingTime)
-                        ).apply(instance, KilnRecipe::new));
-
-                        private final PacketCodec<RegistryByteBuf, KilnRecipe> PACKET_CODEC = PacketCodec.tuple(
-                                PacketCodecs.STRING, KilnRecipe::getGroup,
-                                net.minecraft.recipe.Ingredient.PACKET_CODEC, KilnRecipe::getIngredient,
-                                ItemStack.PACKET_CODEC, KilnRecipe::getResult,
-                                PacketCodecs.FLOAT, KilnRecipe::getExperience,
-                                PacketCodecs.INTEGER, KilnRecipe::getCookingTime,
-                                KilnRecipe::new
-                        );
 
                         @Override
                         public MapCodec<KilnRecipe> codec() {
-                            return CODEC;
+                            return RecordCodecBuilder.mapCodec(instance -> instance.group(
+                                    Codec.STRING.optionalFieldOf("group", "").forGetter(recipe -> recipe.getGroup()),
+                                    CookingRecipeCategory.CODEC.fieldOf("category").orElse(CookingRecipeCategory.MISC).forGetter(recipe -> recipe.getCategory()),
+                                    Ingredient.CODEC.fieldOf("ingredient").forGetter(recipe -> recipe.ingredient()),
+                                    ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.getResult()),
+                                    Codec.FLOAT.optionalFieldOf("experience", 0.0F).forGetter(recipe -> recipe.getExperience()),
+                                    Codec.INT.optionalFieldOf("cookingtime", 200).forGetter(recipe -> recipe.getCookingTime())
+                            ).apply(instance, KilnRecipe::new));
                         }
 
                         @Override
                         public PacketCodec<RegistryByteBuf, KilnRecipe> packetCodec() {
-                            return PACKET_CODEC;
+                            return PacketCodec.tuple(
+                                    PacketCodecs.STRING, recipe -> recipe.getGroup(),
+                                    CookingRecipeCategory.PACKET_CODEC, recipe -> recipe.getCategory(),
+                                    Ingredient.PACKET_CODEC, recipe -> recipe.ingredient(),
+                                    ItemStack.PACKET_CODEC, recipe -> recipe.getResult(),
+                                    PacketCodecs.FLOAT, recipe -> recipe.getExperience(),
+                                    PacketCodecs.INTEGER, recipe -> recipe.getCookingTime(),
+                                    KilnRecipe::new
+                            );
                         }
                     }
             );
+
+
+
+
     public static final RecipeSerializer<ZombieNautilusRecipe> ZOMBIE_NAUTILUS_SERIALIZER = Registry.register(
             Registries.RECIPE_SERIALIZER,
             Identifier.of("nekomasfixed", "zombie_nautilus"),
@@ -144,12 +158,7 @@ public class RecipeRegistry {
             }
     );
 
-    public static final RecipeBookCategory KILN_RECIPE_BOOK_CATEGORY =
-            Registry.register(
-                    Registries.RECIPE_BOOK_CATEGORY,
-                    Identifier.of("nekomasfixed", "kiln"),
-                    KilnRecipeBookCategory.KILN
-            );
+
 
     public static void registerRecipeBookGroups() {}
     public static void registerRecipes() {

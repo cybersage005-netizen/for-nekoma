@@ -13,6 +13,7 @@ public class NekomasFixed implements ModInitializer {
 	public static final String MOD_NAME = "Nekomas' Fixed Minecraft";
 	public static final String NAMESPACE = "nekomasfixed";
 	public static final Logger LOGGER = LoggerFactory.getLogger(NAMESPACE);
+	public static final String MOD_ID = "nekomasfixed";
 
 	@Override
 	public void onInitialize() {
