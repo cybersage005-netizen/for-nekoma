@@ -1,13 +1,11 @@
-package net.greenjab.nekomasfixed.screen;
+package net.greenjab.nekomasfixed.client.screen;
 
 import net.greenjab.nekomasfixed.NekomasFixed;
 import net.greenjab.nekomasfixed.screen.KilnScreenHandler;
-import net.minecraft.client.gui.screen.ingame.AbstractFurnaceScreen;
-import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.client.gui.Click;import net.minecraft.client.gui.screen.ingame.AbstractFurnaceScreen;
+import net.minecraft.client.input.KeyInput;import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-
-import java.util.List;
 
 public class KilnScreen extends AbstractFurnaceScreen<KilnScreenHandler> {
     private static final Identifier TEXTURE = Identifier.of(NekomasFixed.MOD_ID, "textures/gui/container/kiln.png");
@@ -19,11 +17,23 @@ public class KilnScreen extends AbstractFurnaceScreen<KilnScreenHandler> {
                 handler,
                 inventory,
                 title,
-                null,           // No toggle button text = no button
+                null,
                 TEXTURE,
                 LIT_PROGRESS_TEXTURE,
                 BURN_PROGRESS_TEXTURE,
-                null            // No recipe book tabs
+                null
         );
+    }
+
+    @Override
+    public boolean mouseClicked(Click click, boolean doubled) {
+        // Prevent recipe book from opening
+        return super.mouseClicked(click, doubled);
+    }
+
+    @Override
+    public boolean keyPressed(KeyInput input) {
+        // Prevent recipe book hotkey
+        return super.keyPressed(input);
     }
 }
