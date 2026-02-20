@@ -11,7 +11,6 @@ import net.minecraft.recipe.book.RecipeBookType;
 import net.minecraft.screen.AbstractFurnaceScreenHandler;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
-import net.minecraft.screen.ScreenHandlerType;
 
 public class KilnScreenHandler extends AbstractFurnaceScreenHandler {
 
@@ -24,8 +23,8 @@ public class KilnScreenHandler extends AbstractFurnaceScreenHandler {
         super(
                 ScreenHandlerRegistry.KILN_SCREEN_HANDLER,
                 RecipeRegistry.KILN_RECIPE_TYPE,
-                null,  // RecipePropertySet key (not needed)
-                RecipeBookType.FURNACE,  // Use vanilla RecipeBookType
+                null,
+                RecipeBookType.FURNACE,
                 syncId,
                 playerInventory,
                 inventory,
