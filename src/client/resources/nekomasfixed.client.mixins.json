@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_21",
   "client": [
     "BipedEntityModelMixin",
+    "AbstractFurnaceScreenMixin",
     "BipedEntityRendererMixin",
     "ClientPlayerInteractionManagerMixin",
     "EntityModelsMixin",

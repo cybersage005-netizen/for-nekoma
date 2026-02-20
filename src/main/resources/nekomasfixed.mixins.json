@@ -39,6 +39,6 @@
     "requireAnnotations": true
   },
   "client": [
-    "AbstractFurnaceScreenMixin"
+    "client.AbstractFurnaceScreenMixin"
   ]
 }
