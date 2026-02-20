@@ -22,12 +22,11 @@ public class KilnScreenHandler extends AbstractFurnaceScreenHandler {
 
     public KilnScreenHandler(int syncId, PlayerInventory playerInventory,
                              Inventory inventory, PropertyDelegate propertyDelegate) {
-
         super(
                 ScreenHandlerRegistry.KILN_SCREEN_HANDLER,
                 RecipeRegistry.KILN_RECIPE_TYPE,
                 null,
-                RecipeBookType.FURNACE,
+                RecipeRegistry.KILN_RECIPE_BOOK_TYPE,
                 syncId,
                 playerInventory,
                 inventory,

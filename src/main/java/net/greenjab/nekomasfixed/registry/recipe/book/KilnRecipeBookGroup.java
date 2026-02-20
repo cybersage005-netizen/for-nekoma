@@ -14,7 +14,7 @@ public class KilnRecipeBookGroup implements RecipeBookGroup {
     private final boolean isSearch;
 
     private KilnRecipeBookGroup(boolean isSearch) {
-        super();
+
         this.isSearch = isSearch;
     }
 
@@ -22,9 +22,11 @@ public class KilnRecipeBookGroup implements RecipeBookGroup {
         return ImmutableList.of(KILN_SEARCH, KILN_MISC);
     }
 
+
     public boolean isSearch() {
         return this.isSearch;
     }
+
 
     public List<ItemStack> getIcons() {
         if (this == KILN_SEARCH) {

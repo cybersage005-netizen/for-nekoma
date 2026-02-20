@@ -8,6 +8,7 @@ import net.greenjab.nekomasfixed.registry.recipe.CoralNautilusRecipe;
 import net.greenjab.nekomasfixed.registry.recipe.KilnRecipe;
 import net.greenjab.nekomasfixed.registry.recipe.ZombieNautilusRecipe;
 import net.greenjab.nekomasfixed.registry.recipe.book.KilnRecipeBookCategory;
+import net.greenjab.nekomasfixed.registry.recipe.book.KilnRecipeBookTypes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
@@ -19,6 +20,7 @@ import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.book.CookingRecipeCategory;
 import net.minecraft.recipe.book.CraftingRecipeCategory;
 import net.minecraft.recipe.book.RecipeBookCategory;
+import net.minecraft.recipe.book.RecipeBookType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -37,13 +39,16 @@ public class RecipeRegistry {
                     }
             );
 
-    // Recipe Book Category
+    // Recipe Book Category (for screen handler)
     public static final RecipeBookCategory KILN_RECIPE_BOOK_CATEGORY =
             Registry.register(
                     Registries.RECIPE_BOOK_CATEGORY,
                     Identifier.of(NekomasFixed.MOD_ID, "kiln"),
-                    new RecipeBookCategory() {}
+                    KilnRecipeBookCategory.KILN
             );
+
+    // Recipe Book Type (for the recipe book itself)
+    public static final RecipeBookType KILN_RECIPE_BOOK_TYPE = KilnRecipeBookTypes.KILN;
 
     // Recipe Serializer
     public static final RecipeSerializer<KilnRecipe> KILN_RECIPE_SERIALIZER =
