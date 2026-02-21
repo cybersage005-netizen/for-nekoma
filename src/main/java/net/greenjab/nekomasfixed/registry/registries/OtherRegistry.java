@@ -51,6 +51,7 @@ public class OtherRegistry {
     public static final TagKey<Item> SLINGSHOT_PROJECTILES = TagKey.of(RegistryKeys.ITEM, NekomasFixed.id("slingshot_projectiles"));
     public static final TagKey<Item> GLAZED_TERRACOTTA = TagKey.of(RegistryKeys.ITEM, NekomasFixed.id("glazed_terracotta"));
     public static final TagKey<Item> STAINED_GLASS = TagKey.of(RegistryKeys.ITEM, NekomasFixed.id("stained_glass"));
+    public static final TagKey<Item> STAINED_PANE = TagKey.of(RegistryKeys.ITEM, NekomasFixed.id("stained_pane"));
     public static final TagKey<Block> AMBER_BLOCK = TagKey.of(RegistryKeys.BLOCK, NekomasFixed.id("amber_block"));
     public static final TagKey<Block> CRIMSON_BLOCK = TagKey.of(RegistryKeys.BLOCK, NekomasFixed.id("crimson_block"));
     public static final TagKey<Block> INDIGO_BLOCK = TagKey.of(RegistryKeys.BLOCK, NekomasFixed.id("indigo_block"));

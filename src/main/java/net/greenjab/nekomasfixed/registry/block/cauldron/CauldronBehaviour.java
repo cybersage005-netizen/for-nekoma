@@ -10,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -111,6 +112,23 @@ public class CauldronBehaviour {
         addCandleBehaviour(waterMap, Items.PURPLE_CANDLE);
         addCandleBehaviour(waterMap, Items.MAGENTA_CANDLE);
         addCandleBehaviour(waterMap, Items.PINK_CANDLE);
+
+        addStainedglasspaneBehaviour(waterMap, Items.WHITE_STAINED_GLASS_PANE);
+        addStainedglasspaneBehaviour(waterMap, Items.LIGHT_GRAY_STAINED_GLASS_PANE);
+        addStainedglasspaneBehaviour(waterMap, Items.GRAY_STAINED_GLASS_PANE);
+        addStainedglasspaneBehaviour(waterMap, Items.BLACK_STAINED_GLASS_PANE);
+        addStainedglasspaneBehaviour(waterMap, Items.BROWN_STAINED_GLASS_PANE);
+        addStainedglasspaneBehaviour(waterMap, Items.RED_STAINED_GLASS_PANE);
+        addStainedglasspaneBehaviour(waterMap, Items.ORANGE_STAINED_GLASS_PANE);
+        addStainedglasspaneBehaviour(waterMap, Items.YELLOW_STAINED_GLASS_PANE);
+        addStainedglasspaneBehaviour(waterMap, Items.LIME_STAINED_GLASS_PANE);
+        addStainedglasspaneBehaviour(waterMap, Items.GREEN_STAINED_GLASS_PANE);
+        addStainedglasspaneBehaviour(waterMap, Items.CYAN_STAINED_GLASS_PANE);
+        addStainedglasspaneBehaviour(waterMap, Items.LIGHT_BLUE_STAINED_GLASS_PANE);
+        addStainedglasspaneBehaviour(waterMap, Items.BLUE_STAINED_GLASS_PANE);
+        addStainedglasspaneBehaviour(waterMap, Items.PURPLE_STAINED_GLASS_PANE);
+        addStainedglasspaneBehaviour(waterMap, Items.MAGENTA_STAINED_GLASS_PANE);
+        addStainedglasspaneBehaviour(waterMap, Items.PINK_STAINED_GLASS_PANE);
     }
 
 
@@ -133,6 +151,10 @@ public class CauldronBehaviour {
 
     private static void addCandleBehaviour(Map<Item, CauldronBehavior> map, Item candleItem) {
         map.put(candleItem, CauldronBehaviour::cleanCandle);
+    }
+
+    private static void addStainedglasspaneBehaviour(Map<Item, CauldronBehavior> map, Item paneItem) {
+        map.put(paneItem, CauldronBehaviour::cleanGlassPane);
     }
 
     private static ActionResult cleanWool(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, ItemStack stack) {
@@ -160,7 +182,7 @@ public class CauldronBehaviour {
         if (stack.getItem() == Items.TERRACOTTA) {
             return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
         }
-        if (!stack.isIn(ItemTags.TERRACOTTA)) {
+        if (!stack.isIn(ItemTags.TERRACOTTA) ) {
             return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
         }
         if (world.isClient()) {
@@ -228,6 +250,26 @@ public class CauldronBehaviour {
         }
         ItemStack candle = new ItemStack(Items.CANDLE, stack.getCount());
         player.setStackInHand(hand, candle);
+        LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
+        world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY,
+                SoundCategory.BLOCKS, 1.0F, 1.0F);
+
+        return ActionResult.SUCCESS;
+    }
+
+    private static ActionResult cleanGlassPane(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, ItemStack stack) {
+
+        if (stack.getItem() == Items.GLASS_PANE) {
+            return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+        }
+        if (!stack.isIn(OtherRegistry.STAINED_PANE)) {
+            return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+        }
+        if (world.isClient()) {
+            return ActionResult.SUCCESS;
+        }
+        ItemStack pane = new ItemStack(Items.GLASS_PANE, stack.getCount());
+        player.setStackInHand(hand, pane);
         LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
         world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY,
                 SoundCategory.BLOCKS, 1.0F, 1.0F);
