@@ -28,9 +28,8 @@ public class CauldronBehaviour {
         Map<Item, CauldronBehavior> emptyMap = CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.map();
 
         emptyMap.put(Items.HONEY_BOTTLE, (state, world, pos, player, hand, stack) -> {
+            System.out.println("EMPTY CAULDRON: Honey bottle used at " + pos);
             if (!world.isClient()) {
-
-                System.out.println("Honey bottle used on empty cauldron");
                 world.setBlockState(pos, BlockRegistry.HONEY_CAULDRON.getDefaultState()
                         .with(LeveledCauldronBlock.LEVEL, 1));
 
