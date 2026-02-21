@@ -127,11 +127,7 @@ public class BlockRegistry {
                     .strength(1.4F)
                     .resistance(4.2F)
                     .requiresTool());
-    public static final Block HONEY_CAULDRON = register(
-            "honey_cauldron",
-            HoneyCauldronBlock::new,
-            AbstractBlock.Settings.copy(Blocks.CAULDRON)
-    );
+
     private static Block register(String id, AbstractBlock.Settings settings) {
         return register(id, Block::new, settings);
     }

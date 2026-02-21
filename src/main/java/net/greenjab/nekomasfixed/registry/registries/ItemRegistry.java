@@ -219,7 +219,7 @@ public class ItemRegistry {
     }
     public static void registerItems() {
         NekomasFixed.LOGGER.info("Registering items...");
-        register(BlockRegistry.HONEY_CAULDRON);
+
         try {
             Class.forName(ItemRegistry.class.getName());
             NekomasFixed.LOGGER.info("Items registered successfully");
