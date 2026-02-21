@@ -22,9 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class CauldronMixin {
 
     @Inject(method = "onUseWithItem", at = @At("HEAD"), cancellable = true)
-    private void onCauldronUse(ItemStack stack, BlockState state, World world,
-                               BlockPos pos, PlayerEntity player, Hand hand,
-                               BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
+    private void onCauldronUse(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
 
         if (stack.getItem() == Items.HONEY_BOTTLE && state.getBlock() == Blocks.CAULDRON) {
             if (!world.isClient()) {
@@ -37,7 +35,7 @@ public class CauldronMixin {
             return;
         }
 
-        if(stack.getItem() == null){
+        if(stack.isEmpty()){
             System.out.println("Hand is used on cauldron");
         }
 
@@ -72,4 +70,5 @@ public class CauldronMixin {
             }
         }
     }
+
 }
