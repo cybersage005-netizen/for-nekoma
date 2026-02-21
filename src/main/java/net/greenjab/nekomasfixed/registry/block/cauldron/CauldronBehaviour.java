@@ -4,13 +4,10 @@ import net.greenjab.nekomasfixed.registry.registries.OtherRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.block.cauldron.CauldronBehavior;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.NbtComponent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -18,7 +15,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
 import java.util.Map;
 
 public class CauldronBehaviour {
@@ -129,32 +125,125 @@ public class CauldronBehaviour {
         addStainedglasspaneBehaviour(waterMap, Items.PURPLE_STAINED_GLASS_PANE);
         addStainedglasspaneBehaviour(waterMap, Items.MAGENTA_STAINED_GLASS_PANE);
         addStainedglasspaneBehaviour(waterMap, Items.PINK_STAINED_GLASS_PANE);
+
+        addConcretepowderBehaviour(waterMap, Items.WHITE_CONCRETE_POWDER);
+        addConcretepowderBehaviour(waterMap, Items.LIGHT_GRAY_CONCRETE_POWDER);
+        addConcretepowderBehaviour(waterMap, Items.GRAY_CONCRETE_POWDER);
+        addConcretepowderBehaviour(waterMap, Items.BLACK_CONCRETE_POWDER);
+        addConcretepowderBehaviour(waterMap, Items.BROWN_CONCRETE_POWDER);
+        addConcretepowderBehaviour(waterMap, Items.RED_CONCRETE_POWDER);
+        addConcretepowderBehaviour(waterMap, Items.ORANGE_CONCRETE_POWDER);
+        addConcretepowderBehaviour(waterMap, Items.YELLOW_CONCRETE_POWDER);
+        addConcretepowderBehaviour(waterMap, Items.LIME_CONCRETE_POWDER);
+        addConcretepowderBehaviour(waterMap, Items.GREEN_CONCRETE_POWDER);
+        addConcretepowderBehaviour(waterMap, Items.CYAN_CONCRETE_POWDER);
+        addConcretepowderBehaviour(waterMap, Items.LIGHT_BLUE_CONCRETE_POWDER);
+        addConcretepowderBehaviour(waterMap, Items.BLUE_CONCRETE_POWDER);
+        addConcretepowderBehaviour(waterMap, Items.PURPLE_CONCRETE_POWDER);
+        addConcretepowderBehaviour(waterMap, Items.MAGENTA_CONCRETE_POWDER);
+        addConcretepowderBehaviour(waterMap, Items.PINK_CONCRETE_POWDER);
+
+        addCarpetBehaviour(waterMap, Items.WHITE_CARPET);
+        addCarpetBehaviour(waterMap, Items.LIGHT_GRAY_CARPET);
+        addCarpetBehaviour(waterMap, Items.GRAY_CARPET);
+        addCarpetBehaviour(waterMap, Items.BLACK_CARPET);
+        addCarpetBehaviour(waterMap, Items.BROWN_CARPET);
+        addCarpetBehaviour(waterMap, Items.RED_CARPET);
+        addCarpetBehaviour(waterMap, Items.ORANGE_CARPET);
+        addCarpetBehaviour(waterMap, Items.YELLOW_CARPET);
+        addCarpetBehaviour(waterMap, Items.LIME_CARPET);
+        addCarpetBehaviour(waterMap, Items.GREEN_CARPET);
+        addCarpetBehaviour(waterMap, Items.CYAN_CARPET);
+        addCarpetBehaviour(waterMap, Items.LIGHT_BLUE_CARPET);
+        addCarpetBehaviour(waterMap, Items.BLUE_CARPET);
+        addCarpetBehaviour(waterMap, Items.PURPLE_CARPET);
+        addCarpetBehaviour(waterMap, Items.MAGENTA_CARPET);
+        addCarpetBehaviour(waterMap, Items.PINK_CARPET);
+
+        addConcreteBehaviour(waterMap, Items.WHITE_CONCRETE);
+        addConcreteBehaviour(waterMap, Items.LIGHT_GRAY_CONCRETE);
+        addConcreteBehaviour(waterMap, Items.GRAY_CONCRETE);
+        addConcreteBehaviour(waterMap, Items.BLACK_CONCRETE);
+        addConcreteBehaviour(waterMap, Items.BROWN_CONCRETE);
+        addConcreteBehaviour(waterMap, Items.RED_CONCRETE);
+        addConcreteBehaviour(waterMap, Items.ORANGE_CONCRETE);
+        addConcreteBehaviour(waterMap, Items.YELLOW_CONCRETE);
+        addConcreteBehaviour(waterMap, Items.LIME_CONCRETE);
+        addConcreteBehaviour(waterMap, Items.GREEN_CONCRETE);
+        addConcreteBehaviour(waterMap, Items.CYAN_CONCRETE);
+        addConcreteBehaviour(waterMap, Items.LIGHT_BLUE_CONCRETE);
+        addConcreteBehaviour(waterMap, Items.BLUE_CONCRETE);
+        addConcreteBehaviour(waterMap, Items.PURPLE_CONCRETE);
+        addConcreteBehaviour(waterMap, Items.MAGENTA_CONCRETE);
+        addConcreteBehaviour(waterMap, Items.PINK_CONCRETE);
+
+        addBedBehaviour(waterMap, Items.WHITE_BED);
+        addBedBehaviour(waterMap, Items.LIGHT_GRAY_BED);
+        addBedBehaviour(waterMap, Items.GRAY_BED);
+        addBedBehaviour(waterMap, Items.BLACK_BED);
+        addBedBehaviour(waterMap, Items.BROWN_BED);
+        addBedBehaviour(waterMap, Items.RED_BED);
+        addBedBehaviour(waterMap, Items.ORANGE_BED);
+        addBedBehaviour(waterMap, Items.YELLOW_BED);
+        addBedBehaviour(waterMap, Items.LIME_BED);
+        addBedBehaviour(waterMap, Items.GREEN_BED);
+        addBedBehaviour(waterMap, Items.CYAN_BED);
+        addBedBehaviour(waterMap, Items.LIGHT_BLUE_BED);
+        addBedBehaviour(waterMap, Items.BLUE_BED);
+        addBedBehaviour(waterMap, Items.PURPLE_BED);
+        addBedBehaviour(waterMap, Items.MAGENTA_BED);
+        addBedBehaviour(waterMap, Items.PINK_BED);
+
+        addHarnessBehaviour(waterMap, Items.WHITE_HARNESS);
+        addHarnessBehaviour(waterMap, Items.LIGHT_GRAY_HARNESS);
+        addHarnessBehaviour(waterMap, Items.GRAY_HARNESS);
+        addHarnessBehaviour(waterMap, Items.BLACK_HARNESS);
+        addHarnessBehaviour(waterMap, Items.BROWN_HARNESS);
+        addHarnessBehaviour(waterMap, Items.RED_HARNESS);
+        addHarnessBehaviour(waterMap, Items.ORANGE_HARNESS);
+        addHarnessBehaviour(waterMap, Items.YELLOW_HARNESS);
+        addHarnessBehaviour(waterMap, Items.LIME_HARNESS);
+        addHarnessBehaviour(waterMap, Items.GREEN_HARNESS);
+        addHarnessBehaviour(waterMap, Items.CYAN_HARNESS);
+        addHarnessBehaviour(waterMap, Items.LIGHT_BLUE_HARNESS);
+        addHarnessBehaviour(waterMap, Items.BLUE_HARNESS);
+        addHarnessBehaviour(waterMap, Items.PURPLE_HARNESS);
+        addHarnessBehaviour(waterMap, Items.MAGENTA_HARNESS);
+        addHarnessBehaviour(waterMap, Items.PINK_HARNESS);
     }
-
-
 
     private static void addWoolBehavior(Map<Item, CauldronBehavior> map, Item woolItem) {
         map.put(woolItem, CauldronBehaviour::cleanWool);
     }
-
     private static void addTerracottaBehaviour(Map<Item, CauldronBehavior> map, Item terracottaItem) {
         map.put(terracottaItem, CauldronBehaviour::cleanTerracotta);
     }
-
     private static void addGlazedterracottaBehaviour(Map<Item, CauldronBehavior> map, Item glazedTerracottaItem) {
         map.put(glazedTerracottaItem, CauldronBehaviour::cleanGlazedTerracotta);
     }
-
     private static void addStainedglassBehaviour(Map<Item, CauldronBehavior> map, Item glassItem) {
         map.put(glassItem, CauldronBehaviour::cleanGlass);
     }
-
     private static void addCandleBehaviour(Map<Item, CauldronBehavior> map, Item candleItem) {
         map.put(candleItem, CauldronBehaviour::cleanCandle);
     }
-
     private static void addStainedglasspaneBehaviour(Map<Item, CauldronBehavior> map, Item paneItem) {
         map.put(paneItem, CauldronBehaviour::cleanGlassPane);
+    }
+    private static void addConcretepowderBehaviour(Map<Item, CauldronBehavior> map, Item concretePowder) {
+        map.put(concretePowder, CauldronBehaviour::cleanConcretePowder);
+    }
+    private static void addCarpetBehaviour(Map<Item, CauldronBehavior> map, Item carpetItem) {
+        map.put(carpetItem, CauldronBehaviour::cleanCarpet);
+    }
+    private static void addConcreteBehaviour(Map<Item, CauldronBehavior> map, Item concreteItem) {
+        map.put(concreteItem, CauldronBehaviour::cleanConcrete);
+    }
+    private static void addBedBehaviour(Map<Item, CauldronBehavior> map, Item bedItem) {
+        map.put(bedItem, CauldronBehaviour::cleanBed);
+    }
+    private static void addHarnessBehaviour(Map<Item, CauldronBehavior> map, Item harnessItem) {
+        map.put(harnessItem, CauldronBehaviour::cleanHarness);
     }
 
     private static ActionResult cleanWool(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, ItemStack stack) {
@@ -176,7 +265,6 @@ public class CauldronBehaviour {
 
         return ActionResult.SUCCESS;
     }
-
     private static ActionResult cleanTerracotta(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, ItemStack stack) {
 
         if (stack.getItem() == Items.TERRACOTTA) {
@@ -196,13 +284,12 @@ public class CauldronBehaviour {
 
         return ActionResult.SUCCESS;
     }
-
     private static ActionResult cleanGlazedTerracotta(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, ItemStack stack) {
 
         if (stack.getItem() == Items.TERRACOTTA) {
             return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
         }
-        if (!stack.isIn(OtherRegistry.GLAZED_TERRACOTTA)) {
+        if (!stack.isIn(OtherRegistry.GLAZED_TERRACOTTAS)) {
             return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
         }
         if (world.isClient()) {
@@ -216,13 +303,12 @@ public class CauldronBehaviour {
 
         return ActionResult.SUCCESS;
     }
-
     private static ActionResult cleanGlass(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, ItemStack stack) {
 
         if (stack.getItem() == Items.GLASS) {
             return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
         }
-        if (!stack.isIn(OtherRegistry.STAINED_GLASS)) {
+        if (!stack.isIn(OtherRegistry.STAINED_GLASSES)) {
             return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
         }
         if (world.isClient()) {
@@ -236,7 +322,6 @@ public class CauldronBehaviour {
 
         return ActionResult.SUCCESS;
     }
-
     private static ActionResult cleanCandle(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, ItemStack stack) {
 
         if (stack.getItem() == Items.CANDLE) {
@@ -256,13 +341,12 @@ public class CauldronBehaviour {
 
         return ActionResult.SUCCESS;
     }
-
     private static ActionResult cleanGlassPane(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, ItemStack stack) {
 
         if (stack.getItem() == Items.GLASS_PANE) {
             return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
         }
-        if (!stack.isIn(OtherRegistry.STAINED_PANE)) {
+        if (!stack.isIn(OtherRegistry.STAINED_PANES)) {
             return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
         }
         if (world.isClient()) {
@@ -270,6 +354,101 @@ public class CauldronBehaviour {
         }
         ItemStack pane = new ItemStack(Items.GLASS_PANE, stack.getCount());
         player.setStackInHand(hand, pane);
+        LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
+        world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY,
+                SoundCategory.BLOCKS, 1.0F, 1.0F);
+
+        return ActionResult.SUCCESS;
+    }
+    private static ActionResult cleanConcretePowder(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, ItemStack stack) {
+
+        if (stack.getItem() == Items.WHITE_CONCRETE_POWDER) {
+            return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+        }
+        if (!stack.isIn(OtherRegistry.CONCRETE_POWDERS)) {
+            return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+        }
+        if (world.isClient()) {
+            return ActionResult.SUCCESS;
+        }
+        ItemStack pane = new ItemStack(Items.WHITE_CONCRETE_POWDER, stack.getCount());
+        player.setStackInHand(hand, pane);
+        LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
+        world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY,
+                SoundCategory.BLOCKS, 1.0F, 1.0F);
+
+        return ActionResult.SUCCESS;
+    }
+    private static ActionResult cleanCarpet(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, ItemStack stack) {
+
+        if (stack.getItem() == Items.WHITE_CARPET) {
+            return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+        }
+        if (!stack.isIn(ItemTags.WOOL_CARPETS)) {
+            return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+        }
+        if (world.isClient()) {
+            return ActionResult.SUCCESS;
+        }
+        ItemStack carpet = new ItemStack(Items.WHITE_CARPET, stack.getCount());
+        player.setStackInHand(hand, carpet);
+        LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
+        world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY,
+                SoundCategory.BLOCKS, 1.0F, 1.0F);
+
+        return ActionResult.SUCCESS;
+    }
+    private static ActionResult cleanConcrete(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, ItemStack stack) {
+
+        if (stack.getItem() == Items.WHITE_CONCRETE) {
+            return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+        }
+        if (!stack.isIn(OtherRegistry.CONCRETES)) {
+            return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+        }
+        if (world.isClient()) {
+            return ActionResult.SUCCESS;
+        }
+        ItemStack carpet = new ItemStack(Items.WHITE_CONCRETE, stack.getCount());
+        player.setStackInHand(hand, carpet);
+        LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
+        world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY,
+                SoundCategory.BLOCKS, 1.0F, 1.0F);
+
+        return ActionResult.SUCCESS;
+    }
+    private static ActionResult cleanBed(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, ItemStack stack) {
+
+        if (stack.getItem() == Items.WHITE_BED) {
+            return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+        }
+        if (!stack.isIn(ItemTags.BEDS)) {
+            return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+        }
+        if (world.isClient()) {
+            return ActionResult.SUCCESS;
+        }
+        ItemStack carpet = new ItemStack(Items.WHITE_BED, stack.getCount());
+        player.setStackInHand(hand, carpet);
+        LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
+        world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY,
+                SoundCategory.BLOCKS, 1.0F, 1.0F);
+
+        return ActionResult.SUCCESS;
+    }
+    private static ActionResult cleanHarness(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, ItemStack stack) {
+
+        if (stack.getItem() == Items.WHITE_HARNESS) {
+            return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+        }
+        if (!stack.isIn(ItemTags.HARNESSES)) {
+            return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+        }
+        if (world.isClient()) {
+            return ActionResult.SUCCESS;
+        }
+        ItemStack carpet = new ItemStack(Items.WHITE_HARNESS, stack.getCount());
+        player.setStackInHand(hand, carpet);
         LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
         world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY,
                 SoundCategory.BLOCKS, 1.0F, 1.0F);
