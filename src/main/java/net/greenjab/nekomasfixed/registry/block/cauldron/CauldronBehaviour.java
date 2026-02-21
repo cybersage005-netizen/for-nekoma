@@ -78,6 +78,22 @@ public class CauldronBehaviour {
         addGlazedterracottaBehaviour(waterMap, Items.MAGENTA_GLAZED_TERRACOTTA);
         addGlazedterracottaBehaviour(waterMap, Items.PINK_GLAZED_TERRACOTTA);
 
+        addStainedglassBehaviour(waterMap, Items.WHITE_STAINED_GLASS);
+        addStainedglassBehaviour(waterMap, Items.LIGHT_GRAY_STAINED_GLASS);
+        addStainedglassBehaviour(waterMap, Items.GRAY_STAINED_GLASS);
+        addStainedglassBehaviour(waterMap, Items.BLACK_STAINED_GLASS);
+        addStainedglassBehaviour(waterMap, Items.BROWN_STAINED_GLASS);
+        addStainedglassBehaviour(waterMap, Items.RED_STAINED_GLASS);
+        addStainedglassBehaviour(waterMap, Items.ORANGE_STAINED_GLASS);
+        addStainedglassBehaviour(waterMap, Items.YELLOW_STAINED_GLASS);
+        addStainedglassBehaviour(waterMap, Items.LIME_STAINED_GLASS);
+        addStainedglassBehaviour(waterMap, Items.GREEN_STAINED_GLASS);
+        addStainedglassBehaviour(waterMap, Items.CYAN_STAINED_GLASS);
+        addStainedglassBehaviour(waterMap, Items.LIGHT_BLUE_STAINED_GLASS);
+        addStainedglassBehaviour(waterMap, Items.BLUE_STAINED_GLASS);
+        addStainedglassBehaviour(waterMap, Items.PURPLE_STAINED_GLASS);
+        addStainedglassBehaviour(waterMap, Items.MAGENTA_STAINED_GLASS);
+        addStainedglassBehaviour(waterMap, Items.PINK_STAINED_GLASS);
     }
 
 
@@ -92,6 +108,10 @@ public class CauldronBehaviour {
 
     private static void addGlazedterracottaBehaviour(Map<Item, CauldronBehavior> map, Item glazedTerracottaItem) {
         map.put(glazedTerracottaItem, CauldronBehaviour::cleanGlazedTerracotta);
+    }
+
+    private static void addStainedglassBehaviour(Map<Item, CauldronBehavior> map, Item glassItem) {
+        map.put(glassItem, CauldronBehaviour::cleanGlass);
     }
 
     private static ActionResult cleanWool(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, ItemStack stack) {
@@ -147,6 +167,26 @@ public class CauldronBehaviour {
         }
         ItemStack terracotta = new ItemStack(Items.TERRACOTTA, stack.getCount());
         player.setStackInHand(hand, terracotta);
+        LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
+        world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY,
+                SoundCategory.BLOCKS, 1.0F, 1.0F);
+
+        return ActionResult.SUCCESS;
+    }
+
+    private static ActionResult cleanGlass(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, ItemStack stack) {
+
+        if (stack.getItem() == Items.TERRACOTTA) {
+            return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+        }
+        if (!stack.isIn(OtherRegistry.STAINED_GLASS)) {
+            return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+        }
+        if (world.isClient()) {
+            return ActionResult.SUCCESS;
+        }
+        ItemStack glass = new ItemStack(Items.GLASS, stack.getCount());
+        player.setStackInHand(hand, glass);
         LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
         world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY,
                 SoundCategory.BLOCKS, 1.0F, 1.0F);
