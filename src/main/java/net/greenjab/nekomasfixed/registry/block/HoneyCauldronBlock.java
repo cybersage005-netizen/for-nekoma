@@ -13,6 +13,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 
 public class HoneyCauldronBlock extends AbstractCauldronBlock {
+    public static final MapCodec<HoneyCauldronBlock> CODEC = createCodec(HoneyCauldronBlock::new);
     public HoneyCauldronBlock(Settings settings) {
         super(settings, createBehaviorMap());
         this.setDefaultState(this.stateManager.getDefaultState()
@@ -23,16 +24,20 @@ public class HoneyCauldronBlock extends AbstractCauldronBlock {
         var behaviorMap = CauldronBehavior.createMap("honey");
         var map = behaviorMap.map();
 
-        // Take honey with glass bottle
+
         map.put(Items.GLASS_BOTTLE, (state, world, pos, player, hand, stack) -> {
+            System.out.println("Glass bottle used on honey cauldron at " + pos);
             if (!world.isClient()) {
                 int level = state.get(LeveledCauldronBlock.LEVEL);
+                System.out.println("Current level: " + level);
                 player.setStackInHand(hand, new ItemStack(Items.HONEY_BOTTLE));
 
                 if (level > 1) {
                     world.setBlockState(pos, state.with(LeveledCauldronBlock.LEVEL, level - 1));
+                    System.out.println("Level decreased to " + (level - 1));
                 } else {
                     world.setBlockState(pos, Blocks.CAULDRON.getDefaultState());
+                    System.out.println("Cauldron emptied");
                 }
 
                 world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_FILL,
@@ -41,7 +46,7 @@ public class HoneyCauldronBlock extends AbstractCauldronBlock {
             return ActionResult.SUCCESS;
         });
 
-        // Add honey with honey bottle
+
         map.put(Items.HONEY_BOTTLE, (state, world, pos, player, hand, stack) -> {
             if (!world.isClient()) {
                 int level = state.get(LeveledCauldronBlock.LEVEL);
@@ -58,9 +63,10 @@ public class HoneyCauldronBlock extends AbstractCauldronBlock {
         return behaviorMap;
     }
 
+
     @Override
     protected MapCodec<? extends AbstractCauldronBlock> getCodec() {
-        return null;
+        return CODEC;
     }
 
     @Override
