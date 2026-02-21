@@ -104,6 +104,7 @@ public class ItemRegistry {
     6. Amber Terracotta
      */
 
+
     public static final Item WILD_FIRE_SMITHING_TEMPLATE = register(
             "wild_fire_smithing_template",
             settings -> new SmithingTemplateItem(
@@ -138,7 +139,14 @@ public class ItemRegistry {
 //            NekomasFixed.id("clear_item_frame"),
 //            new ItemFrameItem(EntityTypeRegistry.CLEAR_ITEM_FRAME, new Item.Settings())
 //    );
+    private static Item HONEY_CAULDRON;
 
+    public static Item getHoneyCauldron() {
+        if (HONEY_CAULDRON == null) {
+            HONEY_CAULDRON = register(BlockRegistry.HONEY_CAULDRON);
+        }
+        return HONEY_CAULDRON;
+    }
 
     public static final Item IRON_SICKLE = register("iron_sickle", SickleItem::new, ModItemSettings.sickle(ToolMaterial.IRON, SickleItem.SPEED));
     public static final Item WOODEN_SICKLE = register("wooden_sickle", SickleItem::new, ModItemSettings.sickle(ToolMaterial.WOOD, SickleItem.SPEED));
@@ -219,8 +227,7 @@ public class ItemRegistry {
     }
     public static void registerItems() {
         NekomasFixed.LOGGER.info("Registering items...");
-
-        // Force static initialization
+        register(BlockRegistry.HONEY_CAULDRON);
         try {
             Class.forName(ItemRegistry.class.getName());
             NekomasFixed.LOGGER.info("Items registered successfully");
