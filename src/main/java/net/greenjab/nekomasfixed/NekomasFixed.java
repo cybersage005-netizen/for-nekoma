@@ -2,7 +2,6 @@ package net.greenjab.nekomasfixed;
 
 import net.fabricmc.api.ModInitializer;
 import net.greenjab.nekomasfixed.network.SyncHandler;
-import net.greenjab.nekomasfixed.registry.block.HoneyCauldronBlock;
 import net.greenjab.nekomasfixed.registry.block.cauldron.CauldronBehaviour;
 import net.greenjab.nekomasfixed.registry.registries.*;
 import net.minecraft.util.Identifier;
