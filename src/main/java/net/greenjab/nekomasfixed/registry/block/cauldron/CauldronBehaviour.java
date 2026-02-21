@@ -3,15 +3,13 @@ package net.greenjab.nekomasfixed.registry.block.cauldron;
 import net.greenjab.nekomasfixed.registry.registries.BlockRegistry;
 import net.greenjab.nekomasfixed.registry.registries.OtherRegistry;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.block.cauldron.CauldronBehavior;
-import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsage;
 import net.minecraft.item.Items;
-import net.minecraft.potion.Potions;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -30,9 +28,26 @@ public class CauldronBehaviour {
 
         emptyMap.put(Items.HONEY_BOTTLE, (state, world, pos, player, hand, stack) -> {
             if (!world.isClient()) {
-                world.setBlockState(pos, BlockRegistry.HONEY_CAULDRON.getDefaultState().with(LeveledCauldronBlock.LEVEL, 3));
-                player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(Items.GLASS_BOTTLE)));
-                world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_EMPTY,
+                int level = state.get(LeveledCauldronBlock.LEVEL);
+                if (level < 3) {
+                    world.setBlockState(pos, state.with(LeveledCauldronBlock.LEVEL, level + 1));
+                    player.setStackInHand(hand, new ItemStack(Items.GLASS_BOTTLE));
+                    world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_EMPTY,
+                            SoundCategory.BLOCKS, 1.0F, 1.0F);
+                }
+            }
+            return ActionResult.SUCCESS;
+        });
+        emptyMap.put(Items.GLASS_BOTTLE, (state, world, pos, player, hand, stack) -> {
+            if (!world.isClient()) {
+                int level = state.get(LeveledCauldronBlock.LEVEL);
+                player.setStackInHand(hand, new ItemStack(Items.HONEY_BOTTLE));
+                if (level > 1) {
+                    world.setBlockState(pos, state.with(LeveledCauldronBlock.LEVEL, level - 1));
+                } else {
+                    world.setBlockState(pos, Blocks.CAULDRON.getDefaultState());
+                }
+                world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_FILL,
                         SoundCategory.BLOCKS, 1.0F, 1.0F);
             }
             return ActionResult.SUCCESS;
