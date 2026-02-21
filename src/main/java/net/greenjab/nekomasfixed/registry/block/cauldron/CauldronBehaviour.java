@@ -94,6 +94,23 @@ public class CauldronBehaviour {
         addStainedglassBehaviour(waterMap, Items.PURPLE_STAINED_GLASS);
         addStainedglassBehaviour(waterMap, Items.MAGENTA_STAINED_GLASS);
         addStainedglassBehaviour(waterMap, Items.PINK_STAINED_GLASS);
+
+        addCandleBehaviour(waterMap, Items.WHITE_CANDLE);
+        addCandleBehaviour(waterMap, Items.LIGHT_GRAY_CANDLE);
+        addCandleBehaviour(waterMap, Items.GRAY_CANDLE);
+        addCandleBehaviour(waterMap, Items.BLACK_CANDLE);
+        addCandleBehaviour(waterMap, Items.BROWN_CANDLE);
+        addCandleBehaviour(waterMap, Items.RED_CANDLE);
+        addCandleBehaviour(waterMap, Items.ORANGE_CANDLE);
+        addCandleBehaviour(waterMap, Items.YELLOW_CANDLE);
+        addCandleBehaviour(waterMap, Items.LIME_CANDLE);
+        addCandleBehaviour(waterMap, Items.GREEN_CANDLE);
+        addCandleBehaviour(waterMap, Items.CYAN_CANDLE);
+        addCandleBehaviour(waterMap, Items.LIGHT_BLUE_CANDLE);
+        addCandleBehaviour(waterMap, Items.BLUE_CANDLE);
+        addCandleBehaviour(waterMap, Items.PURPLE_CANDLE);
+        addCandleBehaviour(waterMap, Items.MAGENTA_CANDLE);
+        addCandleBehaviour(waterMap, Items.PINK_CANDLE);
     }
 
 
@@ -112,6 +129,10 @@ public class CauldronBehaviour {
 
     private static void addStainedglassBehaviour(Map<Item, CauldronBehavior> map, Item glassItem) {
         map.put(glassItem, CauldronBehaviour::cleanGlass);
+    }
+
+    private static void addCandleBehaviour(Map<Item, CauldronBehavior> map, Item candleItem) {
+        map.put(candleItem, CauldronBehaviour::cleanCandle);
     }
 
     private static ActionResult cleanWool(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, ItemStack stack) {
@@ -176,7 +197,7 @@ public class CauldronBehaviour {
 
     private static ActionResult cleanGlass(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, ItemStack stack) {
 
-        if (stack.getItem() == Items.TERRACOTTA) {
+        if (stack.getItem() == Items.GLASS) {
             return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
         }
         if (!stack.isIn(OtherRegistry.STAINED_GLASS)) {
@@ -194,5 +215,23 @@ public class CauldronBehaviour {
         return ActionResult.SUCCESS;
     }
 
+    private static ActionResult cleanCandle(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, ItemStack stack) {
 
+        if (stack.getItem() == Items.CANDLE) {
+            return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+        }
+        if (!stack.isIn(ItemTags.CANDLES)) {
+            return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+        }
+        if (world.isClient()) {
+            return ActionResult.SUCCESS;
+        }
+        ItemStack candle = new ItemStack(Items.CANDLE, stack.getCount());
+        player.setStackInHand(hand, candle);
+        LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
+        world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY,
+                SoundCategory.BLOCKS, 1.0F, 1.0F);
+
+        return ActionResult.SUCCESS;
+    }
 }
