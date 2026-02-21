@@ -28,7 +28,7 @@ public class NekomasFixed implements ModInitializer {
 		EntityTypeRegistry.init();
 		SyncHandler.init();
 		CauldronBehaviour.register();
-		HoneyCauldronBlock.registerBehaviors();
+
 	}
 
 
