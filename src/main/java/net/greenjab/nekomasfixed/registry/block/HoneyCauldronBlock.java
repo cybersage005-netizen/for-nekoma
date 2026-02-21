@@ -23,18 +23,14 @@ public class HoneyCauldronBlock extends AbstractCauldronBlock {
 
     static {
         Map<Item, CauldronBehavior> map = HONEY_BEHAVIOR.map();
-
-        // Glass bottle takes honey (decreases level)
         map.put(Items.GLASS_BOTTLE, (state, world, pos, player, hand, stack) -> {
             if (!world.isClient()) {
                 int level = state.get(LeveledCauldronBlock.LEVEL);
                 player.setStackInHand(hand, new ItemStack(Items.HONEY_BOTTLE));
 
                 if (level > 1) {
-                    // Decrease level
                     world.setBlockState(pos, state.with(LeveledCauldronBlock.LEVEL, level - 1));
                 } else {
-                    // Empty cauldron
                     world.setBlockState(pos, Blocks.CAULDRON.getDefaultState());
                 }
 
@@ -76,5 +72,5 @@ public class HoneyCauldronBlock extends AbstractCauldronBlock {
         builder.add(LeveledCauldronBlock.LEVEL);
     }
 
-    // ... rest of your code
+
 }
