@@ -6,7 +6,8 @@
     "bottom": "minecraft:block/cauldron_bottom",
     "side": "minecraft:block/cauldron_side",
     "inside": "minecraft:block/cauldron_inner",
-    "content": "minecraft:block/honey_block_side"
+    "content": "minecraft:block/honey_block_side",
+    "content_top": "minecraft:block/honey_block_top"
   },
   "elements": [
     {
@@ -37,7 +38,8 @@
       "from": [4, 0, 4],
       "to": [12, 12, 12],
       "faces": {
-        "up": {"uv": [4, 4, 12, 16], "texture": "#content"},
+        "down": {"uv": [4, 4, 12, 12], "texture": "#content_top"},
+        "up": {"uv": [4, 4, 12, 12], "texture": "#content_top"},
         "north": {"uv": [4, 0, 12, 12], "texture": "#content"},
         "south": {"uv": [4, 0, 12, 12], "texture": "#content"},
         "west": {"uv": [4, 0, 12, 12], "texture": "#content"},
