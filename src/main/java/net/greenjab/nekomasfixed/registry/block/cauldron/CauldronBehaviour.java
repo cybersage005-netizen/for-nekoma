@@ -29,10 +29,10 @@ public class CauldronBehaviour {
 
         emptyMap.put(Items.HONEY_BOTTLE, (state, world, pos, player, hand, stack) -> {
             if (!world.isClient()) {
-                int level = state.get(LeveledCauldronBlock.LEVEL);
+
                 System.out.println("Honey bottle used on empty cauldron");
                 world.setBlockState(pos, BlockRegistry.HONEY_CAULDRON.getDefaultState()
-                        .with(LeveledCauldronBlock.LEVEL, level+1));
+                        .with(LeveledCauldronBlock.LEVEL, 1));
 
                 player.setStackInHand(hand, new ItemStack(Items.GLASS_BOTTLE));
                 world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_EMPTY,
@@ -40,20 +40,7 @@ public class CauldronBehaviour {
             }
             return ActionResult.SUCCESS;
         });
-        emptyMap.put(Items.GLASS_BOTTLE, (state, world, pos, player, hand, stack) -> {
-            if (!world.isClient()) {
-                int level = state.get(LeveledCauldronBlock.LEVEL);
-                player.setStackInHand(hand, new ItemStack(Items.HONEY_BOTTLE));
-                if (level > 1) {
-                    world.setBlockState(pos, state.with(LeveledCauldronBlock.LEVEL, level - 1));
-                } else {
-                    world.setBlockState(pos, Blocks.CAULDRON.getDefaultState());
-                }
-                world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_FILL,
-                        SoundCategory.BLOCKS, 1.0F, 1.0F);
-            }
-            return ActionResult.SUCCESS;
-        });
+
 
         addWoolBehavior(waterMap, Items.WHITE_WOOL);
         addWoolBehavior(waterMap, Items.ORANGE_WOOL);
