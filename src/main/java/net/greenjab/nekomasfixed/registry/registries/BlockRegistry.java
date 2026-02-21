@@ -5,6 +5,7 @@ import net.greenjab.nekomasfixed.registry.block.*;
 import net.greenjab.nekomasfixed.registry.block.enums.ClamType;
 import net.greenjab.nekomasfixed.registry.block.enums.NautilusBlockType;
 import net.minecraft.block.*;
+import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.Item;
@@ -15,8 +16,11 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.biome.Biome;
 
 import java.util.function.Function;
+
+import static net.minecraft.block.Blocks.CAULDRON;
 
 public class BlockRegistry {
 
@@ -123,7 +127,11 @@ public class BlockRegistry {
                     .strength(1.4F)
                     .resistance(4.2F)
                     .requiresTool());
-
+    public static final Block HONEY_CAULDRON = Registry.register(
+            Registries.BLOCK,
+            Identifier.of("nekomasfixed", "honey_cauldron"),
+            new HoneyCauldronBlock(AbstractBlock.Settings.copy(Blocks.CAULDRON))
+    );
     private static Block register(String id, AbstractBlock.Settings settings) {
         return register(id, Block::new, settings);
     }
