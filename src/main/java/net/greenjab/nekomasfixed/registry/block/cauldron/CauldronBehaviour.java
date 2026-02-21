@@ -1,5 +1,6 @@
 package net.greenjab.nekomasfixed.registry.block.cauldron;
 
+import net.greenjab.nekomasfixed.registry.registries.OtherRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.block.cauldron.CauldronBehavior;
@@ -117,6 +118,9 @@ public class CauldronBehaviour {
             return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
         }
         if (!stack.isIn(ItemTags.TERRACOTTA)) {
+            return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+        }
+        if(!stack.isIn(OtherRegistry.GLAZED_TERRACOTTA)){
             return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
         }
         if (world.isClient()) {
