@@ -26,27 +26,29 @@ public class CauldronMixin {
                                BlockPos pos, PlayerEntity player, Hand hand,
                                BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
 
-        // Handle honey bottle on empty cauldron
         if (stack.getItem() == Items.HONEY_BOTTLE && state.getBlock() == Blocks.CAULDRON) {
             if (!world.isClient()) {
                 world.setBlockState(pos, BlockRegistry.HONEY_CAULDRON.getDefaultState()
                         .with(LeveledCauldronBlock.LEVEL, 1));
-                stack.decrement(1);  // ← Use decrement()
+                stack.decrement(1);
                 player.getInventory().offerOrDrop(new ItemStack(Items.GLASS_BOTTLE));
             }
             cir.setReturnValue(ActionResult.SUCCESS);
             return;
         }
 
-        // Handle honey cauldron interactions
+        if(stack.getItem() == null){
+            System.out.println("Hand is used on cauldron");
+        }
+
+
         if (state.getBlock() == BlockRegistry.HONEY_CAULDRON) {
             int level = state.get(LeveledCauldronBlock.LEVEL);
 
-            // Glass bottle takes honey
             if (stack.getItem() == Items.GLASS_BOTTLE) {
                 if (!world.isClient()) {
                     player.getInventory().offerOrDrop(new ItemStack(Items.HONEY_BOTTLE));
-                    stack.decrement(1);  // ← Use decrement()
+                    stack.decrement(1);
 
                     if (level > 1) {
                         world.setBlockState(pos, state.with(LeveledCauldronBlock.LEVEL, level - 1));
@@ -58,11 +60,11 @@ public class CauldronMixin {
                 return;
             }
 
-            // Honey bottle adds honey
+
             if (stack.getItem() == Items.HONEY_BOTTLE && level < 3) {
                 if (!world.isClient()) {
                     world.setBlockState(pos, state.with(LeveledCauldronBlock.LEVEL, level + 1));
-                    stack.decrement(1);  // ← Use decrement()
+                    stack.decrement(1);
                     player.getInventory().offerOrDrop(new ItemStack(Items.GLASS_BOTTLE));
                 }
                 cir.setReturnValue(ActionResult.SUCCESS);
