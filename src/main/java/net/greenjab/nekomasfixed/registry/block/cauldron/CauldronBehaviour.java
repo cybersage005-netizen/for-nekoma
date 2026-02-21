@@ -29,9 +29,10 @@ public class CauldronBehaviour {
 
         emptyMap.put(Items.HONEY_BOTTLE, (state, world, pos, player, hand, stack) -> {
             if (!world.isClient()) {
+                int level = state.get(LeveledCauldronBlock.LEVEL);
                 System.out.println("Honey bottle used on empty cauldron");
                 world.setBlockState(pos, BlockRegistry.HONEY_CAULDRON.getDefaultState()
-                        .with(LeveledCauldronBlock.LEVEL, 1));
+                        .with(LeveledCauldronBlock.LEVEL, level+1));
 
                 player.setStackInHand(hand, new ItemStack(Items.GLASS_BOTTLE));
                 world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_EMPTY,
