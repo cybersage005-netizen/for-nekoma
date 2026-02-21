@@ -4,10 +4,12 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.NbtComponent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -49,17 +51,24 @@ public class CauldronBehaviour {
 
     private static ActionResult cleanWool(BlockState state, World world, BlockPos pos,
                                           PlayerEntity player, Hand hand, ItemStack stack) {
-        System.out.println("Action with " + stack + " done on cauldron");
 
-        if (!stack.contains(DataComponentTypes.DYED_COLOR)) {
+        if (stack.getItem() == Items.WHITE_WOOL) {
             return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
         }
+        if (!stack.isIn(ItemTags.WOOL)) {
+            return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+        }
+
         if (world.isClient()) {
             return ActionResult.SUCCESS;
         }
-        stack.remove(DataComponentTypes.DYED_COLOR);
+
+
+        ItemStack whiteWool = new ItemStack(Items.WHITE_WOOL, stack.getCount());
+        player.setStackInHand(hand, whiteWool);
         LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
-        world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
+        world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY,
+                SoundCategory.BLOCKS, 1.0F, 1.0F);
 
         return ActionResult.SUCCESS;
     }
