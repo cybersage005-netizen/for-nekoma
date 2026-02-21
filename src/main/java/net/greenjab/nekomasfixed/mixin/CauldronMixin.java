@@ -1,5 +1,6 @@
 package net.greenjab.nekomasfixed.mixin;
 
+import net.greenjab.nekomasfixed.registry.block.HoneyCauldronBlock;
 import net.minecraft.block.AbstractCauldronBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -29,7 +30,7 @@ public class CauldronMixin {
         if (stack.getItem() == Items.HONEY_BOTTLE && state.getBlock() == Blocks.CAULDRON) {
             if (!world.isClient()) {
                 world.setBlockState(pos, BlockRegistry.HONEY_CAULDRON.getDefaultState()
-                        .with(LeveledCauldronBlock.LEVEL, 1));
+                        .with(HoneyCauldronBlock.HONEY_LEVEL, 1));  // Use custom property
                 stack.decrement(1);
                 player.getInventory().offerOrDrop(new ItemStack(Items.GLASS_BOTTLE));
             }
@@ -38,8 +39,7 @@ public class CauldronMixin {
         }
 
         if (state.getBlock() == BlockRegistry.HONEY_CAULDRON) {
-            int level = state.get(LeveledCauldronBlock.LEVEL);
-            int MAX_LEVEL = 4; // Define max level
+            int level = state.get(HoneyCauldronBlock.HONEY_LEVEL);  // Use custom property
 
             if (stack.getItem() == Items.GLASS_BOTTLE) {
                 if (!world.isClient()) {
@@ -47,7 +47,7 @@ public class CauldronMixin {
                     stack.decrement(1);
 
                     if (level > 1) {
-                        world.setBlockState(pos, state.with(LeveledCauldronBlock.LEVEL, level - 1));
+                        world.setBlockState(pos, state.with(HoneyCauldronBlock.HONEY_LEVEL, level - 1));
                     } else {
                         world.setBlockState(pos, Blocks.CAULDRON.getDefaultState());
                     }
@@ -56,9 +56,9 @@ public class CauldronMixin {
                 return;
             }
 
-            if (stack.getItem() == Items.HONEY_BOTTLE && level < MAX_LEVEL) {
+            if (stack.getItem() == Items.HONEY_BOTTLE && level < 4) {
                 if (!world.isClient()) {
-                    world.setBlockState(pos, state.with(LeveledCauldronBlock.LEVEL, level + 1));
+                    world.setBlockState(pos, state.with(HoneyCauldronBlock.HONEY_LEVEL, level + 1));
                     stack.decrement(1);
                     player.getInventory().offerOrDrop(new ItemStack(Items.GLASS_BOTTLE));
                 }
