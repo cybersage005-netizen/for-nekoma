@@ -61,24 +61,26 @@ public class CauldronBehaviour {
         addTerracottaBehaviour(waterMap, Items.MAGENTA_TERRACOTTA);
         addTerracottaBehaviour(waterMap, Items.PINK_TERRACOTTA);
 
-        addTerracottaBehaviour(waterMap, Items.WHITE_GLAZED_TERRACOTTA);
-        addTerracottaBehaviour(waterMap, Items.LIGHT_GRAY_GLAZED_TERRACOTTA);
-        addTerracottaBehaviour(waterMap, Items.GRAY_GLAZED_TERRACOTTA);
-        addTerracottaBehaviour(waterMap, Items.BLACK_GLAZED_TERRACOTTA);
-        addTerracottaBehaviour(waterMap, Items.BROWN_GLAZED_TERRACOTTA);
-        addTerracottaBehaviour(waterMap, Items.RED_GLAZED_TERRACOTTA);
-        addTerracottaBehaviour(waterMap, Items.ORANGE_GLAZED_TERRACOTTA);
-        addTerracottaBehaviour(waterMap, Items.YELLOW_GLAZED_TERRACOTTA);
-        addTerracottaBehaviour(waterMap, Items.LIME_GLAZED_TERRACOTTA);
-        addTerracottaBehaviour(waterMap, Items.GREEN_GLAZED_TERRACOTTA);
-        addTerracottaBehaviour(waterMap, Items.CYAN_GLAZED_TERRACOTTA);
-        addTerracottaBehaviour(waterMap, Items.LIGHT_BLUE_GLAZED_TERRACOTTA);
-        addTerracottaBehaviour(waterMap, Items.BLUE_GLAZED_TERRACOTTA);
-        addTerracottaBehaviour(waterMap, Items.PURPLE_GLAZED_TERRACOTTA);
-        addTerracottaBehaviour(waterMap, Items.MAGENTA_GLAZED_TERRACOTTA);
-        addTerracottaBehaviour(waterMap, Items.PINK_GLAZED_TERRACOTTA);
+        addGlazedterracottaBehaviour(waterMap, Items.WHITE_GLAZED_TERRACOTTA);
+        addGlazedterracottaBehaviour(waterMap, Items.LIGHT_GRAY_GLAZED_TERRACOTTA);
+        addGlazedterracottaBehaviour(waterMap, Items.GRAY_GLAZED_TERRACOTTA);
+        addGlazedterracottaBehaviour(waterMap, Items.BLACK_GLAZED_TERRACOTTA);
+        addGlazedterracottaBehaviour(waterMap, Items.BROWN_GLAZED_TERRACOTTA);
+        addGlazedterracottaBehaviour(waterMap, Items.RED_GLAZED_TERRACOTTA);
+        addGlazedterracottaBehaviour(waterMap, Items.ORANGE_GLAZED_TERRACOTTA);
+        addGlazedterracottaBehaviour(waterMap, Items.YELLOW_GLAZED_TERRACOTTA);
+        addGlazedterracottaBehaviour(waterMap, Items.LIME_GLAZED_TERRACOTTA);
+        addGlazedterracottaBehaviour(waterMap, Items.GREEN_GLAZED_TERRACOTTA);
+        addGlazedterracottaBehaviour(waterMap, Items.CYAN_GLAZED_TERRACOTTA);
+        addGlazedterracottaBehaviour(waterMap, Items.LIGHT_BLUE_GLAZED_TERRACOTTA);
+        addGlazedterracottaBehaviour(waterMap, Items.BLUE_GLAZED_TERRACOTTA);
+        addGlazedterracottaBehaviour(waterMap, Items.PURPLE_GLAZED_TERRACOTTA);
+        addGlazedterracottaBehaviour(waterMap, Items.MAGENTA_GLAZED_TERRACOTTA);
+        addGlazedterracottaBehaviour(waterMap, Items.PINK_GLAZED_TERRACOTTA);
 
     }
+
+
 
     private static void addWoolBehavior(Map<Item, CauldronBehavior> map, Item woolItem) {
         map.put(woolItem, CauldronBehaviour::cleanWool);
@@ -86,6 +88,10 @@ public class CauldronBehaviour {
 
     private static void addTerracottaBehaviour(Map<Item, CauldronBehavior> map, Item terracottaItem) {
         map.put(terracottaItem, CauldronBehaviour::cleanTerracotta);
+    }
+
+    private static void addGlazedterracottaBehaviour(Map<Item, CauldronBehavior> map, Item glazedTerracottaItem) {
+        map.put(glazedTerracottaItem, CauldronBehaviour::cleanGlazedTerracotta);
     }
 
     private static ActionResult cleanWool(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, ItemStack stack) {
@@ -116,7 +122,24 @@ public class CauldronBehaviour {
         if (!stack.isIn(ItemTags.TERRACOTTA)) {
             return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
         }
-        if(!stack.isIn(OtherRegistry.GLAZED_TERRACOTTA)){
+        if (world.isClient()) {
+            return ActionResult.SUCCESS;
+        }
+        ItemStack terracotta = new ItemStack(Items.TERRACOTTA, stack.getCount());
+        player.setStackInHand(hand, terracotta);
+        LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
+        world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY,
+                SoundCategory.BLOCKS, 1.0F, 1.0F);
+
+        return ActionResult.SUCCESS;
+    }
+
+    private static ActionResult cleanGlazedTerracotta(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, ItemStack stack) {
+
+        if (stack.getItem() == Items.TERRACOTTA) {
+            return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+        }
+        if (!stack.isIn(OtherRegistry.GLAZED_TERRACOTTA)) {
             return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
         }
         if (world.isClient()) {
