@@ -23,6 +23,14 @@ import java.util.Map;
 public class CauldronBehaviour {
 
     public static void register() {
+        System.out.println("CauldronBehaviour.register() started");
+
+        // Check if honey cauldron block is registered
+        if (BlockRegistry.HONEY_CAULDRON != null) {
+            System.out.println("HONEY_CAULDRON block is registered: " + BlockRegistry.HONEY_CAULDRON);
+        } else {
+            System.out.println("HONEY_CAULDRON block is NULL!");
+        }
 
         Map<Item, CauldronBehavior> waterMap = CauldronBehavior.WATER_CAULDRON_BEHAVIOR.map();
         Map<Item, CauldronBehavior> emptyMap = CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.map();

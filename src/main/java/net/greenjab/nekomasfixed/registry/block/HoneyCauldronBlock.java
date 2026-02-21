@@ -27,6 +27,11 @@ public class HoneyCauldronBlock extends AbstractCauldronBlock {
         System.out.println("Registering Honey Cauldron Behaviors!");
 
         Map<Item, CauldronBehavior> map = HONEY_BEHAVIOR.map();
+        if (map == null) {
+            System.out.println("ERROR: HONEY_BEHAVIOR.map() returned null!");
+        } else {
+            System.out.println("HONEY_BEHAVIOR.map() OK, size: " + map.size());
+        }
 
         // Glass bottle takes honey out
         map.put(Items.GLASS_BOTTLE, (state, world, pos, player, hand, stack) -> {
