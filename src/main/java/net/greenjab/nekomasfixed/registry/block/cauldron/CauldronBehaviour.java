@@ -23,30 +23,31 @@ import java.util.Map;
 public class CauldronBehaviour {
 
     public static void register() {
-        System.out.println("CauldronBehaviour.register() started");
-
-        // Check if honey cauldron block is registered
-        if (BlockRegistry.HONEY_CAULDRON != null) {
-            System.out.println("HONEY_CAULDRON block is registered: " + BlockRegistry.HONEY_CAULDRON);
-        } else {
-            System.out.println("HONEY_CAULDRON block is NULL!");
-        }
-
         Map<Item, CauldronBehavior> waterMap = CauldronBehavior.WATER_CAULDRON_BEHAVIOR.map();
-        Map<Item, CauldronBehavior> emptyMap = CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.map();
 
-        emptyMap.put(Items.HONEY_BOTTLE, (state, world, pos, player, hand, stack) -> {
-            System.out.println("EMPTY CAULDRON: Honey bottle used at " + pos);
-            if (!world.isClient()) {
-                world.setBlockState(pos, BlockRegistry.HONEY_CAULDRON.getDefaultState()
-                        .with(LeveledCauldronBlock.LEVEL, 1));
+            System.out.println("CauldronBehaviour.register() started");
 
-                player.setStackInHand(hand, new ItemStack(Items.GLASS_BOTTLE));
-                world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_EMPTY,
-                        SoundCategory.BLOCKS, 1.0F, 1.0F);
-            }
-            return ActionResult.SUCCESS;
-        });
+            Map<Item, CauldronBehavior> emptyMap = CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.map();
+
+            // Empty cauldron → honey cauldron
+            emptyMap.put(Items.HONEY_BOTTLE, (state, world, pos, player, hand, stack) -> {
+                System.out.println("EMPTY CAULDRON: Honey bottle used at " + pos);
+                if (!world.isClient()) {
+                    world.setBlockState(pos, BlockRegistry.HONEY_CAULDRON.getDefaultState()
+                            .with(LeveledCauldronBlock.LEVEL, 1));
+
+                    player.setStackInHand(hand, new ItemStack(Items.GLASS_BOTTLE));
+                    world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_EMPTY,
+                            SoundCategory.BLOCKS, 1.0F, 1.0F);
+                }
+                return ActionResult.SUCCESS;
+            });
+
+            // Register honey cauldron behaviors HERE, not in the block class
+            registerHoneyCauldronBehaviors();
+
+            System.out.println("CauldronBehaviour.register() finished");
+
 
 
         addWoolBehavior(waterMap, Items.WHITE_WOOL);
@@ -235,6 +236,54 @@ public class CauldronBehaviour {
         addHarnessBehaviour(waterMap, Items.PURPLE_HARNESS);
         addHarnessBehaviour(waterMap, Items.MAGENTA_HARNESS);
         addHarnessBehaviour(waterMap, Items.PINK_HARNESS);
+    }
+    private static void registerHoneyCauldronBehaviors() {
+        System.out.println("Registering honey cauldron behaviors...");
+
+        // Get the behavior map for honey cauldron
+        // You need to create a custom behavior map for your honey cauldron
+        CauldronBehavior.CauldronBehaviorMap honeyMap =
+                CauldronBehavior.createMap("honey_cauldron");
+
+        Map<Item, CauldronBehavior> map = honeyMap.map();
+
+        // Glass bottle takes honey
+        map.put(Items.GLASS_BOTTLE, (state, world, pos, player, hand, stack) -> {
+            System.out.println("HONEY CAULDRON: Glass bottle used at " + pos);
+            if (!world.isClient()) {
+                int level = state.get(LeveledCauldronBlock.LEVEL);
+                player.setStackInHand(hand, new ItemStack(Items.HONEY_BOTTLE));
+
+                if (level > 1) {
+                    world.setBlockState(pos, state.with(LeveledCauldronBlock.LEVEL, level - 1));
+                } else {
+                    world.setBlockState(pos, Blocks.CAULDRON.getDefaultState());
+                }
+
+                world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_FILL,
+                        SoundCategory.BLOCKS, 1.0F, 1.0F);
+            }
+            return ActionResult.SUCCESS;
+        });
+
+        // Honey bottle adds honey
+        map.put(Items.HONEY_BOTTLE, (state, world, pos, player, hand, stack) -> {
+            System.out.println("HONEY CAULDRON: Honey bottle used at " + pos);
+            if (!world.isClient()) {
+                int level = state.get(LeveledCauldronBlock.LEVEL);
+                if (level < 3) {
+                    world.setBlockState(pos, state.with(LeveledCauldronBlock.LEVEL, level + 1));
+                    player.setStackInHand(hand, new ItemStack(Items.GLASS_BOTTLE));
+                    world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_EMPTY,
+                            SoundCategory.BLOCKS, 1.0F, 1.0F);
+                }
+            }
+            return ActionResult.SUCCESS;
+        });
+
+        // Now you need to associate this behavior map with your honey cauldron block
+        // This might require a mixin or a different approach
+        System.out.println("Honey cauldron behaviors registered, map size: " + map.size());
     }
 
     private static void addWoolBehavior(Map<Item, CauldronBehavior> map, Item woolItem) {
