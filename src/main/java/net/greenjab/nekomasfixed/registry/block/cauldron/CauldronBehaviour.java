@@ -1,6 +1,7 @@
 package net.greenjab.nekomasfixed.registry.block.cauldron;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.component.DataComponentTypes;
@@ -50,19 +51,14 @@ public class CauldronBehaviour {
 
     private static ActionResult cleanWool(BlockState state, World world, BlockPos pos,
                                           PlayerEntity player, Hand hand, ItemStack stack) {
-        // Check if wool has color
+
         if (!stack.contains(DataComponentTypes.DYED_COLOR)) {
             return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
         }
 
         if (!world.isClient()) {
-            // Remove the color
-            stack.remove(DataComponentTypes.DYED_COLOR);
-
-            // Decrease water level
+            ItemStack itemStack = stack.copyComponentsToNewStack(Blocks.WHITE_WOOL, 1);
             LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
-
-            // Play sound
             world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY,
                     SoundCategory.BLOCKS, 1.0F, 1.0F);
         }
