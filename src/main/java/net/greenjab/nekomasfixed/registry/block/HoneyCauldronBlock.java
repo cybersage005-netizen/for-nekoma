@@ -38,21 +38,9 @@ public class HoneyCauldronBlock extends AbstractCauldronBlock {
         registerBehaviors();
     }
 
-    private void registerBehaviors() {
+    public void registerBehaviors() {
         Map<Item, CauldronBehavior> map = HONEY_BEHAVIOR.map();
 
-        // Empty bucket takes honey
-        map.put(Items.BUCKET, (state, world, pos, player, hand, stack) -> {
-            if (!world.isClient()) {
-                player.setStackInHand(hand, new ItemStack(Items.HONEY_BOTTLE));
-                world.setBlockState(pos, Blocks.CAULDRON.getDefaultState());
-                world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_FILL,
-                        SoundCategory.BLOCKS, 1.0F, 1.0F);
-            }
-            return ActionResult.SUCCESS;
-        });
-
-        // Honey bottle fills cauldron
         map.put(Items.HONEY_BOTTLE, (state, world, pos, player, hand, stack) -> {
             if (!world.isClient()) {
                 player.setStackInHand(hand, new ItemStack(Items.GLASS_BOTTLE));

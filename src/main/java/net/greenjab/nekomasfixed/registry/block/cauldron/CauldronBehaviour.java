@@ -1,5 +1,6 @@
 package net.greenjab.nekomasfixed.registry.block.cauldron;
 
+import net.greenjab.nekomasfixed.registry.registries.BlockRegistry;
 import net.greenjab.nekomasfixed.registry.registries.OtherRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeveledCauldronBlock;
@@ -22,7 +23,17 @@ public class CauldronBehaviour {
     public static void register() {
 
         Map<Item, CauldronBehavior> waterMap = CauldronBehavior.WATER_CAULDRON_BEHAVIOR.map();
+        Map<Item, CauldronBehavior> emptyMap = CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.map();
 
+        emptyMap.put(Items.HONEY_BOTTLE, (state, world, pos, player, hand, stack) -> {
+            if (!world.isClient()) {
+                world.setBlockState(pos, BlockRegistry.HONEY_CAULDRON.getDefaultState());
+                player.setStackInHand(hand, new ItemStack(Items.GLASS_BOTTLE));
+                world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_EMPTY,
+                        SoundCategory.BLOCKS, 1.0F, 1.0F);
+            }
+            return ActionResult.SUCCESS;
+        });
 
         addWoolBehavior(waterMap, Items.WHITE_WOOL);
         addWoolBehavior(waterMap, Items.ORANGE_WOOL);
