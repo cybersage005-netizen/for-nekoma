@@ -39,6 +39,18 @@ public class HoneyCauldronBlock extends AbstractCauldronBlock {
             }
             return ActionResult.SUCCESS;
         });
+        map.put(Items.HONEY_BOTTLE, (state, world, pos, player, hand, stack) -> {
+            if (!world.isClient()) {
+                int level = state.get(LeveledCauldronBlock.LEVEL);
+                if (level < 3) {
+                    world.setBlockState(pos, state.with(LeveledCauldronBlock.LEVEL, level + 1));
+                    player.setStackInHand(hand, new ItemStack(Items.GLASS_BOTTLE));
+                    world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_EMPTY,
+                            SoundCategory.BLOCKS, 1.0F, 1.0F);
+                }
+            }
+            return ActionResult.SUCCESS;
+        });
     }
 
     public HoneyCauldronBlock(Settings settings) {
@@ -49,7 +61,7 @@ public class HoneyCauldronBlock extends AbstractCauldronBlock {
 
     @Override
     protected MapCodec<? extends AbstractCauldronBlock> getCodec() {
-        return null;
+        return CODEC;
     }
 
     @Override

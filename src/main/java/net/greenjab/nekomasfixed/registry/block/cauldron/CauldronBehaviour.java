@@ -27,7 +27,7 @@ public class CauldronBehaviour {
 
         emptyMap.put(Items.HONEY_BOTTLE, (state, world, pos, player, hand, stack) -> {
             if (!world.isClient()) {
-                world.setBlockState(pos, state.with(LeveledCauldronBlock.LEVEL, 1));
+                world.setBlockState(pos, BlockRegistry.HONEY_CAULDRON.getDefaultState().with(LeveledCauldronBlock.LEVEL, 1));
                 player.setStackInHand(hand, new ItemStack(Items.GLASS_BOTTLE));
                 world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_EMPTY,
                         SoundCategory.BLOCKS, 1.0F, 1.0F);
