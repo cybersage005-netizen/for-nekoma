@@ -33,12 +33,7 @@ public class CauldronMixin {
                         .with(HoneyCauldronBlock.HONEY_LEVEL, 1));
                 stack.decrement(1);
                 player.getInventory().offerOrDrop(new ItemStack(Items.GLASS_BOTTLE));
-                BlockPos abovePos = new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ());
-                Block block = world.getBlockState(abovePos).getBlock();
 
-                if (block == Blocks.BEEHIVE || block == Blocks.BEE_NEST) {
-                    System.out.println("Beehive detected!");
-                }
             }
             cir.setReturnValue(ActionResult.SUCCESS);
             return;
@@ -71,7 +66,12 @@ public class CauldronMixin {
                 cir.setReturnValue(ActionResult.SUCCESS);
                 return;
             }
+            BlockPos abovePos = new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ());
+            Block block = world.getBlockState(abovePos).getBlock();
 
+            if (block == Blocks.BEEHIVE || block == Blocks.BEE_NEST) {
+                System.out.println("Beehive detected!");
+            }
 
         }
     }
