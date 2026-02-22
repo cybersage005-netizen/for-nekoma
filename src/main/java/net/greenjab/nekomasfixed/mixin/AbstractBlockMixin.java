@@ -3,7 +3,6 @@ package net.greenjab.nekomasfixed.mixin;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -32,7 +31,7 @@ public class AbstractBlockMixin {
         if (!world.isClient()) {
             // Start ticking for both normal and honey cauldrons
             if (state.getBlock() == Blocks.CAULDRON || state.getBlock() == BlockRegistry.HONEY_CAULDRON) {
-                ((ServerWorld)world).scheduleBlockTick(pos, state.getBlock(), 20);
+                world.scheduleBlockTick(pos, state.getBlock(), 20);
                 System.out.println("Started ticking cauldron at " + pos);
             }
         }
@@ -77,7 +76,7 @@ public class AbstractBlockMixin {
         }
 
         // Handle normal cauldron conversion to honey cauldron
-        if (state.getBlock() == Blocks.CAULDRON && hasBeehive) {
+        if (state.getBlock() == Blocks.CAULDRON ) {
             world.setBlockState(pos, BlockRegistry.HONEY_CAULDRON.getDefaultState()
                     .with(HoneyCauldronBlock.HONEY_LEVEL, 1));
             world.playSound(null, pos, SoundEvents.BLOCK_BEEHIVE_DRIP,
