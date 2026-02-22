@@ -26,7 +26,7 @@ public class AbstractBlockMixin {
     @Unique
     private static final Map<BlockPos, Integer> CHECK_TIMERS = new HashMap<>();
 
-    @Inject(method = "onBlockAdded", at = @At("HEAD"))
+    @Inject(method = "onBlockAdded", at = @At("RETURN"))
     private void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify, CallbackInfo ci) {
         System.out.println("onBlockAdded called for " + state.getBlock() + " at " + pos);
 
