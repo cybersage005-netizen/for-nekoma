@@ -19,7 +19,7 @@ public class BlockTickSchedulerMixin {
     private void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify, CallbackInfo ci) {
         if (world.isClient()) return;
 
-        // Check if this is a normal cauldron with a beehive above
+
         if (state.getBlock() == Blocks.CAULDRON) {
             BlockPos abovePos = pos.up(2);
             BlockState aboveState = world.getBlockState(abovePos);
@@ -36,10 +36,8 @@ public class BlockTickSchedulerMixin {
             BlockState downState = world.getBlockState(downPos);
 
             if (downState.isOf(Blocks.CAULDRON) || downState.isOf(BlockRegistry.HONEY_CAULDRON)) {
-
-                world.setBlockState(pos, BlockRegistry.HONEY_CAULDRON.getDefaultState()
+                world.setBlockState(pos.down(2), BlockRegistry.HONEY_CAULDRON.getDefaultState()
                         .with(HoneyCauldronBlock.HONEY_LEVEL, 1));
-
             }
         }
         if (state.getBlock() == BlockRegistry.HONEY_CAULDRON) {
