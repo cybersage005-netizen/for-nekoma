@@ -1,10 +1,7 @@
 package net.greenjab.nekomasfixed.mixin;
 
 import net.greenjab.nekomasfixed.registry.block.HoneyCauldronBlock;
-import net.minecraft.block.AbstractCauldronBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.LeveledCauldronBlock;
+import net.minecraft.block.*;
 import net.minecraft.component.Component;
 import net.minecraft.component.ComponentMap;
 import net.minecraft.component.DataComponentTypes;
@@ -36,15 +33,11 @@ public class CauldronMixin {
                         .with(HoneyCauldronBlock.HONEY_LEVEL, 1));
                 stack.decrement(1);
                 player.getInventory().offerOrDrop(new ItemStack(Items.GLASS_BOTTLE));
-                if (state.getBlock() == BlockRegistry.HONEY_CAULDRON) {
-                    BlockPos abovePos = pos.up(2);
-                    BlockState aboveState = world.getBlockState(abovePos);
+                BlockPos abovePos = new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ());
+                Block block = world.getBlockState(abovePos).getBlock();
 
-                    if (aboveState.isOf(Blocks.BEEHIVE) || aboveState.isOf(Blocks.BEE_NEST)) {
-                        BlockState be = world.getBlockState(abovePos);
-                        System.out.println("BEEHIVE found 2 blocks above cauldron!");
-                        System.out.println(be);
-                    }
+                if (block == Blocks.BEEHIVE || block == Blocks.BEE_NEST) {
+                    System.out.println("Beehive detected!");
                 }
             }
             cir.setReturnValue(ActionResult.SUCCESS);
