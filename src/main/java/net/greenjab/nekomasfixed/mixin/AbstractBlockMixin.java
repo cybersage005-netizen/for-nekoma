@@ -26,8 +26,9 @@ public class AbstractBlockMixin {
             honeyLevel= aboveState.get(BeehiveBlock.HONEY_LEVEL);
         }
 
-
         if (state.getBlock() == Blocks.CAULDRON) {
+            abovePos = pos.up(2);
+            aboveState = world.getBlockState(abovePos);
             if ((aboveState.isOf(Blocks.BEE_NEST) && honeyLevel==5) || (aboveState.isOf(Blocks.BEEHIVE) && honeyLevel == 5)) {
                 world.setBlockState(pos, BlockRegistry.HONEY_CAULDRON.getDefaultState()
                         .with(HoneyCauldronBlock.HONEY_LEVEL, 1));
@@ -39,10 +40,11 @@ public class AbstractBlockMixin {
             BlockState downState = world.getBlockState(downPos);
             if (downState.isOf(Blocks.CAULDRON) || downState.isOf(BlockRegistry.HONEY_CAULDRON)) {
                 world.setBlockState(pos.down(2), BlockRegistry.HONEY_CAULDRON.getDefaultState()
+                        //fix it later - it resets the level of honey in it
                         .with(HoneyCauldronBlock.HONEY_LEVEL, 1));
             }
         }
-        if (state.getBlock() == BlockRegistry.HONEY_CAULDRON) {
+        if (state.getBlock() == BlockRegistry.HONEY_CAULDRON || state.getBlock() == Blocks.BEE_NEST || state.getBlock() == Blocks.BEEHIVE) {
             world.scheduleBlockTick(pos, state.getBlock(), 20);
         }
     }
