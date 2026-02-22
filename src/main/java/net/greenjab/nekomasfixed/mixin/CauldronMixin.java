@@ -73,7 +73,7 @@ public class CauldronMixin {
                 BlockPos abovePos = pos.up(2);
                 BlockState aboveState = world.getBlockState(abovePos);
 
-                if (aboveState.isOf(Blocks.BEEHIVE) ) {
+                if (aboveState.isOf(Blocks.BEEHIVE) || aboveState.isOf(Blocks.BEE_NEST)) {
                     BlockState be = world.getBlockState(abovePos);
                     System.out.println("BEEHIVE found 2 blocks above cauldron!");
                     System.out.println(be);
