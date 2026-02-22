@@ -19,7 +19,6 @@ public class BlockTickSchedulerMixin {
     private void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify, CallbackInfo ci) {
         if (world.isClient()) return;
 
-        // Schedule tick for ANY cauldron type
         if (state.getBlock() == Blocks.CAULDRON ||
                 state.getBlock() == Blocks.WATER_CAULDRON ||
                 state.getBlock() == Blocks.LAVA_CAULDRON ||
