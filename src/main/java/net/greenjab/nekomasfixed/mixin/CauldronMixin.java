@@ -25,13 +25,27 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(AbstractCauldronBlock.class)
 public class CauldronMixin {
 
+    @Unique
+    public static boolean incrementHoneyLevel(World world, BlockPos pos, BlockState state) {
+        if (world.isClient()) return false;
+        if (state.getBlock() != BlockRegistry.HONEY_CAULDRON) return false;
+
+        int currentLevel = state.get(HoneyCauldronBlock.HONEY_LEVEL);
+        if (currentLevel >= HoneyCauldronBlock.MAX_LEVEL) return false;
+
+        world.setBlockState(pos, state.with(HoneyCauldronBlock.HONEY_LEVEL, currentLevel + 1));
+        world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
+        System.out.println("Honey cauldron incremented to level " + (currentLevel + 1));
+
+        return true;
+    }
+
     @Inject(method = "onUseWithItem", at = @At("HEAD"), cancellable = true)
     private void onCauldronUse(ItemStack stack, BlockState state, World world, BlockPos pos,
                                PlayerEntity player, Hand hand, BlockHitResult hit,
                                CallbackInfoReturnable<ActionResult> cir) {
-        BlockPos abovePos = pos.up(2);
-        BlockState aboveState = world.getBlockState(abovePos);
-        if ((stack.getItem() == Items.HONEY_BOTTLE && state.getBlock() == Blocks.CAULDRON) || (aboveState.isOf(Blocks.BEEHIVE) || aboveState.isOf(Blocks.BEE_NEST)) ) {
+
+        if (stack.getItem() == Items.HONEY_BOTTLE && state.getBlock() == Blocks.CAULDRON ) {
             if (!world.isClient()) {
                 world.setBlockState(pos, BlockRegistry.HONEY_CAULDRON.getDefaultState()
                         .with(HoneyCauldronBlock.HONEY_LEVEL, 1));
@@ -60,9 +74,6 @@ public class CauldronMixin {
                 cir.setReturnValue(ActionResult.SUCCESS);
                 return;
             }
-
-            // Add this method INSIDE your existing CauldronMixin class
-
 
 
             if (stack.getItem() == Items.HONEY_BOTTLE && level < 4) {
