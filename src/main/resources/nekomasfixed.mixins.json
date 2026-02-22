@@ -3,11 +3,11 @@
   "package": "net.greenjab.nekomasfixed.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "AbstractCauldronBlockMixin",
     "BlockItemMixin",
     "BlocksMixin",
     "BlockTickSchedulerMixin",
     "CarvedPumpkinBlockMixin",
+    "CauldronMixin",
     "ContainerComponentMixin",
     "DrownedEntityMixin",
     "DyeItemMixin",
