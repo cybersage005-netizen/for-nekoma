@@ -59,13 +59,8 @@ public class AbstractBlockMixin {
         BlockState aboveState = world.getBlockState(abovePos);
         boolean hasBeehive = aboveState.isOf(Blocks.BEEHIVE) || aboveState.isOf(Blocks.BEE_NEST);
 
-        if (!hasBeehive) {
-            world.scheduleBlockTick(pos, state.getBlock(), 20);
-            return;
-        }
-
-        // Handle honey cauldron filling
-        if (state.getBlock() == BlockRegistry.HONEY_CAULDRON) {
+        // Handle honey cauldron filling (only if beehive exists)
+        if (state.getBlock() == BlockRegistry.HONEY_CAULDRON && hasBeehive) {
             int currentLevel = state.get(HoneyCauldronBlock.HONEY_LEVEL);
             if (currentLevel < HoneyCauldronBlock.MAX_LEVEL) {
                 world.setBlockState(pos, state.with(HoneyCauldronBlock.HONEY_LEVEL, currentLevel + 1));
@@ -75,8 +70,8 @@ public class AbstractBlockMixin {
             }
         }
 
-        // Handle normal cauldron conversion to honey cauldron
-        if (state.getBlock() == Blocks.CAULDRON ) {
+        // Handle normal cauldron conversion to honey cauldron (ONLY if beehive exists)
+        if (state.getBlock() == Blocks.CAULDRON && hasBeehive) {
             world.setBlockState(pos, BlockRegistry.HONEY_CAULDRON.getDefaultState()
                     .with(HoneyCauldronBlock.HONEY_LEVEL, 1));
             world.playSound(null, pos, SoundEvents.BLOCK_BEEHIVE_DRIP,
