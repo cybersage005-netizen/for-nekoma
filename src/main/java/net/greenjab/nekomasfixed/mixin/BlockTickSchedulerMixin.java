@@ -28,12 +28,22 @@ public class BlockTickSchedulerMixin {
 
                 world.setBlockState(pos, BlockRegistry.HONEY_CAULDRON.getDefaultState()
                         .with(HoneyCauldronBlock.HONEY_LEVEL, 1));
-                System.out.println("Converted cauldron to honey cauldron at " + pos);
+
+            }
+        }
+        if (state.getBlock() == Blocks.BEEHIVE || state.getBlock() == Blocks.BEE_NEST) {
+            BlockPos downPos = pos.down(2);
+            BlockState downState = world.getBlockState(downPos);
+
+            if (downState.isOf(Blocks.CAULDRON) || downState.isOf(BlockRegistry.HONEY_CAULDRON)) {
+
+                world.setBlockState(pos, BlockRegistry.HONEY_CAULDRON.getDefaultState()
+                        .with(HoneyCauldronBlock.HONEY_LEVEL, 1));
+
             }
         }
         if (state.getBlock() == BlockRegistry.HONEY_CAULDRON) {
             world.scheduleBlockTick(pos, state.getBlock(), 20);
-            System.out.println("Scheduled tick for honey cauldron at " + pos);
         }
     }
 }
