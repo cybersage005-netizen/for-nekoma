@@ -25,20 +25,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(AbstractCauldronBlock.class)
 public class CauldronMixin {
 
-    @Unique
-    private static boolean incrementHoneyLevel(World world, BlockPos pos, BlockState state) {
-        if (world.isClient()) return false;
-        if (state.getBlock() != BlockRegistry.HONEY_CAULDRON) return false;
-
-        int currentLevel = state.get(HoneyCauldronBlock.HONEY_LEVEL);
-        if (currentLevel >= HoneyCauldronBlock.MAX_LEVEL) return false;
-
-        world.setBlockState(pos, state.with(HoneyCauldronBlock.HONEY_LEVEL, currentLevel + 1));
-        world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
-        System.out.println("Honey cauldron incremented to level " + (currentLevel + 1));
-
-        return true;
-    }
 
 
 
