@@ -2,7 +2,6 @@ package net.greenjab.nekomasfixed.mixin;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -19,7 +18,6 @@ public class BlockTickSchedulerMixin {
     private void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify, CallbackInfo ci) {
         if (world.isClient()) return;
 
-        // Schedule tick for honey cauldrons too!
         if (state.getBlock() == BlockRegistry.HONEY_CAULDRON) {
             ((ServerWorld)world).scheduleBlockTick(pos, state.getBlock(), 20);
             System.out.println("✅ Scheduled tick for honey cauldron at " + pos);
