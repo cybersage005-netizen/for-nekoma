@@ -26,7 +26,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class CauldronMixin {
 
     @Unique
-    public static boolean incrementHoneyLevel(World world, BlockPos pos, BlockState state) {
+    private static boolean incrementHoneyLevel(World world, BlockPos pos, BlockState state) {
         if (world.isClient()) return false;
         if (state.getBlock() != BlockRegistry.HONEY_CAULDRON) return false;
 
@@ -39,6 +39,17 @@ public class CauldronMixin {
 
         return true;
     }
+
+
+    @Unique
+    private static boolean incrementHoneyLevel(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+        if (incrementHoneyLevel(world, pos, state)) {
+            player.getInventory().offerOrDrop(new ItemStack(Items.GLASS_BOTTLE));
+            return true;
+        }
+        return false;
+    }
+
 
     @Inject(method = "onUseWithItem", at = @At("HEAD"), cancellable = true)
     private void onCauldronUse(ItemStack stack, BlockState state, World world, BlockPos pos,
