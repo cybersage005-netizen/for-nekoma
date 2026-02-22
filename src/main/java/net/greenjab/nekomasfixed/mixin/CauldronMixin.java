@@ -5,6 +5,9 @@ import net.minecraft.block.AbstractCauldronBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LeveledCauldronBlock;
+import net.minecraft.component.Component;
+import net.minecraft.component.ComponentMap;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -30,7 +33,7 @@ public class CauldronMixin {
         if (stack.getItem() == Items.HONEY_BOTTLE && state.getBlock() == Blocks.CAULDRON) {
             if (!world.isClient()) {
                 world.setBlockState(pos, BlockRegistry.HONEY_CAULDRON.getDefaultState()
-                        .with(HoneyCauldronBlock.HONEY_LEVEL, 1));  // Use custom property
+                        .with(HoneyCauldronBlock.HONEY_LEVEL, 1));
                 stack.decrement(1);
                 player.getInventory().offerOrDrop(new ItemStack(Items.GLASS_BOTTLE));
             }
@@ -39,7 +42,7 @@ public class CauldronMixin {
         }
 
         if (state.getBlock() == BlockRegistry.HONEY_CAULDRON) {
-            int level = state.get(HoneyCauldronBlock.HONEY_LEVEL);  // Use custom property
+            int level = state.get(HoneyCauldronBlock.HONEY_LEVEL);
 
             if (stack.getItem() == Items.GLASS_BOTTLE) {
                 if (!world.isClient()) {
@@ -64,6 +67,17 @@ public class CauldronMixin {
                 }
                 cir.setReturnValue(ActionResult.SUCCESS);
                 return;
+            }
+
+            if (state.getBlock() == BlockRegistry.HONEY_CAULDRON) {
+                BlockPos abovePos = pos.up(2);
+                BlockState aboveState = world.getBlockState(abovePos);
+
+                if (aboveState.isOf(Blocks.BEEHIVE) ) {
+                    BlockState be = world.getBlockState(abovePos);
+                    System.out.println("BEEHIVE found 2 blocks above cauldron!");
+                    System.out.println(be);
+                }
             }
         }
     }

@@ -21,7 +21,6 @@ import net.minecraft.world.World;
 public class HoneyCauldronBlock extends AbstractCauldronBlock {
     public static final MapCodec<HoneyCauldronBlock> CODEC = createCodec(HoneyCauldronBlock::new);
 
-    // Define custom property for levels 1-4
     public static final IntProperty HONEY_LEVEL = IntProperty.of("honey_level", 1, 4);
 
     public static final int MAX_LEVEL = 4;
@@ -46,7 +45,7 @@ public class HoneyCauldronBlock extends AbstractCauldronBlock {
         var behaviorMap = CauldronBehavior.createMap("honey");
         var map = behaviorMap.map();
 
-        // Glass bottle takes honey
+
         map.put(Items.GLASS_BOTTLE, (state, world, pos, player, hand, stack) -> {
             if (!world.isClient()) {
                 int level = state.get(HONEY_LEVEL);
@@ -64,7 +63,7 @@ public class HoneyCauldronBlock extends AbstractCauldronBlock {
             return ActionResult.SUCCESS;
         });
 
-        // Honey bottle adds honey
+
         map.put(Items.HONEY_BOTTLE, (state, world, pos, player, hand, stack) -> {
             if (!world.isClient()) {
                 int level = state.get(HONEY_LEVEL);
