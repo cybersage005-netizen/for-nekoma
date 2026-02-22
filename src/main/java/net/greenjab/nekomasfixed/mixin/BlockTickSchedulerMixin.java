@@ -19,14 +19,10 @@ public class BlockTickSchedulerMixin {
     private void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify, CallbackInfo ci) {
         if (world.isClient()) return;
 
-        if (state.getBlock() == Blocks.CAULDRON ||
-                state.getBlock() == Blocks.WATER_CAULDRON ||
-                state.getBlock() == Blocks.LAVA_CAULDRON ||
-                state.getBlock() == Blocks.POWDER_SNOW_CAULDRON ||
-                state.getBlock() == BlockRegistry.HONEY_CAULDRON) {
-
+        // Schedule tick for honey cauldrons too!
+        if (state.getBlock() == BlockRegistry.HONEY_CAULDRON) {
             ((ServerWorld)world).scheduleBlockTick(pos, state.getBlock(), 20);
-            System.out.println("✅ Scheduled tick for " + state.getBlock() + " at " + pos);
+            System.out.println("✅ Scheduled tick for honey cauldron at " + pos);
         }
     }
 }

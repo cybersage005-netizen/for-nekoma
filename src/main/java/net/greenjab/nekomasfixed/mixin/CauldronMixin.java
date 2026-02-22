@@ -60,6 +60,10 @@ public class CauldronMixin {
                 return;
             }
 
+            // Add this method INSIDE your existing CauldronMixin class
+
+
+
             if (stack.getItem() == Items.HONEY_BOTTLE && level < 4) {
                 if (!world.isClient()) {
                     world.setBlockState(pos, state.with(HoneyCauldronBlock.HONEY_LEVEL, level + 1));
