@@ -9,6 +9,7 @@ import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
@@ -16,6 +17,7 @@ import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
 public class HoneyCauldronBlock extends AbstractCauldronBlock {
@@ -78,6 +80,26 @@ public class HoneyCauldronBlock extends AbstractCauldronBlock {
         });
 
         return behaviorMap;
+    }
+
+    @Override
+    protected void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+
+        BlockPos abovePos = pos.up(2);
+        BlockState aboveState = world.getBlockState(abovePos);
+
+        if (aboveState.isOf(Blocks.BEEHIVE) || aboveState.isOf(Blocks.BEE_NEST)) {
+            System.out.println("Cauldron at " + pos + " has beehive above at " + abovePos);
+        }
+
+        world.scheduleBlockTick(pos, this, 20);
+    }
+
+    @Override
+    protected void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
+        if (!world.isClient()) {
+            world.scheduleBlockTick(pos, this, 20);
+        }
     }
 
     @Override
