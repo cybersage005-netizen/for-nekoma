@@ -7,7 +7,6 @@
     "BlockItemMixin",
     "BlocksMixin",
     "CarvedPumpkinBlockMixin",
-    "CauldronMixin",
     "ContainerComponentMixin",
     "DrownedEntityMixin",
     "DyeItemMixin",
