@@ -98,34 +98,34 @@ public class HoneyCauldronBlock extends AbstractCauldronBlock {
         }
     }
 
-//    @Override
-//    protected void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-//        System.out.println("scheduledTick called at " + pos + " on " + (world.isClient() ? "CLIENT" : "SERVER"));
-//
-//        if (!world.isClient()) {
-//            boolean hasBeehive = isBeeHiveAbove(pos, world);
-//            System.out.println("Beehive above? " + hasBeehive);
-//
-//            if (hasBeehive) {
-//                int currentLevel = state.get(HONEY_LEVEL);
-//                System.out.println("Current honey level: " + currentLevel + ", MAX: " + MAX_LEVEL);
-//
-//                if (currentLevel < MAX_LEVEL) {
-//                    // Auto-fill
-//                    System.out.println("Filling honey cauldron!");
-//                    world.setBlockState(pos, state.with(HONEY_LEVEL, currentLevel + 1));
-//                    world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_EMPTY,
-//                            SoundCategory.BLOCKS, 1.0F, 1.0F);
-//                } else {
-//                    System.out.println("Already full!");
-//                }
-//            }
-//        }
-//
-//        // Reschedule for next tick
-//        world.scheduleBlockTick(pos, this, 20);
-//        System.out.println("Rescheduled next tick");
-//    }
+    @Override
+    protected void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        System.out.println("scheduledTick called at " + pos + " on " + (world.isClient() ? "CLIENT" : "SERVER"));
+
+        if (!world.isClient()) {
+            boolean hasBeehive = isBeeHiveAbove(pos, world);
+            System.out.println("Beehive above? " + hasBeehive);
+
+            if (hasBeehive) {
+                int currentLevel = state.get(HONEY_LEVEL);
+                System.out.println("Current honey level: " + currentLevel + ", MAX: " + MAX_LEVEL);
+
+                if (currentLevel < MAX_LEVEL) {
+                    // Auto-fill
+                    System.out.println("Filling honey cauldron!");
+                    world.setBlockState(pos, state.with(HONEY_LEVEL, currentLevel + 1));
+                    world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_EMPTY,
+                            SoundCategory.BLOCKS, 1.0F, 1.0F);
+                } else {
+                    System.out.println("Already full!");
+                }
+            }
+        }
+
+        // Reschedule for next tick
+        world.scheduleBlockTick(pos, this, 20);
+        System.out.println("Rescheduled next tick");
+    }
 
     @Override
     protected void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
