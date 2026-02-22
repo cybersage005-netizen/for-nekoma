@@ -5,20 +5,59 @@ import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.greenjab.nekomasfixed.registry.registries.BlockRegistry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(AbstractCauldronBlock.class)
 public class CauldronMixin {
+    private int checkTimer = 0;
+
+    @Inject(method = "scheduledTick", at = @At("HEAD"))
+    private void onScheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
+        checkTimer++;
+        if (checkTimer < 20) return;
+        checkTimer = 0;
+
+        if (state.getBlock() == Blocks.CAULDRON) {
+            System.out.println("Checking normal cauldron at " + pos);
+
+
+            BlockPos abovePos = pos.up(2);
+            BlockState aboveState = world.getBlockState(abovePos);
+
+            if (aboveState.isOf(Blocks.BEEHIVE) || aboveState.isOf(Blocks.BEE_NEST)) {
+                System.out.println("Beehive found above! Converting to honey cauldron");
+
+                world.setBlockState(pos, BlockRegistry.HONEY_CAULDRON.getDefaultState()
+                        .with(LeveledCauldronBlock.LEVEL, 1));
+
+                world.playSound(null, pos, SoundEvents.BLOCK_BEEHIVE_DRIP,
+                        SoundCategory.BLOCKS, 1.0F, 1.0F);
+            }
+        }
+    }
+
+    @Unique
+    private void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify, CallbackInfo ci) {
+        if (!world.isClient() && state.getBlock() == Blocks.CAULDRON) {
+            ((ServerWorld)world).scheduleBlockTick(pos, state.getBlock(), 20);
+            System.out.println("Started ticking normal cauldron at " + pos);
+        }
+    }
 
     @Inject(method = "onUseWithItem", at = @At("HEAD"), cancellable = true)
     private void onCauldronUse(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
