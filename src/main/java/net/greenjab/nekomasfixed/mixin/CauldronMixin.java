@@ -33,14 +33,10 @@ public class CauldronMixin {
         checkTimer = 0;
 
         if (state.getBlock() == Blocks.CAULDRON) {
-            System.out.println("Checking normal cauldron at " + pos);
-
-
             BlockPos abovePos = pos.up(2);
             BlockState aboveState = world.getBlockState(abovePos);
 
             if (aboveState.isOf(Blocks.BEEHIVE) || aboveState.isOf(Blocks.BEE_NEST)) {
-                System.out.println("Beehive found above! Converting to honey cauldron");
 
                 world.setBlockState(pos, BlockRegistry.HONEY_CAULDRON.getDefaultState()
                         .with(LeveledCauldronBlock.LEVEL, 1));
