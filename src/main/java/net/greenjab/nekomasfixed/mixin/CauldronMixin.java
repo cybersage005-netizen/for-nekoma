@@ -49,7 +49,6 @@ public class CauldronMixin {
             }
             cir.setReturnValue(ActionResult.SUCCESS);
             return;
-
         }
 
         if (state.getBlock() == BlockRegistry.HONEY_CAULDRON) {
