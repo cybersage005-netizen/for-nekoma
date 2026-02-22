@@ -12,6 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.greenjab.nekomasfixed.registry.registries.BlockRegistry;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -65,7 +66,7 @@ public class CauldronMixin {
 
                 }
                 cir.setReturnValue(ActionResult.SUCCESS);
-                return;
+
             }
 
 
@@ -77,12 +78,5 @@ public class CauldronMixin {
 
     }
 
-    private void isBeeHiveAbove(BlockPos pos, World world){
-        BlockPos abovePos = new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ());
-        Block block = world.getBlockState(abovePos).getBlock();
 
-        if (block == Blocks.BEEHIVE || block == Blocks.BEE_NEST) {
-            System.out.println("Beehive detected!");
-        }
-    }
 }

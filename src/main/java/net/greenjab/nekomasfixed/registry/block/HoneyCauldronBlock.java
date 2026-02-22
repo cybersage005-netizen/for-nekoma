@@ -24,7 +24,6 @@ public class HoneyCauldronBlock extends AbstractCauldronBlock {
     public static final MapCodec<HoneyCauldronBlock> CODEC = createCodec(HoneyCauldronBlock::new);
 
     public static final IntProperty HONEY_LEVEL = IntProperty.of("honey_level", 1, 4);
-
     public static final int MAX_LEVEL = 4;
 
     public HoneyCauldronBlock(Settings settings) {
@@ -47,7 +46,6 @@ public class HoneyCauldronBlock extends AbstractCauldronBlock {
         var behaviorMap = CauldronBehavior.createMap("honey");
         var map = behaviorMap.map();
 
-
         map.put(Items.GLASS_BOTTLE, (state, world, pos, player, hand, stack) -> {
             if (!world.isClient()) {
                 int level = state.get(HONEY_LEVEL);
@@ -65,16 +63,9 @@ public class HoneyCauldronBlock extends AbstractCauldronBlock {
             return ActionResult.SUCCESS;
         });
 
-
         map.put(Items.HONEY_BOTTLE, (state, world, pos, player, hand, stack) -> {
             if (!world.isClient()) {
-                int level = state.get(HONEY_LEVEL);
-                if (level < MAX_LEVEL) {
-                    world.setBlockState(pos, state.with(HONEY_LEVEL, level + 1));
-                    player.setStackInHand(hand, new ItemStack(Items.GLASS_BOTTLE));
-                    world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_EMPTY,
-                            SoundCategory.BLOCKS, 1.0F, 1.0F);
-                }
+                incrementHoneyLevel(state, world, pos, player, hand);
             }
             return ActionResult.SUCCESS;
         });
@@ -82,16 +73,38 @@ public class HoneyCauldronBlock extends AbstractCauldronBlock {
         return behaviorMap;
     }
 
+    // New method to increment honey level
+    public static void incrementHoneyLevel(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand) {
+        if (world.isClient()) return;
+
+        int level = state.get(HONEY_LEVEL);
+        if (level < MAX_LEVEL) {
+            world.setBlockState(pos, state.with(HONEY_LEVEL, level + 1));
+            player.setStackInHand(hand, new ItemStack(Items.GLASS_BOTTLE));
+            world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_EMPTY,
+                    SoundCategory.BLOCKS, 1.0F, 1.0F);
+        }
+    }
+
+    // Overloaded method without player (for automatic filling)
+    public static void incrementHoneyLevel(BlockState state, World world, BlockPos pos) {
+        if (world.isClient()) return;
+
+        int level = state.get(HONEY_LEVEL);
+        if (level < MAX_LEVEL) {
+            world.setBlockState(pos, state.with(HONEY_LEVEL, level + 1));
+            world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_EMPTY,
+                    SoundCategory.BLOCKS, 1.0F, 1.0F);
+        }
+    }
+
     @Override
     protected void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-
-        BlockPos abovePos = pos.up(2);
-        BlockState aboveState = world.getBlockState(abovePos);
-
-        if (aboveState.isOf(Blocks.BEEHIVE) || aboveState.isOf(Blocks.BEE_NEST)) {
-            System.out.println("Cauldron at " + pos + " has beehive above at " + abovePos);
+        if (!world.isClient()) {
+            if (isBeeHiveAbove(pos, world)) {
+                incrementHoneyLevel(state, world, pos);
+            }
         }
-
         world.scheduleBlockTick(pos, this, 20);
     }
 
@@ -100,6 +113,13 @@ public class HoneyCauldronBlock extends AbstractCauldronBlock {
         if (!world.isClient()) {
             world.scheduleBlockTick(pos, this, 20);
         }
+    }
+
+    private boolean isBeeHiveAbove(BlockPos pos, World world) {
+        BlockPos abovePos = new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ());
+        Block block = world.getBlockState(abovePos).getBlock();
+
+        return block == Blocks.BEEHIVE || block == Blocks.BEE_NEST;
     }
 
     @Override
