@@ -5,7 +5,7 @@
   "mixins": [
     "BlockItemMixin",
     "BlocksMixin",
-    "BlockTickSchedulerMixin",
+    "AbstractBlockMixin",
     "CarvedPumpkinBlockMixin",
     "CauldronMixin",
     "ContainerComponentMixin",
@@ -14,7 +14,6 @@
     "EnchantmentMixin",
     "ExplosionImplMixin",
     "FarmlandBlockMixin",
-    "HoneyAutoFillMixin",
     "ItemDispenserBehaviorMixin",
     "ItemMixin",
     "ItemsMixin",
