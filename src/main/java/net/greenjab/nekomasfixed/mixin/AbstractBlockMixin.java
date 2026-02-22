@@ -21,7 +21,11 @@ public class AbstractBlockMixin {
         if (world.isClient()) return;
         BlockPos abovePos = pos.up(2);
         BlockState aboveState = world.getBlockState(abovePos);
-        int honeyLevel = aboveState.get(BeehiveBlock.HONEY_LEVEL);
+        int honeyLevel = 0;
+        if(aboveState.isOf(Blocks.BEEHIVE) || aboveState.isOf(Blocks.BEE_NEST)){
+            honeyLevel= aboveState.get(BeehiveBlock.HONEY_LEVEL);
+        }
+
 
         if (state.getBlock() == Blocks.CAULDRON) {
             if ((aboveState.isOf(Blocks.BEE_NEST) && honeyLevel==5) || (aboveState.isOf(Blocks.BEEHIVE) && honeyLevel == 5)) {
