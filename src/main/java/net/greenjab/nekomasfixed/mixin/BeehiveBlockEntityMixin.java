@@ -3,6 +3,7 @@ package net.greenjab.nekomasfixed.mixin;
 import net.greenjab.nekomasfixed.registry.block.HoneyCauldronBlock;
 import net.greenjab.nekomasfixed.registry.registries.BlockRegistry;
 import net.greenjab.nekomasfixed.util.HoneyCauldronUtil;
+import net.minecraft.block.BeehiveBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BeehiveBlockEntity;
@@ -27,20 +28,13 @@ public class BeehiveBlockEntityMixin {
                                      BeehiveBlockEntity.BeeData bee, @Nullable List<Entity> entities,
                                      BeehiveBlockEntity.BeeState beeState, @Nullable BlockPos flowerPos,
                                      CallbackInfoReturnable<Boolean> cir) {
-
-        // Only care about honey delivery
         if (beeState != BeehiveBlockEntity.BeeState.HONEY_DELIVERED) return;
-
-        // Check for cauldron 2 blocks below
         BlockPos belowPos = pos.down(2);
         BlockState belowState = world.getBlockState(belowPos);
-
-        // If there's a honey cauldron below, fill it
-        if (belowState.getBlock() == BlockRegistry.HONEY_CAULDRON) {
+        if (belowState.getBlock() == BlockRegistry.HONEY_CAULDRON && state.get(BeehiveBlock.HONEY_LEVEL) == 5) {
             HoneyCauldronUtil.incrementHoneyLevel(world, belowPos, belowState);
         }
-        // If there's an empty cauldron below, convert it
-        else if (belowState.getBlock() == Blocks.CAULDRON) {
+        else if (belowState.getBlock() == Blocks.CAULDRON && state.get(BeehiveBlock.HONEY_LEVEL) == 5) {
             world.setBlockState(belowPos, BlockRegistry.HONEY_CAULDRON.getDefaultState()
                     .with(HoneyCauldronBlock.HONEY_LEVEL, 1));
             world.playSound(null, belowPos, SoundEvents.BLOCK_BEEHIVE_DRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
