@@ -25,8 +25,13 @@ public class AbstractCauldronBlockMixin {
     @Unique
     private static final Map<BlockPos, Integer> CHECK_TIMERS = new HashMap<>();
 
-    @Inject(method = "scheduledTick", at = @At("TAIL"))
+    @Inject(method = "scheduledTick", at = @At("HEAD"))
     private void onScheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
+
+        // 🔴 RESCHEDULE IMMEDIATELY - THIS IS KEY!
+        world.scheduleBlockTick(pos, state.getBlock(), 20);
+        System.out.println("⏰ Tick at " + pos + " - rescheduled next tick in 20");
+
         // Only process honey cauldrons
         if (state.getBlock() != BlockRegistry.HONEY_CAULDRON) {
             return;
@@ -41,7 +46,7 @@ public class AbstractCauldronBlockMixin {
         }
         CHECK_TIMERS.put(pos, 0);
 
-        System.out.println("AbstractCauldron scheduledTick for honey cauldron at " + pos);
+        System.out.println("🍯 Processing honey cauldron at " + pos);
 
         // Check for beehive above (2 blocks above)
         BlockPos abovePos = pos.up(2);
@@ -56,7 +61,7 @@ public class AbstractCauldronBlockMixin {
             world.setBlockState(pos, state.with(HoneyCauldronBlock.HONEY_LEVEL, currentLevel + 1));
             world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_EMPTY,
                     SoundCategory.BLOCKS, 1.0F, 1.0F);
-            System.out.println("Honey cauldron filled to level " + (currentLevel + 1));
+            System.out.println("✅ Honey cauldron filled to level " + (currentLevel + 1));
         }
     }
 }

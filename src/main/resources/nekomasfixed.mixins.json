@@ -6,6 +6,7 @@
     "AbstractCauldronBlockMixin",
     "BlockItemMixin",
     "BlocksMixin",
+    "BlockTickSchedulerMixin",
     "CarvedPumpkinBlockMixin",
     "ContainerComponentMixin",
     "DrownedEntityMixin",
