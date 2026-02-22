@@ -29,7 +29,7 @@ public class CauldronMixin {
     private void onCauldronUse(ItemStack stack, BlockState state, World world,
                                BlockPos pos, PlayerEntity player, Hand hand,
                                BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
-
+        System.out.println(stack.getItem()+" Is used on cauldron");
         if (stack.getItem() == Items.HONEY_BOTTLE && state.getBlock() == Blocks.CAULDRON) {
             if (!world.isClient()) {
                 world.setBlockState(pos, BlockRegistry.HONEY_CAULDRON.getDefaultState()
