@@ -51,13 +51,8 @@ public class CauldronMixin {
         }
     }
 
-    @Unique
-    private void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify, CallbackInfo ci) {
-        if (!world.isClient() && state.getBlock() == Blocks.CAULDRON) {
-            ((ServerWorld)world).scheduleBlockTick(pos, state.getBlock(), 20);
-            System.out.println("Started ticking normal cauldron at " + pos);
-        }
-    }
+
+
 
     @Inject(method = "onUseWithItem", at = @At("HEAD"), cancellable = true)
     private void onCauldronUse(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
