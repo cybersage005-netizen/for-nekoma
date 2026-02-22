@@ -2,6 +2,7 @@ package net.greenjab.nekomasfixed.mixin;
 
 import net.greenjab.nekomasfixed.registry.block.HoneyCauldronBlock;
 import net.minecraft.block.*;
+import net.minecraft.client.render.entity.feature.WolfArmorFeatureRenderer;
 import net.minecraft.component.Component;
 import net.minecraft.component.ComponentMap;
 import net.minecraft.component.DataComponentTypes;
@@ -23,9 +24,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class CauldronMixin {
 
     @Inject(method = "onUseWithItem", at = @At("HEAD"), cancellable = true)
-    private void onCauldronUse(ItemStack stack, BlockState state, World world,
-                               BlockPos pos, PlayerEntity player, Hand hand,
-                               BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
+    private void onCauldronUse(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
         System.out.println(stack.getItem()+" Is used on cauldron");
         if (stack.getItem() == Items.HONEY_BOTTLE && state.getBlock() == Blocks.CAULDRON) {
             if (!world.isClient()) {
@@ -33,6 +32,8 @@ public class CauldronMixin {
                         .with(HoneyCauldronBlock.HONEY_LEVEL, 1));
                 stack.decrement(1);
                 player.getInventory().offerOrDrop(new ItemStack(Items.GLASS_BOTTLE));
+                System.out.println("Running the beehive code...");
+                isBeeHiveAbove(pos, world);
 
             }
             cir.setReturnValue(ActionResult.SUCCESS);
@@ -46,7 +47,8 @@ public class CauldronMixin {
                 if (!world.isClient()) {
                     player.getInventory().offerOrDrop(new ItemStack(Items.HONEY_BOTTLE));
                     stack.decrement(1);
-
+                    System.out.println("Running the beehive code...");
+                    isBeeHiveAbove(pos, world);
                     if (level > 1) {
                         world.setBlockState(pos, state.with(HoneyCauldronBlock.HONEY_LEVEL, level - 1));
                     } else {
@@ -62,17 +64,28 @@ public class CauldronMixin {
                     world.setBlockState(pos, state.with(HoneyCauldronBlock.HONEY_LEVEL, level + 1));
                     stack.decrement(1);
                     player.getInventory().offerOrDrop(new ItemStack(Items.GLASS_BOTTLE));
+                    System.out.println("Running the beehive code...");
+                    isBeeHiveAbove(pos, world);
                 }
                 cir.setReturnValue(ActionResult.SUCCESS);
                 return;
             }
-            BlockPos abovePos = new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ());
-            Block block = world.getBlockState(abovePos).getBlock();
 
-            if (block == Blocks.BEEHIVE || block == Blocks.BEE_NEST) {
-                System.out.println("Beehive detected!");
-            }
 
+
+
+
+        }
+
+
+    }
+
+    private void isBeeHiveAbove(BlockPos pos, World world){
+        BlockPos abovePos = new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ());
+        Block block = world.getBlockState(abovePos).getBlock();
+
+        if (block == Blocks.BEEHIVE || block == Blocks.BEE_NEST) {
+            System.out.println("Beehive detected!");
         }
     }
 }
