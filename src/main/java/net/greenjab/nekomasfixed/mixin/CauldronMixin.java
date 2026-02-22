@@ -21,7 +21,7 @@ public class CauldronMixin {
 
     @Inject(method = "onUseWithItem", at = @At("HEAD"), cancellable = true)
     private void onCauldronUse(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
-        System.out.println(stack.getItem()+" Is used on cauldron");
+
         if (stack.getItem() == Items.HONEY_BOTTLE && state.getBlock() == Blocks.CAULDRON) {
             if (!world.isClient()) {
                 world.setBlockState(pos, BlockRegistry.HONEY_CAULDRON.getDefaultState()
@@ -47,6 +47,7 @@ public class CauldronMixin {
 
                     if (level > 1) {
                         world.setBlockState(pos, state.with(HoneyCauldronBlock.HONEY_LEVEL, level - 1));
+                        System.out.println("level decrease");
                     } else {
                         world.setBlockState(pos, Blocks.CAULDRON.getDefaultState());
                     }
@@ -58,6 +59,7 @@ public class CauldronMixin {
             if (stack.getItem() == Items.HONEY_BOTTLE && level < 4) {
                 if (!world.isClient()) {
                     world.setBlockState(pos, state.with(HoneyCauldronBlock.HONEY_LEVEL, level + 1));
+                    System.out.println("level increase");
                     stack.decrement(1);
                     player.getInventory().offerOrDrop(new ItemStack(Items.GLASS_BOTTLE));
 
