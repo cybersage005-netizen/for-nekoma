@@ -28,7 +28,7 @@ public class CauldronMixin {
                         .with(HoneyCauldronBlock.HONEY_LEVEL, 1));
                 stack.decrement(1);
                 player.getInventory().offerOrDrop(new ItemStack(Items.GLASS_BOTTLE));
-                System.out.println("Running the beehive code...");
+                System.out.println("Running the beehive code... from honey bottle used");
                 isBeeHiveAbove(pos, world);
 
             }
@@ -43,7 +43,7 @@ public class CauldronMixin {
                 if (!world.isClient()) {
                     player.getInventory().offerOrDrop(new ItemStack(Items.HONEY_BOTTLE));
                     stack.decrement(1);
-                    System.out.println("Running the beehive code...");
+                    System.out.println("Running the beehive code... from 2nd function");
                     isBeeHiveAbove(pos, world);
                     if (level > 1) {
                         world.setBlockState(pos, state.with(HoneyCauldronBlock.HONEY_LEVEL, level - 1));
@@ -60,7 +60,7 @@ public class CauldronMixin {
                     world.setBlockState(pos, state.with(HoneyCauldronBlock.HONEY_LEVEL, level + 1));
                     stack.decrement(1);
                     player.getInventory().offerOrDrop(new ItemStack(Items.GLASS_BOTTLE));
-                    System.out.println("Running the beehive code...");
+                    System.out.println("Running the beehive code... from 2nd if");
                     isBeeHiveAbove(pos, world);
                 }
                 cir.setReturnValue(ActionResult.SUCCESS);
